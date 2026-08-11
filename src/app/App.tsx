@@ -217,7 +217,7 @@ export const App: React.FC = () => {
           >
             @SlicerzzTV
           </a>{' '}
-          on TikTok • ValoRoll is a fan project and not affiliated with Riot Games.
+          on TikTok <span className="hidden sm:inline">• ValoRoll is a fan project and not affiliated with Riot Games.</span>
         </p>
       </footer>
     </div>

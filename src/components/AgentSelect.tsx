@@ -176,22 +176,22 @@ export const AgentSelect: React.FC<AgentSelectProps> = ({
 
       {/* BOTTOM ROSTER & FILTERS */}
       <div className="relative z-10 w-full p-2 lg:p-8 bg-gradient-to-t from-[#0f1923] via-[#0f1923]/90 to-transparent pt-8 lg:pt-16 mt-auto">
-        <div className="max-w-6xl mx-auto flex flex-col gap-4 lg:gap-6 items-center">
+        <div className="w-full max-w-[1200px] mx-auto flex flex-col gap-4 lg:gap-6 items-center px-4">
           
           {/* Filters */}
-          <div className="flex flex-col sm:flex-row items-center gap-4 bg-[#152230]/80 backdrop-blur p-2 border border-[#2a3e52] rounded-lg w-full sm:w-auto shadow-xl">
-            <div className="relative w-full sm:w-64">
+          <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4 bg-[#152230]/80 backdrop-blur p-3 border border-[#2a3e52] rounded-xl w-full shadow-xl">
+            <div className="relative w-full md:max-w-xs lg:max-w-sm">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#8b9bb4]" />
               <input
                 type="text"
                 placeholder="Search agent (A-Z)..."
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                className="w-full pl-9 pr-4 py-2 bg-[#0f1923] border border-[#2a3e52] focus:border-[#ff4655] text-sm text-white placeholder-[#8b9bb4] outline-none transition-colors"
+                className="w-full pl-9 pr-4 py-2 bg-[#0f1923] border border-[#2a3e52] focus:border-[#ff4655] text-sm text-white placeholder-[#8b9bb4] outline-none transition-colors rounded-lg"
               />
             </div>
             
-            <div className="flex items-center gap-1 overflow-x-auto w-full sm:w-auto pb-1 sm:pb-0 scrollbar-hide">
+            <div className="flex items-center gap-1 overflow-x-auto w-full md:w-auto pb-1 md:pb-0 scrollbar-hide justify-start md:justify-end">
               {(
                 [
                   { id: 'all', label: 'All', roleIcon: null },
