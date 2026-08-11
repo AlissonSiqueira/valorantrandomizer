@@ -38,15 +38,15 @@ export const ResultsDock: React.FC<ResultsDockProps> = ({
   ) => {
     
     return (
-      <div className="flex-1 flex flex-col gap-2">
-        <div className="flex items-center gap-1.5 text-xs font-mono font-bold text-slate-400 uppercase tracking-wider px-1">
-          <Icon className="w-4 h-4" style={{ color: isRevealed || isSpinning ? accent : undefined }} />
-          {label}
+      <div className="flex-1 flex flex-col gap-1 sm:gap-2 min-w-0">
+        <div className="flex items-center gap-1 sm:gap-1.5 text-[10px] sm:text-xs font-mono font-bold text-slate-400 uppercase tracking-wider px-1">
+          <Icon className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" style={{ color: isRevealed || isSpinning ? accent : undefined }} />
+          <span className="truncate">{label}</span>
         </div>
         
         <div 
           className={`
-            relative w-full h-32 rounded-lg border flex flex-col items-center justify-center p-3 transition-all duration-300
+            relative w-full h-24 sm:h-32 rounded-lg border flex flex-col items-center justify-center p-1.5 sm:p-3 transition-all duration-300
             ${isRevealed ? 'bg-[#152230] opacity-100 shadow-xl' : isSpinning ? 'bg-[#0f1923] border-dashed opacity-80' : 'bg-[#0a1017] opacity-40'}
           `}
           style={{ 
@@ -60,7 +60,7 @@ export const ResultsDock: React.FC<ResultsDockProps> = ({
               animate={{ scale: 1, opacity: 1 }} 
               className="flex flex-col items-center w-full"
             >
-              <div className="h-16 flex items-center justify-center gap-2 w-full mb-2">
+              <div className="h-10 sm:h-16 flex items-center justify-center gap-1 sm:gap-2 w-full mb-1 sm:mb-2">
                 {type === 'ability' && item.abilities && item.abilities.length > 1 ? (
                   item.abilities.map((ab: any, idx: number) => (
                     <AssetImage
@@ -69,7 +69,7 @@ export const ResultsDock: React.FC<ResultsDockProps> = ({
                       alt={ab.name}
                       type="ability"
                       fallbackName={ab.name}
-                      className="max-w-[40px] max-h-[40px] object-contain drop-shadow-md"
+                      className="max-w-[20px] max-h-[20px] sm:max-w-[40px] sm:max-h-[40px] object-contain drop-shadow-md"
                     />
                   ))
                 ) : (
@@ -81,19 +81,19 @@ export const ResultsDock: React.FC<ResultsDockProps> = ({
                   />
                 )}
               </div>
-              <span className="font-tactical font-black text-sm uppercase tracking-wide text-white text-center w-full truncate" style={{ color: accent }}>
+              <span className="font-tactical font-black text-[10px] sm:text-sm uppercase tracking-wide text-white text-center w-full truncate px-0.5" style={{ color: accent }}>
                 {type === 'ability' ? item.title : item.name}
               </span>
             </motion.div>
           ) : isSpinning ? (
-            <div className="flex flex-col items-center text-slate-400 animate-pulse">
-              <Loader2 className="w-8 h-8 animate-spin mb-2" style={{ color: accent }} />
-              <span className="text-xs font-mono">SPINNING...</span>
+            <div className="flex flex-col items-center text-slate-400 animate-pulse scale-90 sm:scale-100">
+              <Loader2 className="w-5 h-5 sm:w-8 sm:h-8 animate-spin mb-1 sm:mb-2" style={{ color: accent }} />
+              <span className="text-[9px] sm:text-xs font-mono">SPINNING</span>
             </div>
           ) : (
-            <div className="flex flex-col items-center text-slate-600">
-              <HelpCircle className="w-8 h-8 mb-2 opacity-50" />
-              <span className="text-xs font-mono">PENDING</span>
+            <div className="flex flex-col items-center text-slate-600 scale-90 sm:scale-100">
+              <HelpCircle className="w-5 h-5 sm:w-8 sm:h-8 mb-1 sm:mb-2 opacity-50" />
+              <span className="text-[9px] sm:text-xs font-mono">PENDING</span>
             </div>
           )}
         </div>
@@ -102,8 +102,8 @@ export const ResultsDock: React.FC<ResultsDockProps> = ({
   };
 
   return (
-    <div className="w-full bg-[#0a1017]/80 backdrop-blur-md border border-[#2a3e52] rounded-xl p-4 sm:p-6 shadow-2xl">
-      <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6">
+    <div className="w-full bg-[#0a1017]/80 backdrop-blur-md border border-[#2a3e52] rounded-xl p-3 sm:p-6 shadow-2xl">
+      <div className="flex flex-row items-stretch gap-2.5 sm:gap-6 w-full">
         {renderSlot('Weapon', Target, isWeaponRevealed, isWeaponSpinning, weapon, '#ff4655', 'weapon')}
         {renderSlot('Ability', Zap, isAbilityRevealed, isAbilitySpinning, abilityPlan, '#ffb400', 'ability')}
         {renderSlot('Shield', Shield, isArmorRevealed, isArmorSpinning, armor, '#00e5ff', 'armor')}
