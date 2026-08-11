@@ -75,7 +75,7 @@ export const App: React.FC = () => {
               <Dices className="w-6 h-6 animate-pulse" />
             </div>
             <div>
-              <h1 className="text-2xl sm:text-3xl font-black font-tactical uppercase tracking-wider text-white leading-none flex items-center gap-2">
+              <h1 className="text-2xl sm:text-3xl font-black font-tactical uppercase tracking-wider text-white leading-none">
                 Valo<span className="text-[#ff4655]">Roll</span>
               </h1>
             </div>

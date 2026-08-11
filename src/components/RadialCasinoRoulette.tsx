@@ -332,29 +332,89 @@ export const RadialCasinoRoulette: React.FC<RadialCasinoRouletteProps> = ({
                     {item.categoryOrMode}
                   </span>
                   
-                  <div className="flex-1 flex flex-wrap items-center justify-center gap-3 w-full my-3">
-                    {item.abilities && item.abilities.length > 1 ? (
-                      item.abilities.map((ab: any, idx: number) => (
+                  <div className="flex-1 flex items-center justify-center w-full my-3">
+                    {item.abilities && item.abilities.length > 0 ? (
+                      item.abilities.length === 1 ? (
                         <AssetImage
-                          key={ab.id || idx}
-                          src={ab.iconPath}
-                          alt={ab.name}
+                          src={item.abilities[0].iconPath}
+                          alt={item.abilities[0].name}
                           type="ability"
-                          fallbackName={ab.name}
-                          className={`${
-                            item.abilities!.length === 2
-                              ? 'max-w-[64px] max-h-[64px] sm:max-w-[76px] sm:max-h-[76px]'
-                              : 'max-w-[48px] max-h-[48px] sm:max-w-[56px] sm:max-h-[56px]'
-                          } object-contain transition-all ${isActive ? 'drop-shadow-md scale-105' : 'grayscale-[40%]'}`}
+                          fallbackName={item.abilities[0].name}
+                          className={`max-w-[110px] max-h-[110px] sm:max-w-[130px] sm:max-h-[130px] object-contain transition-all ${
+                            isActive ? 'scale-110 drop-shadow-[0_0_20px_rgba(255,255,255,0.4)]' : 'grayscale-[40%]'
+                          }`}
                         />
-                      ))
+                      ) : item.abilities.length === 2 ? (
+                        /* 2 Skills: Vertical Format */
+                        <div className="flex flex-col items-center justify-center gap-2.5 w-full">
+                          {item.abilities.map((ab: any, idx: number) => (
+                            <AssetImage
+                              key={ab.id || idx}
+                              src={ab.iconPath}
+                              alt={ab.name}
+                              type="ability"
+                              fallbackName={ab.name}
+                              className={`max-w-[54px] max-h-[54px] sm:max-w-[62px] sm:max-h-[62px] object-contain transition-all ${
+                                isActive ? 'drop-shadow-md scale-105' : 'grayscale-[40%]'
+                              }`}
+                            />
+                          ))}
+                        </div>
+                      ) : item.abilities.length === 3 ? (
+                        /* 3 Skills: Pyramid Format (1 top, 2 bottom) */
+                        <div className="flex flex-col items-center justify-center gap-2 w-full">
+                          <div className="flex justify-center w-full">
+                            <AssetImage
+                              src={item.abilities[0].iconPath}
+                              alt={item.abilities[0].name}
+                              type="ability"
+                              fallbackName={item.abilities[0].name}
+                              className={`max-w-[46px] max-h-[46px] sm:max-w-[54px] sm:max-h-[54px] object-contain transition-all ${
+                                isActive ? 'drop-shadow-md scale-105' : 'grayscale-[40%]'
+                              }`}
+                            />
+                          </div>
+                          <div className="flex justify-center gap-3 w-full">
+                            {item.abilities.slice(1, 3).map((ab: any, idx: number) => (
+                              <AssetImage
+                                key={ab.id || idx}
+                                src={ab.iconPath}
+                                alt={ab.name}
+                                type="ability"
+                                fallbackName={ab.name}
+                                className={`max-w-[46px] max-h-[46px] sm:max-w-[54px] sm:max-h-[54px] object-contain transition-all ${
+                                  isActive ? 'drop-shadow-md scale-105' : 'grayscale-[40%]'
+                                }`}
+                              />
+                            ))}
+                          </div>
+                        </div>
+                      ) : (
+                        /* 4 Skills: 2x2 Grid Format */
+                        <div className="grid grid-cols-2 gap-2.5 place-items-center justify-center w-full">
+                          {item.abilities.map((ab: any, idx: number) => (
+                            <AssetImage
+                              key={ab.id || idx}
+                              src={ab.iconPath}
+                              alt={ab.name}
+                              type="ability"
+                              fallbackName={ab.name}
+                              className={`max-w-[46px] max-h-[46px] sm:max-w-[54px] sm:max-h-[54px] object-contain transition-all ${
+                                isActive ? 'drop-shadow-md scale-105' : 'grayscale-[40%]'
+                              }`}
+                            />
+                          ))}
+                        </div>
+                      )
                     ) : (
                       <AssetImage
                         src={iconToDisplay}
                         alt={item.name}
                         type="weapon"
                         fallbackName={item.name}
-                        className={`max-w-full max-h-36 sm:max-h-44 object-contain transition-all ${isActive ? 'scale-110 drop-shadow-[0_0_20px_rgba(255,255,255,0.4)]' : ''}`}
+                        className={`max-w-full max-h-36 sm:max-h-44 object-contain transition-all ${
+                          isActive ? 'scale-110 drop-shadow-[0_0_20px_rgba(255,255,255,0.4)]' : ''
+                        }`}
                       />
                     )}
                   </div>
