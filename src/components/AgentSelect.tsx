@@ -77,21 +77,21 @@ export const AgentSelect: React.FC<AgentSelectProps> = ({
     <div className="relative w-full h-full flex-1 overflow-hidden bg-[#0f1923] flex flex-col justify-between">
       
       {/* BACKGROUND LARGE RENDER */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden flex items-end justify-center lg:justify-end lg:pr-20">
+      <div className="absolute inset-0 pointer-events-none overflow-hidden flex items-center justify-center lg:items-end lg:justify-end lg:pr-20 pb-40 lg:pb-0">
         <AnimatePresence mode="wait">
           {displayAgent && (
             <motion.div
               key={isRandomizing ? 'randomizing' : displayAgent.id}
-              initial={{ opacity: 0, y: 50, scale: 0.95 }}
+              initial={{ opacity: 0, y: 30, scale: 0.95 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: 50, scale: 0.95 }}
+              exit={{ opacity: 0, y: 30, scale: 0.95 }}
               transition={{ duration: 0.4, ease: "easeOut" }}
-              className="h-[80%] lg:h-[95%] opacity-90 drop-shadow-[0_0_30px_rgba(255,255,255,0.1)]"
+              className="h-[55%] sm:h-[70%] lg:h-[95%] opacity-50 sm:opacity-75 lg:opacity-90 drop-shadow-[0_0_30px_rgba(255,255,255,0.15)] flex items-center justify-center"
             >
               <img 
                 src={displayAgent.fullPortraitPath} 
                 alt={displayAgent.name}
-                className="h-full w-auto object-contain object-bottom"
+                className="h-full w-auto object-contain object-center lg:object-bottom"
                 onError={(e) => {
                   (e.target as HTMLImageElement).src = displayAgent.portraitPath; // fallback
                 }}
