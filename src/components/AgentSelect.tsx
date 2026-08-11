@@ -230,6 +230,37 @@ export const AgentSelect: React.FC<AgentSelectProps> = ({
             </div>
           </div>
 
+          {/* MOBILE ONLY SELECTED / HOVERED AGENT BANNER */}
+          <div className="block sm:hidden w-full text-center my-1">
+            <AnimatePresence mode="wait">
+              {displayAgent && (
+                <motion.div
+                  key={displayAgent.id}
+                  initial={{ opacity: 0, scale: 0.9, y: 5 }}
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  exit={{ opacity: 0, scale: 0.9, y: -5 }}
+                  transition={{ duration: 0.2 }}
+                  className="inline-flex items-center justify-center gap-3 px-5 py-2.5 bg-[#152230]/95 backdrop-blur border border-[#ff4655] rounded-xl shadow-[0_0_20px_rgba(255,70,85,0.4)]"
+                >
+                  <AssetImage
+                    src={displayAgent.portraitPath}
+                    alt={displayAgent.name}
+                    type="ability"
+                    className="w-9 h-9 rounded-lg border border-[#ff4655] object-cover bg-[#0f1923]"
+                  />
+                  <div className="flex flex-col text-left">
+                    <span className="text-[10px] font-mono text-[#ff4655] font-extrabold uppercase tracking-widest leading-none">
+                      {isRandomizing ? 'RANDOMIZING...' : 'SELECTED AGENT'}
+                    </span>
+                    <span className="text-xl font-black font-tactical text-white uppercase tracking-wider leading-none mt-1">
+                      {displayAgent.name}
+                    </span>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+
           {/* Roster Grid */}
           {filteredAgents.length === 0 ? (
             <div className="p-8 text-center text-[#8b9bb4] font-mono">
