@@ -32,7 +32,7 @@ type RandomizerStore = AppState &
 const loaded = loadStoredState();
 
 // Helper to determine default credit preset based on round number
-export function getDefaultCreditsForRound(roundNum: number): number {
+export function getDefaultCreditsForRound(_roundNum: number): number {
   return 9000;
 }
 
