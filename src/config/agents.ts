@@ -11,10 +11,10 @@ export const AGENTS: Agent[] = [
     iconPath: assetPath('/assets/images/astra.webp'),
     enabled: true,
     abilities: [
-      { id: 'astra-well', name: 'Gravity Well', slot: 'basic_1', iconPath: assetPath('/assets/images/astra-c.webp'), description: 'Pulls players toward center before exploding to Vulnerable.', enabled: true },
-      { id: 'astra-pulse', name: 'Nova Pulse', slot: 'basic_2', iconPath: assetPath('/assets/images/astra-q.webp'), description: 'Charges and concusses all players in area.', enabled: true },
-      { id: 'astra-smoke', name: 'Nebula', slot: 'signature', iconPath: assetPath('/assets/images/astra-e.webp'), description: 'Transforms a star into a smoke cloud.', enabled: true },
-      { id: 'astra-ult', name: 'Cosmic Divide', slot: 'ultimate', iconPath: assetPath('/assets/images/astra-x.webp'), description: 'Creates a map-spanning wall blocking bullets and muffling sound.', enabled: true },
+      { id: 'astra-well', name: 'Gravity Well', slot: 'basic_1', iconPath: assetPath('/assets/images/astra-c.webp'), description: 'Pulls players toward center before exploding to Vulnerable.', enabled: true, maxCharges: 1 },
+      { id: 'astra-pulse', name: 'Nova Pulse', slot: 'basic_2', iconPath: assetPath('/assets/images/astra-q.webp'), description: 'Charges and concusses all players in area.', enabled: true, maxCharges: 1 },
+      { id: 'astra-smoke', name: 'Nebula', slot: 'signature', iconPath: assetPath('/assets/images/astra-e.webp'), description: 'Transforms a star into a smoke cloud.', enabled: true, maxCharges: 2 },
+      { id: 'astra-ult', name: 'Cosmic Divide', slot: 'ultimate', iconPath: assetPath('/assets/images/astra-x.webp'), description: 'Creates a map-spanning wall blocking bullets and muffling sound.', enabled: true, maxCharges: 1 },
     ],
   },
   {
@@ -26,10 +26,10 @@ export const AGENTS: Agent[] = [
     iconPath: assetPath('/assets/images/breach.webp'),
     enabled: true,
     abilities: [
-      { id: 'breach-shock', name: 'Aftershock', slot: 'basic_1', iconPath: assetPath('/assets/images/breach-c.webp'), description: 'Fires a slow-acting burst through walls dealing heavy damage.', enabled: true },
-      { id: 'breach-flash', name: 'Flashpoint', slot: 'basic_2', iconPath: assetPath('/assets/images/breach-q.webp'), description: 'Fires a fast-acting blind burst through walls.', enabled: true },
-      { id: 'breach-fault', name: 'Fault Line', slot: 'signature', iconPath: assetPath('/assets/images/breach-e.webp'), description: 'Sets off a seismic blast concussing all players in zone.', enabled: true },
-      { id: 'breach-ult', name: 'Rolling Thunder', slot: 'ultimate', iconPath: assetPath('/assets/images/breach-x.webp'), description: 'Sends a cascading seismic wave concussing and knocking up enemies.', enabled: true },
+      { id: 'breach-shock', name: 'Aftershock', slot: 'basic_1', iconPath: assetPath('/assets/images/breach-c.webp'), description: 'Fires a slow-acting burst through walls dealing heavy damage.', enabled: true, maxCharges: 1 },
+      { id: 'breach-flash', name: 'Flashpoint', slot: 'basic_2', iconPath: assetPath('/assets/images/breach-q.webp'), description: 'Fires a fast-acting blind burst through walls.', enabled: true, maxCharges: 2 },
+      { id: 'breach-fault', name: 'Fault Line', slot: 'signature', iconPath: assetPath('/assets/images/breach-e.webp'), description: 'Sets off a seismic blast concussing all players in zone.', enabled: true, maxCharges: 1 },
+      { id: 'breach-ult', name: 'Rolling Thunder', slot: 'ultimate', iconPath: assetPath('/assets/images/breach-x.webp'), description: 'Sends a cascading seismic wave concussing and knocking up enemies.', enabled: true, maxCharges: 1 },
     ],
   },
   {
@@ -41,10 +41,10 @@ export const AGENTS: Agent[] = [
     iconPath: assetPath('/assets/images/brimstone.webp'),
     enabled: true,
     abilities: [
-      { id: 'brimstone-stim', name: 'Stim Beacon', slot: 'basic_1', iconPath: assetPath('/assets/images/brimstone-c.webp'), description: 'Grants RapidFire and Speed Boost to team.', enabled: true },
-      { id: 'brimstone-molly', name: 'Incendiary', slot: 'basic_2', iconPath: assetPath('/assets/images/brimstone-q.webp'), description: 'Launches a grenade creating a zone of fire.', enabled: true },
-      { id: 'brimstone-smoke', name: 'Sky Smoke', slot: 'signature', iconPath: assetPath('/assets/images/brimstone-e.webp'), description: 'Deploys long-lasting smoke clouds.', enabled: true },
-      { id: 'brimstone-ult', name: 'Orbital Strike', slot: 'ultimate', iconPath: assetPath('/assets/images/brimstone-x.webp'), description: 'Launches a high-damage laser beam.', enabled: true },
+      { id: 'brimstone-stim', name: 'Stim Beacon', slot: 'basic_1', iconPath: assetPath('/assets/images/brimstone-c.webp'), description: 'Grants RapidFire and Speed Boost to team.', enabled: true, maxCharges: 1 },
+      { id: 'brimstone-molly', name: 'Incendiary', slot: 'basic_2', iconPath: assetPath('/assets/images/brimstone-q.webp'), description: 'Launches a grenade creating a zone of fire.', enabled: true, maxCharges: 1 },
+      { id: 'brimstone-smoke', name: 'Sky Smoke', slot: 'signature', iconPath: assetPath('/assets/images/brimstone-e.webp'), description: 'Deploys long-lasting smoke clouds.', enabled: true, maxCharges: 3 },
+      { id: 'brimstone-ult', name: 'Orbital Strike', slot: 'ultimate', iconPath: assetPath('/assets/images/brimstone-x.webp'), description: 'Launches a high-damage laser beam.', enabled: true, maxCharges: 1 },
     ],
   },
   {
@@ -56,10 +56,10 @@ export const AGENTS: Agent[] = [
     iconPath: assetPath('/assets/images/chamber.webp'),
     enabled: true,
     abilities: [
-      { id: 'chamber-trap', name: 'Trademark', slot: 'basic_1', iconPath: assetPath('/assets/images/chamber-c.webp'), description: 'Places a trap that scans for enemies and creates a slow field.', enabled: true },
-      { id: 'chamber-pistol', name: 'Headhunter', slot: 'basic_2', iconPath: assetPath('/assets/images/chamber-q.webp'), description: 'Equips a custom heavy pistol with ADS precision.', enabled: true },
-      { id: 'chamber-tp', name: 'Rendezvous', slot: 'signature', iconPath: assetPath('/assets/images/chamber-e.webp'), description: 'Teleports to anchor beacon location.', enabled: true },
-      { id: 'chamber-ult', name: 'Tour De Force', slot: 'ultimate', iconPath: assetPath('/assets/images/chamber-x.webp'), description: 'Summons a custom sniper rifle that spawns slow fields on kill.', enabled: true },
+      { id: 'chamber-trap', name: 'Trademark', slot: 'basic_1', iconPath: assetPath('/assets/images/chamber-c.webp'), description: 'Places a trap that scans for enemies and creates a slow field.', enabled: true, maxCharges: 1 },
+      { id: 'chamber-pistol', name: 'Headhunter', slot: 'basic_2', iconPath: assetPath('/assets/images/chamber-q.webp'), description: 'Equips a custom heavy pistol with ADS precision.', enabled: true, maxCharges: 8 },
+      { id: 'chamber-tp', name: 'Rendezvous', slot: 'signature', iconPath: assetPath('/assets/images/chamber-e.webp'), description: 'Teleports to anchor beacon location.', enabled: true, maxCharges: 1 },
+      { id: 'chamber-ult', name: 'Tour De Force', slot: 'ultimate', iconPath: assetPath('/assets/images/chamber-x.webp'), description: 'Summons a custom sniper rifle that spawns slow fields on kill.', enabled: true, maxCharges: 1 },
     ],
   },
   {
@@ -71,10 +71,10 @@ export const AGENTS: Agent[] = [
     iconPath: assetPath('/assets/images/clove.webp'),
     enabled: true,
     abilities: [
-      { id: 'clove-buff', name: 'Pick-Me-Up', slot: 'basic_1', iconPath: assetPath('/assets/images/clove-c.webp'), description: 'Absorbs life energy from fallen enemy for haste and temp health.', enabled: true },
-      { id: 'clove-decay', name: 'Meddle', slot: 'basic_2', iconPath: assetPath('/assets/images/clove-q.webp'), description: 'Throws an essence shard that decays enemies in blast zone.', enabled: true },
-      { id: 'clove-smoke', name: 'Ruse', slot: 'signature', iconPath: assetPath('/assets/images/clove-e.webp'), description: 'Sets smoke clouds (usable even after death).', enabled: true },
-      { id: 'clove-ult', name: 'Not Dead Yet', slot: 'ultimate', iconPath: assetPath('/assets/images/clove-x.webp'), description: 'Resurrects self after dying; must secure kill to stay alive.', enabled: true },
+      { id: 'clove-buff', name: 'Pick-Me-Up', slot: 'basic_1', iconPath: assetPath('/assets/images/clove-c.webp'), description: 'Absorbs life energy from fallen enemy for haste and temp health.', enabled: true, maxCharges: 1 },
+      { id: 'clove-decay', name: 'Meddle', slot: 'basic_2', iconPath: assetPath('/assets/images/clove-q.webp'), description: 'Throws an essence shard that decays enemies in blast zone.', enabled: true, maxCharges: 1 },
+      { id: 'clove-smoke', name: 'Ruse', slot: 'signature', iconPath: assetPath('/assets/images/clove-e.webp'), description: 'Sets smoke clouds (usable even after death).', enabled: true, maxCharges: 2 },
+      { id: 'clove-ult', name: 'Not Dead Yet', slot: 'ultimate', iconPath: assetPath('/assets/images/clove-x.webp'), description: 'Resurrects self after dying; must secure kill to stay alive.', enabled: true, maxCharges: 1 },
     ],
   },
   {
@@ -86,10 +86,10 @@ export const AGENTS: Agent[] = [
     iconPath: assetPath('/assets/images/cypher.webp'),
     enabled: true,
     abilities: [
-      { id: 'cypher-wire', name: 'Trapwire', slot: 'basic_1', iconPath: assetPath('/assets/images/cypher-c.webp'), description: 'Places a tripwire tethering and revealing crossing enemies.', enabled: true },
-      { id: 'cypher-cage', name: 'Cyber Cage', slot: 'basic_2', iconPath: assetPath('/assets/images/cypher-q.webp'), description: 'Creates a cage blocking vision and slowing passing enemies.', enabled: true },
-      { id: 'cypher-cam', name: 'Spycam', slot: 'signature', iconPath: assetPath('/assets/images/cypher-e.webp'), description: 'Places a remote camera that shoots marking darts.', enabled: true },
-      { id: 'cypher-ult', name: 'Neural Theft', slot: 'ultimate', iconPath: assetPath('/assets/images/cypher-x.webp'), description: 'Uses a corpse to reveal the current locations of all living enemies.', enabled: true },
+      { id: 'cypher-wire', name: 'Trapwire', slot: 'basic_1', iconPath: assetPath('/assets/images/cypher-c.webp'), description: 'Places a tripwire tethering and revealing crossing enemies.', enabled: true, maxCharges: 2 },
+      { id: 'cypher-cage', name: 'Cyber Cage', slot: 'basic_2', iconPath: assetPath('/assets/images/cypher-q.webp'), description: 'Creates a cage blocking vision and slowing passing enemies.', enabled: true, maxCharges: 2 },
+      { id: 'cypher-cam', name: 'Spycam', slot: 'signature', iconPath: assetPath('/assets/images/cypher-e.webp'), description: 'Places a remote camera that shoots marking darts.', enabled: true, maxCharges: 1 },
+      { id: 'cypher-ult', name: 'Neural Theft', slot: 'ultimate', iconPath: assetPath('/assets/images/cypher-x.webp'), description: 'Uses a corpse to reveal the current locations of all living enemies.', enabled: true, maxCharges: 1 },
     ],
   },
   {
@@ -101,10 +101,10 @@ export const AGENTS: Agent[] = [
     iconPath: assetPath('/assets/images/deadlock.webp'),
     enabled: true,
     abilities: [
-      { id: 'deadlock-gravnet', name: 'GravNet', slot: 'basic_1', iconPath: assetPath('/assets/images/deadlock-c.webp'), description: 'Throws a grenade forcing hit enemies to crouch and slow.', enabled: true },
-      { id: 'deadlock-sensor', name: 'Sonic Sensor', slot: 'basic_2', iconPath: assetPath('/assets/images/deadlock-q.webp'), description: 'Deploys a wall sensor concussing enemies making footstep noise.', enabled: true },
-      { id: 'deadlock-wall', name: 'Barrier Mesh', slot: 'signature', iconPath: assetPath('/assets/images/deadlock-e.webp'), description: 'Throws a disc generating an X-shaped movement barrier.', enabled: true },
-      { id: 'deadlock-ult', name: 'Annihilation', slot: 'ultimate', iconPath: assetPath('/assets/images/deadlock-x.webp'), description: 'Fires nano-wire pulse cocooning and dragging first hit enemy to death.', enabled: true },
+      { id: 'deadlock-gravnet', name: 'GravNet', slot: 'basic_1', iconPath: assetPath('/assets/images/deadlock-c.webp'), description: 'Throws a grenade forcing hit enemies to crouch and slow.', enabled: true, maxCharges: 1 },
+      { id: 'deadlock-sensor', name: 'Sonic Sensor', slot: 'basic_2', iconPath: assetPath('/assets/images/deadlock-q.webp'), description: 'Deploys a wall sensor concussing enemies making footstep noise.', enabled: true, maxCharges: 2 },
+      { id: 'deadlock-wall', name: 'Barrier Mesh', slot: 'signature', iconPath: assetPath('/assets/images/deadlock-e.webp'), description: 'Throws a disc generating an X-shaped movement barrier.', enabled: true, maxCharges: 1 },
+      { id: 'deadlock-ult', name: 'Annihilation', slot: 'ultimate', iconPath: assetPath('/assets/images/deadlock-x.webp'), description: 'Fires nano-wire pulse cocooning and dragging first hit enemy to death.', enabled: true, maxCharges: 1 },
     ],
   },
   {
@@ -116,10 +116,10 @@ export const AGENTS: Agent[] = [
     iconPath: assetPath('/assets/images/fade.webp'),
     enabled: true,
     abilities: [
-      { id: 'fade-seize', name: 'Seize', slot: 'basic_1', iconPath: assetPath('/assets/images/fade-c.webp'), description: 'Throws an orb that tethers and decays nearby enemies.', enabled: true },
-      { id: 'fade-haunt', name: 'Haunt', slot: 'basic_2', iconPath: assetPath('/assets/images/fade-q.webp'), description: 'Drops a nightmare entity revealing enemy positions and trails.', enabled: true },
-      { id: 'fade-prowler', name: 'Prowler', slot: 'signature', iconPath: assetPath('/assets/images/fade-e.webp'), description: 'Sends a creature that locks onto terror trails to nearsight.', enabled: true },
-      { id: 'fade-ult', name: 'Nightfall', slot: 'ultimate', iconPath: assetPath('/assets/images/fade-x.webp'), description: 'Sends a wave of nightmare energy deafening and decaying targets.', enabled: true },
+      { id: 'fade-seize', name: 'Seize', slot: 'basic_1', iconPath: assetPath('/assets/images/fade-c.webp'), description: 'Throws an orb that tethers and decays nearby enemies.', enabled: true, maxCharges: 1 },
+      { id: 'fade-haunt', name: 'Haunt', slot: 'basic_2', iconPath: assetPath('/assets/images/fade-q.webp'), description: 'Drops a nightmare entity revealing enemy positions and trails.', enabled: true, maxCharges: 1 },
+      { id: 'fade-prowler', name: 'Prowler', slot: 'signature', iconPath: assetPath('/assets/images/fade-e.webp'), description: 'Sends a creature that locks onto terror trails to nearsight.', enabled: true, maxCharges: 2 },
+      { id: 'fade-ult', name: 'Nightfall', slot: 'ultimate', iconPath: assetPath('/assets/images/fade-x.webp'), description: 'Sends a wave of nightmare energy deafening and decaying targets.', enabled: true, maxCharges: 1 },
     ],
   },
   {
@@ -131,10 +131,10 @@ export const AGENTS: Agent[] = [
     iconPath: assetPath('/assets/images/gekko.webp'),
     enabled: true,
     abilities: [
-      { id: 'gekko-mosh', name: 'Mosh Pit', slot: 'basic_1', iconPath: assetPath('/assets/images/gekko-c.webp'), description: 'Throws Mosh who expands and explodes across a wide area.', enabled: true },
-      { id: 'gekko-wingman', name: 'Wingman', slot: 'basic_2', iconPath: assetPath('/assets/images/gekko-q.webp'), description: 'Sends Wingman to concuss enemies or plant/defuse the Spike.', enabled: true },
-      { id: 'gekko-dizzy', name: 'Dizzy', slot: 'signature', iconPath: assetPath('/assets/images/gekko-e.webp'), description: 'Launches Dizzy into the air to plasma-blind enemies.', enabled: true },
-      { id: 'gekko-ult', name: 'Thrash', slot: 'ultimate', iconPath: assetPath('/assets/images/gekko-x.webp'), description: 'Steers Thrash to lunge and detain enemies.', enabled: true },
+      { id: 'gekko-mosh', name: 'Mosh Pit', slot: 'basic_1', iconPath: assetPath('/assets/images/gekko-c.webp'), description: 'Throws Mosh who expands and explodes across a wide area.', enabled: true, maxCharges: 1 },
+      { id: 'gekko-wingman', name: 'Wingman', slot: 'basic_2', iconPath: assetPath('/assets/images/gekko-q.webp'), description: 'Sends Wingman to concuss enemies or plant/defuse the Spike.', enabled: true, maxCharges: 1 },
+      { id: 'gekko-dizzy', name: 'Dizzy', slot: 'signature', iconPath: assetPath('/assets/images/gekko-e.webp'), description: 'Launches Dizzy into the air to plasma-blind enemies.', enabled: true, maxCharges: 1 },
+      { id: 'gekko-ult', name: 'Thrash', slot: 'ultimate', iconPath: assetPath('/assets/images/gekko-x.webp'), description: 'Steers Thrash to lunge and detain enemies.', enabled: true, maxCharges: 1 },
     ],
   },
   {
@@ -146,10 +146,10 @@ export const AGENTS: Agent[] = [
     iconPath: assetPath('/assets/images/harbor.webp'),
     enabled: true,
     abilities: [
-      { id: 'harbor-cascade', name: 'Cascade', slot: 'basic_1', iconPath: assetPath('/assets/images/harbor-c.webp'), description: 'Sends a wave of water rolling forward through walls.', enabled: true },
-      { id: 'harbor-cove', name: 'Cove', slot: 'basic_2', iconPath: assetPath('/assets/images/harbor-q.webp'), description: 'Spawns a bullet-shielding sphere of water.', enabled: true },
-      { id: 'harbor-tide', name: 'High Tide', slot: 'signature', iconPath: assetPath('/assets/images/harbor-e.webp'), description: 'Guides a wall of water along a drawn path.', enabled: true },
-      { id: 'harbor-ult', name: 'Reckoning', slot: 'ultimate', iconPath: assetPath('/assets/images/harbor-x.webp'), description: 'Summons a geyser pool that concusses enemy players.', enabled: true },
+      { id: 'harbor-cascade', name: 'Cascade', slot: 'basic_1', iconPath: assetPath('/assets/images/harbor-c.webp'), description: 'Sends a wave of water rolling forward through walls.', enabled: true, maxCharges: 1 },
+      { id: 'harbor-cove', name: 'Cove', slot: 'basic_2', iconPath: assetPath('/assets/images/harbor-q.webp'), description: 'Spawns a bullet-shielding sphere of water.', enabled: true, maxCharges: 1 },
+      { id: 'harbor-tide', name: 'High Tide', slot: 'signature', iconPath: assetPath('/assets/images/harbor-e.webp'), description: 'Guides a wall of water along a drawn path.', enabled: true, maxCharges: 1 },
+      { id: 'harbor-ult', name: 'Reckoning', slot: 'ultimate', iconPath: assetPath('/assets/images/harbor-x.webp'), description: 'Summons a geyser pool that concusses enemy players.', enabled: true, maxCharges: 1 },
     ],
   },
   {
@@ -161,10 +161,10 @@ export const AGENTS: Agent[] = [
     iconPath: assetPath('/assets/images/iso.webp'),
     enabled: true,
     abilities: [
-      { id: 'iso-wall', name: 'Contingency', slot: 'basic_1', iconPath: assetPath('/assets/images/iso-c.webp'), description: 'Pushes an indestructible bulletproof energy wall.', enabled: true },
-      { id: 'iso-bolt', name: 'Undercut', slot: 'basic_2', iconPath: assetPath('/assets/images/iso-q.webp'), description: 'Fires a molecular bolt applying Fragile to enemies.', enabled: true },
-      { id: 'iso-shield', name: 'Double Tap', slot: 'signature', iconPath: assetPath('/assets/images/iso-e.webp'), description: 'Gains a protective energy shield absorbing 1 damage instance.', enabled: true },
-      { id: 'iso-ult', name: 'Kill Contract', slot: 'ultimate', iconPath: assetPath('/assets/images/iso-x.webp'), description: 'Pulls an enemy into a 1v1 arena duel to the death.', enabled: true },
+      { id: 'iso-wall', name: 'Contingency', slot: 'basic_1', iconPath: assetPath('/assets/images/iso-c.webp'), description: 'Pushes an indestructible bulletproof energy wall.', enabled: true, maxCharges: 1 },
+      { id: 'iso-bolt', name: 'Undercut', slot: 'basic_2', iconPath: assetPath('/assets/images/iso-q.webp'), description: 'Fires a molecular bolt applying Fragile to enemies.', enabled: true, maxCharges: 1 },
+      { id: 'iso-shield', name: 'Double Tap', slot: 'signature', iconPath: assetPath('/assets/images/iso-e.webp'), description: 'Gains a protective energy shield absorbing 1 damage instance.', enabled: true, maxCharges: 1 },
+      { id: 'iso-ult', name: 'Kill Contract', slot: 'ultimate', iconPath: assetPath('/assets/images/iso-x.webp'), description: 'Pulls an enemy into a 1v1 arena duel to the death.', enabled: true, maxCharges: 1 },
     ],
   },
   {
@@ -176,10 +176,10 @@ export const AGENTS: Agent[] = [
     iconPath: assetPath('/assets/images/jett.webp'),
     enabled: true,
     abilities: [
-      { id: 'jett-smoke', name: 'Cloudburst', slot: 'basic_1', iconPath: assetPath('/assets/images/jett-c.webp'), description: 'Throws a fast-moving cloud of vision-blocking fog.', enabled: true },
-      { id: 'jett-updraft', name: 'Updraft', slot: 'basic_2', iconPath: assetPath('/assets/images/jett-q.webp'), description: 'Launches Jett high into the air.', enabled: true },
-      { id: 'jett-dash', name: 'Tailwind', slot: 'signature', iconPath: assetPath('/assets/images/jett-e.webp'), description: 'Dashes instantly in current movement direction.', enabled: true },
-      { id: 'jett-ult', name: 'Blade Storm', slot: 'ultimate', iconPath: assetPath('/assets/images/jett-x.webp'), description: 'Equips deadly high-accuracy throwing knives.', enabled: true },
+      { id: 'jett-smoke', name: 'Cloudburst', slot: 'basic_1', iconPath: assetPath('/assets/images/jett-c.webp'), description: 'Throws a fast-moving cloud of vision-blocking fog.', enabled: true, maxCharges: 2 },
+      { id: 'jett-updraft', name: 'Updraft', slot: 'basic_2', iconPath: assetPath('/assets/images/jett-q.webp'), description: 'Launches Jett high into the air.', enabled: true, maxCharges: 1 },
+      { id: 'jett-dash', name: 'Tailwind', slot: 'signature', iconPath: assetPath('/assets/images/jett-e.webp'), description: 'Dashes instantly in current movement direction.', enabled: true, maxCharges: 1 },
+      { id: 'jett-ult', name: 'Blade Storm', slot: 'ultimate', iconPath: assetPath('/assets/images/jett-x.webp'), description: 'Equips deadly high-accuracy throwing knives.', enabled: true, maxCharges: 1 },
     ],
   },
   {
@@ -191,10 +191,10 @@ export const AGENTS: Agent[] = [
     iconPath: assetPath('/assets/images/kayo.webp'),
     enabled: true,
     abilities: [
-      { id: 'kayo-frag', name: 'FRAG/ment', slot: 'basic_1', iconPath: assetPath('/assets/images/kayo-c.webp'), description: 'Throws an explosive pulse grenade.', enabled: true },
-      { id: 'kayo-flash', name: 'FLASH/drive', slot: 'basic_2', iconPath: assetPath('/assets/images/kayo-q.webp'), description: 'Throws a flash grenade that blinds on detonation.', enabled: true },
-      { id: 'kayo-knife', name: 'ZERO/point', slot: 'signature', iconPath: assetPath('/assets/images/kayo-e.webp'), description: 'Throws a suppression blade that disables enemy abilities.', enabled: true },
-      { id: 'kayo-ult', name: 'NULL/cmd', slot: 'ultimate', iconPath: assetPath('/assets/images/kayo-x.webp'), description: 'Emits suppression pulses; can be downed and revived by team.', enabled: true },
+      { id: 'kayo-frag', name: 'FRAG/ment', slot: 'basic_1', iconPath: assetPath('/assets/images/kayo-c.webp'), description: 'Throws an explosive pulse grenade.', enabled: true, maxCharges: 1 },
+      { id: 'kayo-flash', name: 'FLASH/drive', slot: 'basic_2', iconPath: assetPath('/assets/images/kayo-q.webp'), description: 'Throws a flash grenade that blinds on detonation.', enabled: true, maxCharges: 2 },
+      { id: 'kayo-knife', name: 'ZERO/point', slot: 'signature', iconPath: assetPath('/assets/images/kayo-e.webp'), description: 'Throws a suppression blade that disables enemy abilities.', enabled: true, maxCharges: 1 },
+      { id: 'kayo-ult', name: 'NULL/cmd', slot: 'ultimate', iconPath: assetPath('/assets/images/kayo-x.webp'), description: 'Emits suppression pulses; can be downed and revived by team.', enabled: true, maxCharges: 1 },
     ],
   },
   {
@@ -206,10 +206,10 @@ export const AGENTS: Agent[] = [
     iconPath: assetPath('/assets/images/killjoy.webp'),
     enabled: true,
     abilities: [
-      { id: 'killjoy-nano', name: 'Nanoswarm', slot: 'basic_1', iconPath: assetPath('/assets/images/killjoy-c.webp'), description: 'Deploys covert grenade that unleashes a swarm of nanobots.', enabled: true },
-      { id: 'killjoy-alarm', name: 'Alarmbot', slot: 'basic_2', iconPath: assetPath('/assets/images/killjoy-q.webp'), description: 'Deploys a bot that hunts enemies and makes them Vulnerable.', enabled: true },
-      { id: 'killjoy-turret', name: 'Turret', slot: 'signature', iconPath: assetPath('/assets/images/killjoy-e.webp'), description: 'Deploys an automated turret firing at enemies in a 180 cone.', enabled: true },
-      { id: 'killjoy-ult', name: 'Lockdown', slot: 'ultimate', iconPath: assetPath('/assets/images/killjoy-x.webp'), description: 'Detonates a device detaining all enemies in radius.', enabled: true },
+      { id: 'killjoy-nano', name: 'Nanoswarm', slot: 'basic_1', iconPath: assetPath('/assets/images/killjoy-c.webp'), description: 'Deploys covert grenade that unleashes a swarm of nanobots.', enabled: true, maxCharges: 1 },
+      { id: 'killjoy-alarm', name: 'Alarmbot', slot: 'basic_2', iconPath: assetPath('/assets/images/killjoy-q.webp'), description: 'Deploys a bot that hunts enemies and makes them Vulnerable.', enabled: true, maxCharges: 1 },
+      { id: 'killjoy-turret', name: 'Turret', slot: 'signature', iconPath: assetPath('/assets/images/killjoy-e.webp'), description: 'Deploys an automated turret firing at enemies in a 180 cone.', enabled: true, maxCharges: 1 },
+      { id: 'killjoy-ult', name: 'Lockdown', slot: 'ultimate', iconPath: assetPath('/assets/images/killjoy-x.webp'), description: 'Detonates a device detaining all enemies in radius.', enabled: true, maxCharges: 1 },
     ],
   },
   {
@@ -221,10 +221,10 @@ export const AGENTS: Agent[] = [
     iconPath: assetPath('/assets/images/miks.webp'),
     enabled: true,
     abilities: [
-      { id: 'miks-dampener', name: 'Kinetic Dampener', slot: 'basic_1', iconPath: assetPath('/assets/images/miks-c.webp'), description: 'Deploys a zone that reduces enemy weapon accuracy and fire rate.', enabled: true },
-      { id: 'miks-shift', name: 'Chrono Shift', slot: 'basic_2', iconPath: assetPath('/assets/images/miks-q.webp'), description: 'Phase-shifts smoke location forward or backward.', enabled: true },
-      { id: 'miks-barrier', name: 'Sonic Barrier', slot: 'signature', iconPath: assetPath('/assets/images/miks-e.webp'), description: 'Projects a sound-deadening smoke wall.', enabled: true },
-      { id: 'miks-ult', name: 'Temporal Overhaul', slot: 'ultimate', iconPath: assetPath('/assets/images/miks-x.png'), description: 'Rewinds recent map changes and resets ability cooldowns.', enabled: true },
+      { id: 'miks-dampener', name: 'Kinetic Dampener', slot: 'basic_1', iconPath: assetPath('/assets/images/miks-c.webp'), description: 'Deploys a zone that reduces enemy weapon accuracy and fire rate.', enabled: true, maxCharges: 1 },
+      { id: 'miks-shift', name: 'Chrono Shift', slot: 'basic_2', iconPath: assetPath('/assets/images/miks-q.webp'), description: 'Phase-shifts smoke location forward or backward.', enabled: true, maxCharges: 1 },
+      { id: 'miks-barrier', name: 'Sonic Barrier', slot: 'signature', iconPath: assetPath('/assets/images/miks-e.webp'), description: 'Projects a sound-deadening smoke wall.', enabled: true, maxCharges: 1 },
+      { id: 'miks-ult', name: 'Temporal Overhaul', slot: 'ultimate', iconPath: assetPath('/assets/images/miks-x.png'), description: 'Rewinds recent map changes and resets ability cooldowns.', enabled: true, maxCharges: 1 },
     ],
   },
   {
@@ -236,10 +236,10 @@ export const AGENTS: Agent[] = [
     iconPath: assetPath('/assets/images/neon.webp'),
     enabled: true,
     abilities: [
-      { id: 'neon-wall', name: 'Fast Lane', slot: 'basic_1', iconPath: assetPath('/assets/images/neon-c.webp'), description: 'Fires two parallel static walls of energy.', enabled: true },
-      { id: 'neon-stun', name: 'Relay Bolt', slot: 'basic_2', iconPath: assetPath('/assets/images/neon-q.webp'), description: 'Bounces an energy bolt concussing targets on hit.', enabled: true },
-      { id: 'neon-sprint', name: 'High Gear', slot: 'signature', iconPath: assetPath('/assets/images/neon-e.webp'), description: 'Channel power for boosted movement speed and combat slide.', enabled: true },
-      { id: 'neon-ult', name: 'Overdrive', slot: 'ultimate', iconPath: assetPath('/assets/images/neon-x.webp'), description: 'Unleashes full speed and lethal electrical lightning beam.', enabled: true },
+      { id: 'neon-wall', name: 'Fast Lane', slot: 'basic_1', iconPath: assetPath('/assets/images/neon-c.webp'), description: 'Fires two parallel static walls of energy.', enabled: true, maxCharges: 1 },
+      { id: 'neon-stun', name: 'Relay Bolt', slot: 'basic_2', iconPath: assetPath('/assets/images/neon-q.webp'), description: 'Bounces an energy bolt concussing targets on hit.', enabled: true, maxCharges: 2 },
+      { id: 'neon-sprint', name: 'High Gear', slot: 'signature', iconPath: assetPath('/assets/images/neon-e.webp'), description: 'Channel power for boosted movement speed and combat slide.', enabled: true, maxCharges: 1 },
+      { id: 'neon-ult', name: 'Overdrive', slot: 'ultimate', iconPath: assetPath('/assets/images/neon-x.webp'), description: 'Unleashes full speed and lethal electrical lightning beam.', enabled: true, maxCharges: 1 },
     ],
   },
   {
@@ -251,10 +251,10 @@ export const AGENTS: Agent[] = [
     iconPath: assetPath('/assets/images/omen.webp'),
     enabled: true,
     abilities: [
-      { id: 'omen-step', name: 'Shrouded Step', slot: 'basic_1', iconPath: assetPath('/assets/images/omen-c.webp'), description: 'Short range teleport after a brief delay.', enabled: true },
-      { id: 'omen-flash', name: 'Paranoia', slot: 'basic_2', iconPath: assetPath('/assets/images/omen-q.webp'), description: 'Fires a shadow projectile that nearsights enemies.', enabled: true },
-      { id: 'omen-smoke', name: 'Dark Cover', slot: 'signature', iconPath: assetPath('/assets/images/omen-e.webp'), description: 'Casts a long distance shadow sphere smoke.', enabled: true },
-      { id: 'omen-ult', name: 'From the Shadows', slot: 'ultimate', iconPath: assetPath('/assets/images/omen-x.webp'), description: 'Teleports to any location on the map.', enabled: true },
+      { id: 'omen-step', name: 'Shrouded Step', slot: 'basic_1', iconPath: assetPath('/assets/images/omen-c.webp'), description: 'Short range teleport after a brief delay.', enabled: true, maxCharges: 1 },
+      { id: 'omen-flash', name: 'Paranoia', slot: 'basic_2', iconPath: assetPath('/assets/images/omen-q.webp'), description: 'Fires a shadow projectile that nearsights enemies.', enabled: true, maxCharges: 1 },
+      { id: 'omen-smoke', name: 'Dark Cover', slot: 'signature', iconPath: assetPath('/assets/images/omen-e.webp'), description: 'Casts a long distance shadow sphere smoke.', enabled: true, maxCharges: 2 },
+      { id: 'omen-ult', name: 'From the Shadows', slot: 'ultimate', iconPath: assetPath('/assets/images/omen-x.webp'), description: 'Teleports to any location on the map.', enabled: true, maxCharges: 1 },
     ],
   },
   {
@@ -266,10 +266,10 @@ export const AGENTS: Agent[] = [
     iconPath: assetPath('/assets/images/phoenix.webp'),
     enabled: true,
     abilities: [
-      { id: 'phoenix-wall', name: 'Blaze', slot: 'basic_1', iconPath: assetPath('/assets/images/phoenix-c.webp'), description: 'Flame wall that blocks vision and heals Phoenix.', enabled: true },
-      { id: 'phoenix-flash', name: 'Curveball', slot: 'basic_2', iconPath: assetPath('/assets/images/phoenix-q.webp'), description: 'Curves a flare orb that blinds looking players.', enabled: true },
-      { id: 'phoenix-molly', name: 'Hot Hands', slot: 'signature', iconPath: assetPath('/assets/images/phoenix-e.webp'), description: 'Throws a fireball exploding into a healing fire zone.', enabled: true },
-      { id: 'phoenix-ult', name: 'Run It Back', slot: 'ultimate', iconPath: assetPath('/assets/images/phoenix-x.webp'), description: 'Places a marker and resurrects at marker if killed during timer.', enabled: true },
+      { id: 'phoenix-wall', name: 'Blaze', slot: 'basic_1', iconPath: assetPath('/assets/images/phoenix-c.webp'), description: 'Flame wall that blocks vision and heals Phoenix.', enabled: true, maxCharges: 1 },
+      { id: 'phoenix-flash', name: 'Curveball', slot: 'basic_2', iconPath: assetPath('/assets/images/phoenix-q.webp'), description: 'Curves a flare orb that blinds looking players.', enabled: true, maxCharges: 2 },
+      { id: 'phoenix-molly', name: 'Hot Hands', slot: 'signature', iconPath: assetPath('/assets/images/phoenix-e.webp'), description: 'Throws a fireball exploding into a healing fire zone.', enabled: true, maxCharges: 1 },
+      { id: 'phoenix-ult', name: 'Run It Back', slot: 'ultimate', iconPath: assetPath('/assets/images/phoenix-x.webp'), description: 'Places a marker and resurrects at marker if killed during timer.', enabled: true, maxCharges: 1 },
     ],
   },
   {
@@ -281,10 +281,10 @@ export const AGENTS: Agent[] = [
     iconPath: assetPath('/assets/images/raze.webp'),
     enabled: true,
     abilities: [
-      { id: 'raze-bot', name: 'Boom Bot', slot: 'basic_1', iconPath: assetPath('/assets/images/raze-c.webp'), description: 'Deploys a ground bot that locks onto and chases enemies.', enabled: true },
-      { id: 'raze-satchel', name: 'Blast Pack', slot: 'basic_2', iconPath: assetPath('/assets/images/raze-q.webp'), description: 'Throws a satchel charge to boost or damage.', enabled: true },
-      { id: 'raze-nadir', name: 'Paint Shells', slot: 'signature', iconPath: assetPath('/assets/images/raze-e.webp'), description: 'Cluster grenade dealing massive AOE damage.', enabled: true },
-      { id: 'raze-ult', name: 'Showstopper', slot: 'ultimate', iconPath: assetPath('/assets/images/raze-x.webp'), description: 'Equips a rocket launcher for huge explosive impact.', enabled: true },
+      { id: 'raze-bot', name: 'Boom Bot', slot: 'basic_1', iconPath: assetPath('/assets/images/raze-c.webp'), description: 'Deploys a ground bot that locks onto and chases enemies.', enabled: true, maxCharges: 1 },
+      { id: 'raze-satchel', name: 'Blast Pack', slot: 'basic_2', iconPath: assetPath('/assets/images/raze-q.webp'), description: 'Throws a satchel charge to boost or damage.', enabled: true, maxCharges: 1 },
+      { id: 'raze-nadir', name: 'Paint Shells', slot: 'signature', iconPath: assetPath('/assets/images/raze-e.webp'), description: 'Cluster grenade dealing massive AOE damage.', enabled: true, maxCharges: 1 },
+      { id: 'raze-ult', name: 'Showstopper', slot: 'ultimate', iconPath: assetPath('/assets/images/raze-x.webp'), description: 'Equips a rocket launcher for huge explosive impact.', enabled: true, maxCharges: 1 },
     ],
   },
   {
@@ -296,10 +296,10 @@ export const AGENTS: Agent[] = [
     iconPath: assetPath('/assets/images/reyna.webp'),
     enabled: true,
     abilities: [
-      { id: 'reyna-flash', name: 'Leer', slot: 'basic_1', iconPath: assetPath('/assets/images/reyna-c.png'), description: 'Casts an ethereal eye that nearsights enemies looking at it.', enabled: true },
-      { id: 'reyna-heal', name: 'Devour', slot: 'basic_2', iconPath: assetPath('/assets/images/reyna-q.webp'), description: 'Consumes soul orb to rapidly heal health.', enabled: true },
-      { id: 'reyna-dismiss', name: 'Dismiss', slot: 'signature', iconPath: assetPath('/assets/images/reyna-e.webp'), description: 'Consumes soul orb to become intangible briefly.', enabled: true },
-      { id: 'reyna-ult', name: 'Empress', slot: 'ultimate', iconPath: assetPath('/assets/images/reyna-x.webp'), description: 'Frenzy mode with combat speed, reload speed, and stealth.', enabled: true },
+      { id: 'reyna-flash', name: 'Leer', slot: 'basic_1', iconPath: assetPath('/assets/images/reyna-c.png'), description: 'Casts an ethereal eye that nearsights enemies looking at it.', enabled: true, maxCharges: 1 },
+      { id: 'reyna-heal', name: 'Devour', slot: 'basic_2', iconPath: assetPath('/assets/images/reyna-q.webp'), description: 'Consumes soul orb to rapidly heal health.', enabled: true, maxCharges: 2 },
+      { id: 'reyna-dismiss', name: 'Dismiss', slot: 'signature', iconPath: assetPath('/assets/images/reyna-e.webp'), description: 'Consumes soul orb to become intangible briefly.', enabled: true, maxCharges: 2 },
+      { id: 'reyna-ult', name: 'Empress', slot: 'ultimate', iconPath: assetPath('/assets/images/reyna-x.webp'), description: 'Frenzy mode with combat speed, reload speed, and stealth.', enabled: true, maxCharges: 1 },
     ],
   },
   {
@@ -311,10 +311,10 @@ export const AGENTS: Agent[] = [
     iconPath: assetPath('/assets/images/sage.webp'),
     enabled: true,
     abilities: [
-      { id: 'sage-wall', name: 'Barrier Orb', slot: 'basic_1', iconPath: assetPath('/assets/images/sage-c.webp'), description: 'Fortifies a solid jade wall segment.', enabled: true },
-      { id: 'sage-slow', name: 'Slow Orb', slot: 'basic_2', iconPath: assetPath('/assets/images/sage-q.webp'), description: 'Launches an orb creating a slowing field.', enabled: true },
-      { id: 'sage-heal', name: 'Healing Orb', slot: 'signature', iconPath: assetPath('/assets/images/sage-e.webp'), description: 'Heals an ally or self over a short duration.', enabled: true },
-      { id: 'sage-ult', name: 'Resurrection', slot: 'ultimate', iconPath: assetPath('/assets/images/sage-x.webp'), description: 'Target a dead ally to revive them with full health.', enabled: true },
+      { id: 'sage-wall', name: 'Barrier Orb', slot: 'basic_1', iconPath: assetPath('/assets/images/sage-c.webp'), description: 'Fortifies a solid jade wall segment.', enabled: true, maxCharges: 1 },
+      { id: 'sage-slow', name: 'Slow Orb', slot: 'basic_2', iconPath: assetPath('/assets/images/sage-q.webp'), description: 'Launches an orb creating a slowing field.', enabled: true, maxCharges: 2 },
+      { id: 'sage-heal', name: 'Healing Orb', slot: 'signature', iconPath: assetPath('/assets/images/sage-e.webp'), description: 'Heals an ally or self over a short duration.', enabled: true, maxCharges: 1 },
+      { id: 'sage-ult', name: 'Resurrection', slot: 'ultimate', iconPath: assetPath('/assets/images/sage-x.webp'), description: 'Target a dead ally to revive them with full health.', enabled: true, maxCharges: 1 },
     ],
   },
   {
@@ -326,10 +326,10 @@ export const AGENTS: Agent[] = [
     iconPath: assetPath('/assets/images/skye.webp'),
     enabled: true,
     abilities: [
-      { id: 'skye-heal', name: 'Regrowth', slot: 'basic_1', iconPath: assetPath('/assets/images/skye-c.webp'), description: 'Channels a healing trinket to heal teammates in range.', enabled: true },
-      { id: 'skye-tiger', name: 'Trailblazer', slot: 'basic_2', iconPath: assetPath('/assets/images/skye-q.webp'), description: 'Controls a Tasmanian tiger to leap and concuss enemies.', enabled: true },
-      { id: 'skye-bird', name: 'Guiding Light', slot: 'signature', iconPath: assetPath('/assets/images/skye-e.webp'), description: 'Steers a hawk trinket that transforms into a blinding flash.', enabled: true },
-      { id: 'skye-ult', name: 'Seekers', slot: 'ultimate', iconPath: assetPath('/assets/images/skye-x.png'), description: 'Sends 3 seekers to track down and nearsight the closest enemies.', enabled: true },
+      { id: 'skye-heal', name: 'Regrowth', slot: 'basic_1', iconPath: assetPath('/assets/images/skye-c.webp'), description: 'Channels a healing trinket to heal teammates in range.', enabled: true, maxCharges: 1 },
+      { id: 'skye-tiger', name: 'Trailblazer', slot: 'basic_2', iconPath: assetPath('/assets/images/skye-q.webp'), description: 'Controls a Tasmanian tiger to leap and concuss enemies.', enabled: true, maxCharges: 1 },
+      { id: 'skye-bird', name: 'Guiding Light', slot: 'signature', iconPath: assetPath('/assets/images/skye-e.webp'), description: 'Steers a hawk trinket that transforms into a blinding flash.', enabled: true, maxCharges: 2 },
+      { id: 'skye-ult', name: 'Seekers', slot: 'ultimate', iconPath: assetPath('/assets/images/skye-x.png'), description: 'Sends 3 seekers to track down and nearsight the closest enemies.', enabled: true, maxCharges: 1 },
     ],
   },
   {
@@ -341,10 +341,10 @@ export const AGENTS: Agent[] = [
     iconPath: assetPath('/assets/images/sova.webp'),
     enabled: true,
     abilities: [
-      { id: 'sova-drone', name: 'Owl Drone', slot: 'basic_1', iconPath: assetPath('/assets/images/sova-c.webp'), description: 'Deploys a pilotable drone that shoots marking darts.', enabled: true },
-      { id: 'sova-shock', name: 'Shock Bolt', slot: 'basic_2', iconPath: assetPath('/assets/images/sova-q.webp'), description: 'Fires an explosive shock arrow.', enabled: true },
-      { id: 'sova-recon', name: 'Recon Bolt', slot: 'signature', iconPath: assetPath('/assets/images/sova-e.webp'), description: 'Fires a sonar arrow that reveals enemy locations.', enabled: true },
-      { id: 'sova-ult', name: "Hunter's Fury", slot: 'ultimate', iconPath: assetPath('/assets/images/sova-x.webp'), description: 'Fires up to 3 map-spanning wall-piercing energy blasts.', enabled: true },
+      { id: 'sova-drone', name: 'Owl Drone', slot: 'basic_1', iconPath: assetPath('/assets/images/sova-c.webp'), description: 'Deploys a pilotable drone that shoots marking darts.', enabled: true, maxCharges: 1 },
+      { id: 'sova-shock', name: 'Shock Bolt', slot: 'basic_2', iconPath: assetPath('/assets/images/sova-q.webp'), description: 'Fires an explosive shock arrow.', enabled: true, maxCharges: 2 },
+      { id: 'sova-recon', name: 'Recon Bolt', slot: 'signature', iconPath: assetPath('/assets/images/sova-e.webp'), description: 'Fires a sonar arrow that reveals enemy locations.', enabled: true, maxCharges: 1 },
+      { id: 'sova-ult', name: "Hunter's Fury", slot: 'ultimate', iconPath: assetPath('/assets/images/sova-x.webp'), description: 'Fires up to 3 map-spanning wall-piercing energy blasts.', enabled: true, maxCharges: 1 },
     ],
   },
   {
@@ -356,10 +356,10 @@ export const AGENTS: Agent[] = [
     iconPath: assetPath('/assets/images/tejo.webp'),
     enabled: true,
     abilities: [
-      { id: 'tejo-sensor', name: 'Sensor Array', slot: 'basic_1', iconPath: assetPath('/assets/images/tejo-c.webp'), description: 'Deploys a acoustic sensor revealing movement heatmaps.', enabled: true },
-      { id: 'tejo-blast', name: 'Sonic Blast', slot: 'basic_2', iconPath: assetPath('/assets/images/tejo-q.webp'), description: 'Emits a shockwave that disrupts enemy radar and HUD.', enabled: true },
-      { id: 'tejo-beacon', name: 'Target Beacon', slot: 'signature', iconPath: assetPath('/assets/images/tejo-e.png'), description: 'Marks a chokepoint for artillery tracking.', enabled: true },
-      { id: 'tejo-ult', name: 'Orbital Retribution', slot: 'ultimate', iconPath: assetPath('/assets/images/tejo-x.webp'), description: 'Calls down precision air strikes on revealed enemies.', enabled: true },
+      { id: 'tejo-sensor', name: 'Sensor Array', slot: 'basic_1', iconPath: assetPath('/assets/images/tejo-c.webp'), description: 'Deploys a acoustic sensor revealing movement heatmaps.', enabled: true, maxCharges: 1 },
+      { id: 'tejo-blast', name: 'Sonic Blast', slot: 'basic_2', iconPath: assetPath('/assets/images/tejo-q.webp'), description: 'Emits a shockwave that disrupts enemy radar and HUD.', enabled: true, maxCharges: 1 },
+      { id: 'tejo-beacon', name: 'Target Beacon', slot: 'signature', iconPath: assetPath('/assets/images/tejo-e.png'), description: 'Marks a chokepoint for artillery tracking.', enabled: true, maxCharges: 1 },
+      { id: 'tejo-ult', name: 'Orbital Retribution', slot: 'ultimate', iconPath: assetPath('/assets/images/tejo-x.webp'), description: 'Calls down precision air strikes on revealed enemies.', enabled: true, maxCharges: 1 },
     ],
   },
   {
@@ -371,10 +371,10 @@ export const AGENTS: Agent[] = [
     iconPath: assetPath('/assets/images/veto.webp'),
     enabled: true,
     abilities: [
-      { id: 'veto-trap', name: 'Stasis Trap', slot: 'basic_1', iconPath: assetPath('/assets/images/veto-c.webp'), description: 'Lays a field holding enemies motionless for 1.5s.', enabled: true },
-      { id: 'veto-field', name: 'Suppression Field', slot: 'basic_2', iconPath: assetPath('/assets/images/veto-q.webp'), description: 'Creates an anti-utility aura blocking enemy flashes and smouldering.', enabled: true },
-      { id: 'veto-wall', name: 'Aegis Wall', slot: 'signature', iconPath: assetPath('/assets/images/veto-e.webp'), description: 'Raises a kinetic energy barrier deflecting damage back.', enabled: true },
-      { id: 'veto-ult', name: 'Overlock Denier', slot: 'ultimate', iconPath: assetPath('/assets/images/veto-x.webp'), description: 'Cancels active enemy ultimate abilities in a massive radius.', enabled: true },
+      { id: 'veto-trap', name: 'Stasis Trap', slot: 'basic_1', iconPath: assetPath('/assets/images/veto-c.webp'), description: 'Lays a field holding enemies motionless for 1.5s.', enabled: true, maxCharges: 1 },
+      { id: 'veto-field', name: 'Suppression Field', slot: 'basic_2', iconPath: assetPath('/assets/images/veto-q.webp'), description: 'Creates an anti-utility aura blocking enemy flashes and smouldering.', enabled: true, maxCharges: 1 },
+      { id: 'veto-wall', name: 'Aegis Wall', slot: 'signature', iconPath: assetPath('/assets/images/veto-e.webp'), description: 'Raises a kinetic energy barrier deflecting damage back.', enabled: true, maxCharges: 1 },
+      { id: 'veto-ult', name: 'Overlock Denier', slot: 'ultimate', iconPath: assetPath('/assets/images/veto-x.webp'), description: 'Cancels active enemy ultimate abilities in a massive radius.', enabled: true, maxCharges: 1 },
     ],
   },
   {
@@ -386,10 +386,10 @@ export const AGENTS: Agent[] = [
     iconPath: assetPath('/assets/images/viper.webp'),
     enabled: true,
     abilities: [
-      { id: 'viper-bite', name: 'Snake Bite', slot: 'basic_1', iconPath: assetPath('/assets/images/viper-c.webp'), description: 'Fires a capsule that creates an acid zone.', enabled: true },
-      { id: 'viper-cloud', name: 'Poison Cloud', slot: 'basic_2', iconPath: assetPath('/assets/images/viper-q.webp'), description: 'Deploys a gas emitter creating toxic smoke.', enabled: true },
-      { id: 'viper-screen', name: 'Toxic Screen', slot: 'signature', iconPath: assetPath('/assets/images/viper-e.png'), description: 'Deploys a line of gas emitters creating a wall.', enabled: true },
-      { id: 'viper-ult', name: "Viper's Pit", slot: 'ultimate', iconPath: assetPath('/assets/images/viper-x.webp'), description: 'Creates a massive toxic cloud reducing vision and health.', enabled: true },
+      { id: 'viper-bite', name: 'Snake Bite', slot: 'basic_1', iconPath: assetPath('/assets/images/viper-c.webp'), description: 'Fires a capsule that creates an acid zone.', enabled: true, maxCharges: 1 },
+      { id: 'viper-cloud', name: 'Poison Cloud', slot: 'basic_2', iconPath: assetPath('/assets/images/viper-q.webp'), description: 'Deploys a gas emitter creating toxic smoke.', enabled: true, maxCharges: 1 },
+      { id: 'viper-screen', name: 'Toxic Screen', slot: 'signature', iconPath: assetPath('/assets/images/viper-e.png'), description: 'Deploys a line of gas emitters creating a wall.', enabled: true, maxCharges: 1 },
+      { id: 'viper-ult', name: "Viper's Pit", slot: 'ultimate', iconPath: assetPath('/assets/images/viper-x.webp'), description: 'Creates a massive toxic cloud reducing vision and health.', enabled: true, maxCharges: 1 },
     ],
   },
   {
@@ -401,10 +401,10 @@ export const AGENTS: Agent[] = [
     iconPath: assetPath('/assets/images/vyse.webp'),
     enabled: true,
     abilities: [
-      { id: 'vyse-vine', name: 'Razorvine', slot: 'basic_1', iconPath: assetPath('/assets/images/vyse-c.webp'), description: 'Launches invisible liquid metal vine trap that slows and damages.', enabled: true },
-      { id: 'vyse-wall', name: 'Shear', slot: 'basic_2', iconPath: assetPath('/assets/images/vyse-q.webp'), description: 'Places a wall trap separating enemies when triggered.', enabled: true },
-      { id: 'vyse-flash', name: 'Arc Rose', slot: 'signature', iconPath: assetPath('/assets/images/vyse-e.webp'), description: 'Places a flash bloom on surfaces to blind looking enemies.', enabled: true },
-      { id: 'vyse-ult', name: 'Steel Garden', slot: 'ultimate', iconPath: assetPath('/assets/images/vyse-x.webp'), description: 'Erupts metallic thorns jamming enemy primary weapons.', enabled: true },
+      { id: 'vyse-vine', name: 'Razorvine', slot: 'basic_1', iconPath: assetPath('/assets/images/vyse-c.webp'), description: 'Launches invisible liquid metal vine trap that slows and damages.', enabled: true, maxCharges: 2 },
+      { id: 'vyse-wall', name: 'Shear', slot: 'basic_2', iconPath: assetPath('/assets/images/vyse-q.webp'), description: 'Places a wall trap separating enemies when triggered.', enabled: true, maxCharges: 1 },
+      { id: 'vyse-flash', name: 'Arc Rose', slot: 'signature', iconPath: assetPath('/assets/images/vyse-e.webp'), description: 'Places a flash bloom on surfaces to blind looking enemies.', enabled: true, maxCharges: 1 },
+      { id: 'vyse-ult', name: 'Steel Garden', slot: 'ultimate', iconPath: assetPath('/assets/images/vyse-x.webp'), description: 'Erupts metallic thorns jamming enemy primary weapons.', enabled: true, maxCharges: 1 },
     ],
   },
   {
@@ -416,10 +416,10 @@ export const AGENTS: Agent[] = [
     iconPath: assetPath('/assets/images/waylay.webp'),
     enabled: true,
     abilities: [
-      { id: 'waylay-dash', name: 'Phase Dash', slot: 'basic_1', iconPath: assetPath('/assets/images/waylay-c.webp'), description: 'Phases forward through obstacles in a swift dash.', enabled: true },
-      { id: 'waylay-flash', name: 'Light Flash', slot: 'basic_2', iconPath: assetPath('/assets/images/waylay-q.webp'), description: 'Detonates a light pulse blinding nearby sightlines.', enabled: true },
-      { id: 'waylay-strike', name: 'Pulse Strike', slot: 'signature', iconPath: assetPath('/assets/images/waylay-e.webp'), description: 'Empowered melee strike dealing burst impact.', enabled: true },
-      { id: 'waylay-ult', name: 'Overload Surge', slot: 'ultimate', iconPath: assetPath('/assets/images/waylay-x.webp'), description: 'Surges movement and weapon firerate while revealing enemies.', enabled: true },
+      { id: 'waylay-dash', name: 'Phase Dash', slot: 'basic_1', iconPath: assetPath('/assets/images/waylay-c.webp'), description: 'Phases forward through obstacles in a swift dash.', enabled: true, maxCharges: 1 },
+      { id: 'waylay-flash', name: 'Light Flash', slot: 'basic_2', iconPath: assetPath('/assets/images/waylay-q.webp'), description: 'Detonates a light pulse blinding nearby sightlines.', enabled: true, maxCharges: 1 },
+      { id: 'waylay-strike', name: 'Pulse Strike', slot: 'signature', iconPath: assetPath('/assets/images/waylay-e.webp'), description: 'Empowered melee strike dealing burst impact.', enabled: true, maxCharges: 1 },
+      { id: 'waylay-ult', name: 'Overload Surge', slot: 'ultimate', iconPath: assetPath('/assets/images/waylay-x.webp'), description: 'Surges movement and weapon firerate while revealing enemies.', enabled: true, maxCharges: 1 },
     ],
   },
   {
@@ -431,10 +431,10 @@ export const AGENTS: Agent[] = [
     iconPath: assetPath('/assets/images/yoru.webp'),
     enabled: true,
     abilities: [
-      { id: 'yoru-clone', name: 'Fakeout', slot: 'basic_1', iconPath: assetPath('/assets/images/yoru-c.webp'), description: 'Sends forward an echo clone that flashes enemies when shot.', enabled: true },
-      { id: 'yoru-flash', name: 'Blindside', slot: 'basic_2', iconPath: assetPath('/assets/images/yoru-q.webp'), description: 'Throws a dimensional fragment that bounces and blinds.', enabled: true },
-      { id: 'yoru-tp', name: 'Gatecrash', slot: 'signature', iconPath: assetPath('/assets/images/yoru-e.webp'), description: 'Sends a tether forward that Yoru can teleport to.', enabled: true },
-      { id: 'yoru-ult', name: 'Dimensional Drift', slot: 'ultimate', iconPath: assetPath('/assets/images/yoru-x.webp'), description: 'Enters dimensional realm, invisible and invulnerable.', enabled: true },
+      { id: 'yoru-clone', name: 'Fakeout', slot: 'basic_1', iconPath: assetPath('/assets/images/yoru-c.webp'), description: 'Sends forward an echo clone that flashes enemies when shot.', enabled: true, maxCharges: 1 },
+      { id: 'yoru-flash', name: 'Blindside', slot: 'basic_2', iconPath: assetPath('/assets/images/yoru-q.webp'), description: 'Throws a dimensional fragment that bounces and blinds.', enabled: true, maxCharges: 2 },
+      { id: 'yoru-tp', name: 'Gatecrash', slot: 'signature', iconPath: assetPath('/assets/images/yoru-e.webp'), description: 'Sends a tether forward that Yoru can teleport to.', enabled: true, maxCharges: 2 },
+      { id: 'yoru-ult', name: 'Dimensional Drift', slot: 'ultimate', iconPath: assetPath('/assets/images/yoru-x.webp'), description: 'Enters dimensional realm, invisible and invulnerable.', enabled: true, maxCharges: 1 },
     ],
   },
 ];

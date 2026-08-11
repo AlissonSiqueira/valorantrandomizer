@@ -172,7 +172,7 @@ export const App: React.FC = () => {
                 />
 
                 {/* Results Dock - Nudged up by another 20px */}
-                <div className="w-full max-w-5xl z-30 -mt-36 sm:-mt-52 relative px-4 sm:px-6">
+                <div className="w-full max-w-5xl z-30 -mt-36 sm:-mt-28 relative px-4 sm:px-6">
                   <ResultsDock
                     currentStage={spinStage}
                     weapon={currentResult?.weapon || null}
