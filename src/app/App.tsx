@@ -123,7 +123,7 @@ export const App: React.FC = () => {
       </header>
 
       {/* Main Content Area */}
-      <main className={`flex-1 max-w-[1650px] w-full mx-auto flex flex-col min-h-[calc(100vh-70px)] ${!selectedAgent ? '' : 'p-4 sm:p-6 lg:p-8 space-y-6'}`}>
+      <main className={`flex-1 max-w-[1650px] w-full mx-auto flex flex-col min-h-[calc(100vh-120px)] ${!selectedAgent ? '' : 'p-4 sm:p-6 lg:p-8 space-y-6'}`}>
         {!selectedAgent ? (
           /* Step 1: Agent Select Screen */
           <AgentSelect
@@ -206,7 +206,7 @@ export const App: React.FC = () => {
       />
 
       {/* Footer */}
-      <footer className="w-full py-4 mt-auto border-t border-[#2a3e52]/40 bg-[#0b121a]/80 text-center text-[11px] sm:text-xs font-mono text-[#8b9bb4] z-10 px-4">
+      <footer className="w-full py-3 mt-auto border-t border-[#2a3e52]/40 bg-[#0b121a]/80 text-center text-[11px] font-mono text-[#8b9bb4]/80 z-10 px-4">
         <p>
           Created by{' '}
           <a
