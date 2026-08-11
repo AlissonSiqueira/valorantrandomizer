@@ -14,13 +14,13 @@ export function loadStoredState(): Partial<AppState> | null {
     const parsed = JSON.parse(raw) as PersistedState;
 
     if (!parsed || typeof parsed !== 'object' || parsed._version !== STORAGE_VERSION) {
-      console.warn(`[Valorant Randomizer] Outdated storage version. Resetting.`);
+      console.warn(`[ValoRoll] Outdated storage version. Resetting.`);
       localStorage.removeItem(STORAGE_KEY);
       return null;
     }
 
     if (!isValidAppState(parsed)) {
-      console.warn(`[Valorant Randomizer] Invalid state schema. Cleaning up.`);
+      console.warn(`[ValoRoll] Invalid state schema. Cleaning up.`);
       localStorage.removeItem(STORAGE_KEY);
       return null;
     }
@@ -34,7 +34,7 @@ export function loadStoredState(): Partial<AppState> | null {
       settings: parsed.settings ?? DEFAULT_SETTINGS,
     };
   } catch (err) {
-    console.error(`[Valorant Randomizer] Error reading localStorage:`, err);
+    console.error(`[ValoRoll] Error reading localStorage:`, err);
     try {
       localStorage.removeItem(STORAGE_KEY);
     } catch {
@@ -58,7 +58,7 @@ export function saveStateToStorage(state: AppState): void {
 
     localStorage.setItem(STORAGE_KEY, JSON.stringify(dataToSave));
   } catch (err) {
-    console.error(`[Valorant Randomizer] Failed to write to localStorage:`, err);
+    console.error(`[ValoRoll] Failed to write to localStorage:`, err);
   }
 }
 
@@ -66,6 +66,6 @@ export function clearStoredState(): void {
   try {
     localStorage.removeItem(STORAGE_KEY);
   } catch (err) {
-    console.error(`[Valorant Randomizer] Failed to clear localStorage:`, err);
+    console.error(`[ValoRoll] Failed to clear localStorage:`, err);
   }
 }

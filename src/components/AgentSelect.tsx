@@ -19,6 +19,7 @@ export const AgentSelect: React.FC<AgentSelectProps> = ({
   const [search, setSearch] = useState('');
   const [roleFilter, setRoleFilter] = useState<AgentRole | 'all'>('all');
   const [hoveredAgentId, setHoveredAgentId] = useState<string | null>(null);
+  const [isRandomizing, setIsRandomizing] = useState(false);
 
   const filteredAgents = useMemo(() => {
     return AGENTS.filter((agent) => {
@@ -34,7 +35,31 @@ export const AgentSelect: React.FC<AgentSelectProps> = ({
   }, [hoveredAgentId, selectedAgentId, filteredAgents]);
 
   const handleSelect = (agentId: string) => {
+    if (isRandomizing) return;
     onSelectAgent(agentId);
+  };
+
+  const handleRandomize = () => {
+    if (isRandomizing || filteredAgents.length === 0) return;
+    setIsRandomizing(true);
+    let duration = 3000;
+    const intervalTime = 100;
+    let elapsed = 0;
+
+    const interval = setInterval(() => {
+      const randomAgent = filteredAgents[Math.floor(Math.random() * filteredAgents.length)];
+      setHoveredAgentId(randomAgent.id);
+      elapsed += intervalTime;
+      if (elapsed >= duration) {
+        clearInterval(interval);
+        setTimeout(() => {
+          setIsRandomizing(false);
+          const finalAgent = filteredAgents[Math.floor(Math.random() * filteredAgents.length)];
+          setHoveredAgentId(finalAgent.id);
+          onSelectAgent(finalAgent.id);
+        }, 300);
+      }
+    }, intervalTime);
   };
 
   const roleColors: Record<Agent['role'], string> = {
@@ -208,6 +233,22 @@ export const AgentSelect: React.FC<AgentSelectProps> = ({
             </div>
           ) : (
             <div className="flex flex-wrap justify-center gap-3 lg:gap-4 max-w-[1200px]">
+              {/* Random Agent Button */}
+              <button
+                type="button"
+                onClick={handleRandomize}
+                disabled={isRandomizing}
+                className={`group relative w-[72px] h-[72px] sm:w-[84px] sm:h-[84px] transition-all duration-200 rounded-lg cursor-pointer overflow-hidden border border-[#2a3e52] hover:border-[#ff4655]/60 hover:scale-105 flex items-center justify-center bg-[#152230] ${isRandomizing ? 'animate-pulse shadow-[0_0_15px_rgba(255,70,85,0.4)] border-[#ff4655]' : ''}`}
+                title="Random Agent"
+              >
+                <span className="text-4xl font-tactical text-[#8b9bb4] group-hover:text-white transition-colors">?</span>
+                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-1 pt-4 opacity-0 group-hover:opacity-100 transition-opacity">
+                  <span className="text-[10px] sm:text-xs font-bold text-white tracking-wider uppercase text-center block w-full drop-shadow-md">
+                    RANDOM
+                  </span>
+                </div>
+              </button>
+
               {filteredAgents.map((agent) => (
                 <AgentCard
                   key={agent.id}
