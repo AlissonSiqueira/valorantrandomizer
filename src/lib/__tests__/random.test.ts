@@ -43,7 +43,6 @@ describe('Randomization Engine Pure Utilities', () => {
     };
     const mockPrevious = {
       id: 'r1',
-      roundNumber: 1,
       agentId: 'jett',
       weapon: WEAPONS.find((w) => w.id === 'vandal')!,
       armor: ARMOR_OPTIONS[0],
@@ -95,14 +94,12 @@ describe('Randomization Engine Pure Utilities', () => {
   it('generateRoundResult produces full round result object', () => {
     const jett = AGENTS.find((a) => a.id === 'jett')!;
     const result = generateRoundResult({
-      roundNumber: 1,
       agent: jett,
       settings: DEFAULT_SETTINGS,
       previousResult: null,
       availableCredits: 4000,
     });
 
-    expect(result.roundNumber).toBe(1);
     expect(result.agentId).toBe('jett');
     expect(result.weapon).toBeDefined();
     expect(result.armor).toBeDefined();

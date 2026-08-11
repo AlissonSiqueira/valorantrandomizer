@@ -1,14 +1,13 @@
 import React from 'react';
 import { RandomizerSettings, WeaponCategory } from '../types/domain';
 import { ALL_WEAPON_CATEGORIES } from '../config/randomizer';
-import { X, Settings as SettingsIcon, Trash2, RotateCcw, Check, Sparkles } from 'lucide-react';
+import { X, Settings as SettingsIcon, Trash2, Check, Sparkles } from 'lucide-react';
 
 type SettingsDrawerProps = {
   isOpen: boolean;
   onClose: () => void;
   settings: RandomizerSettings;
   onUpdateSettings: (newSettings: Partial<RandomizerSettings>) => void;
-  onResetMatch: () => void;
   onClearAllData: () => void;
 };
 
@@ -17,7 +16,6 @@ export const SettingsDrawer: React.FC<SettingsDrawerProps> = ({
   onClose,
   settings,
   onUpdateSettings,
-  onResetMatch,
   onClearAllData,
 }) => {
   if (!isOpen) return null;
@@ -173,19 +171,6 @@ export const SettingsDrawer: React.FC<SettingsDrawerProps> = ({
 
         {/* Bottom Actions */}
         <div className="pt-4 border-t border-[#2a3e52] space-y-2">
-          <button
-            type="button"
-            onClick={() => {
-              if (window.confirm('Reset current match and return to round 1?')) {
-                onResetMatch();
-                onClose();
-              }
-            }}
-            className="w-full py-2.5 px-4 bg-[#152230] border border-[#2a3e52] hover:border-yellow-500 text-yellow-400 font-mono text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 transition-colors"
-          >
-            <RotateCcw className="w-4 h-4" /> Reset Active Match
-          </button>
-
           <button
             type="button"
             onClick={() => {

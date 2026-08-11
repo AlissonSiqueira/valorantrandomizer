@@ -214,13 +214,12 @@ export function generateAbilityPlan(agent: Agent): AbilityPlan {
  * Generates a complete round result with 100% fair randomization and anti-repeat guarantees.
  */
 export function generateRoundResult(params: {
-  roundNumber: number;
   agent: Agent;
   settings: RandomizerSettings;
   previousResult?: RoundResult | null;
   availableCredits: number;
 }): RoundResult {
-  const { roundNumber, agent, settings, previousResult, availableCredits } = params;
+  const { agent, settings, previousResult, availableCredits } = params;
 
   const availableWeapons = getAvailableWeapons(settings, previousResult, availableCredits);
   if (availableWeapons.length === 0) {
@@ -251,8 +250,7 @@ export function generateRoundResult(params: {
   const totalCost = selectedWeapon.cost + selectedArmor.cost;
 
   return {
-    id: `round_${roundNumber}_${Date.now()}_${Math.random().toString(36).substring(2, 7)}`,
-    roundNumber,
+    id: `roll_${Date.now()}_${Math.random().toString(36).substring(2, 7)}`,
     agentId: agent.id,
     weapon: selectedWeapon,
     armor: selectedArmor,

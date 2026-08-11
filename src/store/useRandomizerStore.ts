@@ -9,9 +9,6 @@ type StoreActions = {
   selectAgent: (agentId: string) => void;
   setAvailableCredits: (credits: number) => void;
   spinRound: () => void;
-  nextRound: () => void;
-  reSpinRound: () => void;
-  resetMatch: () => void;
   updateSettings: (newSettings: Partial<RandomizerSettings>) => void;
   clearAllData: () => void;
   setIsSpinning: (spinning: boolean) => void;
@@ -31,15 +28,9 @@ type RandomizerStore = AppState &
 
 const loaded = loadStoredState();
 
-// Helper to determine default credit preset based on round number
-export function getDefaultCreditsForRound(_roundNum: number): number {
-  return 9000;
-}
-
 const initialState: AppState = {
   selectedAgentId: loaded?.selectedAgentId ?? null,
-  currentRound: loaded?.currentRound ?? 1,
-  availableCredits: loaded?.availableCredits ?? getDefaultCreditsForRound(loaded?.currentRound ?? 1),
+  availableCredits: loaded?.availableCredits ?? 9000,
   currentResult: loaded?.currentResult ?? null,
   previousResult: loaded?.previousResult ?? null,
   settings: loaded?.settings ?? DEFAULT_SETTINGS,
@@ -55,7 +46,6 @@ export const useRandomizerStore = create<RandomizerStore>((set, get) => ({
   selectAgent: (agentId: string) => {
     set({
       selectedAgentId: agentId,
-      currentRound: 1,
       availableCredits: 9000,
       currentResult: null,
       previousResult: null,
@@ -76,7 +66,7 @@ export const useRandomizerStore = create<RandomizerStore>((set, get) => ({
   },
 
   spinRound: () => {
-    const { selectedAgentId, currentRound, settings, currentResult, availableCredits, isSpinning } = get();
+    const { selectedAgentId, settings, currentResult, availableCredits, isSpinning } = get();
 
     if (isSpinning) return;
 
@@ -88,7 +78,6 @@ export const useRandomizerStore = create<RandomizerStore>((set, get) => ({
 
     try {
       const nextResult = generateRoundResult({
-        roundNumber: currentRound,
         agent,
         settings,
         previousResult: currentResult,
@@ -141,44 +130,6 @@ export const useRandomizerStore = create<RandomizerStore>((set, get) => ({
     }
   },
 
-  nextRound: () => {
-    const { currentRound } = get();
-    const nextRoundNum = currentRound + 1;
-    const defaultCredits = getDefaultCreditsForRound(nextRoundNum);
-
-    set({
-      currentRound: nextRoundNum,
-      availableCredits: defaultCredits,
-      currentResult: null,
-      spinStage: 'idle',
-      error: null,
-    });
-    saveStateToStorage(get());
-  },
-
-  reSpinRound: () => {
-    const { isSpinning } = get();
-    if (isSpinning) return;
-
-    set({ currentResult: null, spinStage: 'idle' });
-    get().spinRound();
-  },
-
-  resetMatch: () => {
-    set((state) => {
-      const newState = {
-        currentRound: 1,
-        availableCredits: 9000,
-        currentResult: null,
-        previousResult: null,
-        spinStage: 'idle' as SpinStage,
-        error: null,
-      };
-      saveStateToStorage({ ...state, ...newState });
-      return newState;
-    });
-  },
-
   updateSettings: (newSettings: Partial<RandomizerSettings>) => {
     set((state) => {
       const updated = { ...state.settings, ...newSettings };
@@ -192,7 +143,6 @@ export const useRandomizerStore = create<RandomizerStore>((set, get) => ({
     clearStoredState();
     set({
       selectedAgentId: null,
-      currentRound: 1,
       availableCredits: 9000,
       currentResult: null,
       previousResult: null,

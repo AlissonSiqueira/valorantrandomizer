@@ -24,7 +24,6 @@ export const App: React.FC = () => {
     selectAgent,
     setAvailableCredits,
     spinRound,
-    resetMatch,
     updateSettings,
     clearAllData,
     setIsSettingsOpen,
@@ -64,7 +63,7 @@ export const App: React.FC = () => {
       {/* Screen Reader Live Region */}
       <div className="sr-only" aria-live="polite" aria-atomic="true">
         {currentResult
-          ? `Round ${currentResult.roundNumber} Result: Weapon ${currentResult.weapon.name}, Armor ${currentResult.armor.name}, Strategy ${currentResult.abilityPlan.title}`
+          ? `Result: Weapon ${currentResult.weapon.name}, Armor ${currentResult.armor.name}, Strategy ${currentResult.abilityPlan.title}`
           : 'No spin result generated.'}
       </div>
 
@@ -186,7 +185,6 @@ export const App: React.FC = () => {
         onClose={() => setIsSettingsOpen(false)}
         settings={settings}
         onUpdateSettings={updateSettings}
-        onResetMatch={resetMatch}
         onClearAllData={clearAllData}
       />
 

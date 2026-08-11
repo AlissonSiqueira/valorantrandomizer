@@ -27,7 +27,6 @@ export function loadStoredState(): Partial<AppState> | null {
 
     return {
       selectedAgentId: parsed.selectedAgentId ?? null,
-      currentRound: parsed.currentRound ?? 1,
       availableCredits: parsed.availableCredits ?? DEFAULT_AVAILABLE_CREDITS,
       currentResult: parsed.currentResult ?? null,
       previousResult: parsed.previousResult ?? null,
@@ -49,7 +48,6 @@ export function saveStateToStorage(state: AppState): void {
     const dataToSave: PersistedState = {
       _version: STORAGE_VERSION,
       selectedAgentId: state.selectedAgentId,
-      currentRound: state.currentRound,
       availableCredits: state.availableCredits,
       currentResult: state.currentResult,
       previousResult: state.previousResult,

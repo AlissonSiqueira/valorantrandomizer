@@ -67,7 +67,6 @@ export type AbilityPlan = {
 
 export type RoundResult = {
   id: string;
-  roundNumber: number;
   agentId: string;
   weapon: Weapon;
   armor: ArmorOption;
@@ -88,7 +87,6 @@ export type RandomizerSettings = {
 
 export type AppState = {
   selectedAgentId: string | null;
-  currentRound: number;
   availableCredits: number;
   currentResult: RoundResult | null;
   previousResult: RoundResult | null;
