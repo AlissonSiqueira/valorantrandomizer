@@ -103,27 +103,41 @@ export const AgentSelect: React.FC<AgentSelectProps> = ({
                 <p className="text-[#8b9bb4] text-xs font-mono uppercase tracking-widest border-b border-[#2a3e52] pb-1 w-max">
                   Abilities
                 </p>
-                <div className="flex flex-wrap gap-3">
-                  {displayAgent.abilities.map((ability) => (
-                    <div 
-                      key={ability.id} 
-                      className="flex items-center gap-3 bg-[#152230]/80 backdrop-blur border border-[#2a3e52] p-2 pr-4 val-clip-corner hover:border-[#ff4655]/50 transition-colors group cursor-help"
-                      title={ability.description}
-                    >
-                      <div className="w-10 h-10 bg-[#0f1923] flex items-center justify-center border border-[#2a3e52] group-hover:border-[#ff4655] transition-colors">
-                        <AssetImage
-                          src={ability.iconPath}
-                          alt={ability.name}
-                          type="ability"
-                          className="w-6 h-6 object-contain"
-                        />
+                <div className="flex flex-col gap-2">
+                  {displayAgent.abilities.map((ability) => {
+                    const getAbilityKey = (slot: string) => {
+                      switch (slot) {
+                        case 'basic_1': return 'C';
+                        case 'basic_2': return 'Q';
+                        case 'signature': return 'E';
+                        case 'ultimate': return 'X - ULTIMATE';
+                        default: return slot;
+                      }
+                    };
+                    
+                    return (
+                      <div 
+                        key={ability.id} 
+                        className="flex items-center gap-3 bg-[#152230]/80 backdrop-blur border border-[#2a3e52] p-2 pr-4 val-clip-corner hover:border-[#ff4655]/50 transition-colors group cursor-help w-full max-w-[280px]"
+                        title={ability.description}
+                      >
+                        <div className="w-10 h-10 shrink-0 bg-[#0f1923] flex items-center justify-center border border-[#2a3e52] group-hover:border-[#ff4655] transition-colors relative">
+                          <AssetImage
+                            src={ability.iconPath}
+                            alt={ability.name}
+                            type="ability"
+                            className="w-6 h-6 object-contain"
+                          />
+                        </div>
+                        <div className="flex flex-col">
+                          <span className="text-white font-bold text-sm tracking-wide">{ability.name}</span>
+                          <span className="text-[#8b9bb4] text-[10px] font-mono uppercase tracking-wider font-bold">
+                            KEY: {getAbilityKey(ability.slot)}
+                          </span>
+                        </div>
                       </div>
-                      <div className="flex flex-col">
-                        <span className="text-white font-bold text-sm tracking-wide">{ability.name}</span>
-                        <span className="text-[#8b9bb4] text-[10px] font-mono uppercase tracking-wider">{ability.slot.replace('_', ' ')}</span>
-                      </div>
-                    </div>
-                  ))}
+                    );
+                  })}
                 </div>
               </div>
             </motion.div>
