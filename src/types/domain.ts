@@ -56,7 +56,7 @@ export type Agent = {
   abilities: Ability[];
 };
 
-export type AbilityPlanMode = 'single' | 'combo' | 'all' | 'ultimate_focus';
+export type AbilityPlanMode = 'single' | 'double' | 'triple' | 'all';
 
 export type AbilityPlan = {
   mode: AbilityPlanMode;

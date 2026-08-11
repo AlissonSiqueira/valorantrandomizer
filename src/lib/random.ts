@@ -154,58 +154,53 @@ export function generateAbilityPlan(agent: Agent): AbilityPlan {
     };
   }
 
-  const hasUltimate = enabledAbilities.some((a) => a.slot === 'ultimate');
+  const maxAbilities = enabledAbilities.length;
+  const modePool: { mode: AbilityPlan['mode']; weight: number }[] = [];
 
-  const modePool: { mode: AbilityPlan['mode']; weight: number }[] = [
-    { mode: 'single', weight: DEFAULT_ABILITY_PLAN_WEIGHTS.single },
-    { mode: 'combo', weight: DEFAULT_ABILITY_PLAN_WEIGHTS.combo },
-    { mode: 'all', weight: DEFAULT_ABILITY_PLAN_WEIGHTS.restriction },
-  ];
-
-  if (hasUltimate) {
-    modePool.push({ mode: 'ultimate_focus', weight: DEFAULT_ABILITY_PLAN_WEIGHTS.ultimate_focus });
-  }
+  if (maxAbilities >= 1) modePool.push({ mode: 'single', weight: DEFAULT_ABILITY_PLAN_WEIGHTS.single });
+  if (maxAbilities >= 2) modePool.push({ mode: 'double', weight: DEFAULT_ABILITY_PLAN_WEIGHTS.double });
+  if (maxAbilities >= 3) modePool.push({ mode: 'triple', weight: DEFAULT_ABILITY_PLAN_WEIGHTS.triple });
+  if (maxAbilities >= 4) modePool.push({ mode: 'all', weight: DEFAULT_ABILITY_PLAN_WEIGHTS.all });
 
   const selectedModeEntry = getWeightedRandomItem(modePool);
   const mode = selectedModeEntry.mode;
 
-  if (mode === 'combo') {
-    const shuffle = shuffleArray(enabledAbilities);
-    const ab1 = shuffle[0];
-    const ab2 = shuffle[1];
-    return {
-      mode: 'combo',
-      title: `Allowed Skills: ${ab1.name} + ${ab2.name}`,
-      description: `You are allowed to use ${ab1.name} and ${ab2.name} in combination.`,
-      abilities: [ab1, ab2],
-    };
-  }
+  const shuffledSkills = shuffleArray(enabledAbilities);
 
   if (mode === 'all') {
     return {
       mode: 'all',
-      title: 'Full Utility: All Abilities Allowed',
-      description: `You are allowed to cast any and all of ${agent.name}'s abilities this round!`,
-      abilities: enabledAbilities,
+      title: 'Combinação Total',
+      description: `Todas as habilidades permitidas.`,
+      abilities: shuffledSkills.slice(0, 4),
     };
   }
 
-  if (mode === 'ultimate_focus') {
-    const ult = enabledAbilities.find((a) => a.slot === 'ultimate') || enabledAbilities[0];
+  if (mode === 'triple') {
+    const picked = shuffledSkills.slice(0, 3);
     return {
-      mode: 'ultimate_focus',
-      title: `Ultimate Focus: ${ult.name}`,
-      description: `Play aggressively to charge and cast ${ult.name}!`,
-      abilities: [ult],
+      mode: 'triple',
+      title: `Combinação Tripla`,
+      description: `Habilidades permitidas: ${picked.map(a => a.name).join(', ')}`,
+      abilities: picked,
     };
   }
 
-  const shuffledSkills = shuffleArray(enabledAbilities);
+  if (mode === 'double') {
+    const picked = shuffledSkills.slice(0, 2);
+    return {
+      mode: 'double',
+      title: `Combinação Dupla`,
+      description: `Habilidades permitidas: ${picked.map(a => a.name).join(' + ')}`,
+      abilities: picked,
+    };
+  }
+
   const single = shuffledSkills[0];
   return {
     mode: 'single',
-    title: `Allowed Skill: ${single.name}`,
-    description: `You are allowed to cast ${single.name} this round.`,
+    title: `Habilidade Individual`,
+    description: `Habilidade permitida: ${single.name}`,
     abilities: [single],
   };
 }

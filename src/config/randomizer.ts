@@ -4,10 +4,10 @@ export const STORAGE_VERSION = 1;
 export const STORAGE_KEY = 'valorant_round_randomizer_v1';
 
 export const DEFAULT_ABILITY_PLAN_WEIGHTS = {
-  single: 5,
-  combo: 3,
-  restriction: 2,
-  ultimate_focus: 1,
+  single: 4,
+  double: 4,
+  triple: 3,
+  all: 2,
 };
 
 export const ALL_WEAPON_CATEGORIES: WeaponCategory[] = [

@@ -112,10 +112,10 @@ export const RadialCasinoRoulette: React.FC<RadialCasinoRouletteProps> = ({
       }
 
       return [
-        { id: 'single', name: 'Single Skill', categoryOrMode: 'ABILITY', iconPath: assetPath('/assets/images/uses-1.webp') },
-        { id: 'combo', name: 'Skill Combo', categoryOrMode: 'ABILITY', iconPath: assetPath('/assets/images/uses-2.webp') },
-        { id: 'all', name: 'Full Utility', categoryOrMode: 'ABILITY', iconPath: assetPath('/assets/images/uses-1.webp') },
-        { id: 'ultimate', name: 'Ultimate Focus', categoryOrMode: 'ABILITY', iconPath: assetPath('/assets/images/uses-2.webp') },
+        { id: 'single', name: 'Habilidade Individual', categoryOrMode: 'ABILITY', iconPath: assetPath('/assets/images/uses-1.webp') },
+        { id: 'double', name: 'Combinação Dupla', categoryOrMode: 'ABILITY', iconPath: assetPath('/assets/images/uses-2.webp') },
+        { id: 'triple', name: 'Combinação Tripla', categoryOrMode: 'ABILITY', iconPath: assetPath('/assets/images/uses-1.webp') },
+        { id: 'all', name: 'Combinação Total', categoryOrMode: 'ABILITY', iconPath: assetPath('/assets/images/uses-2.webp') },
       ];
     }
     if (currentPoolStage === 'armor') {
