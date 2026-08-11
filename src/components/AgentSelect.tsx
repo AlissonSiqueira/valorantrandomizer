@@ -56,7 +56,11 @@ export const AgentSelect: React.FC<AgentSelectProps> = ({
           setIsRandomizing(false);
           const finalAgent = filteredAgents[Math.floor(Math.random() * filteredAgents.length)];
           setHoveredAgentId(finalAgent.id);
-          onSelectAgent(finalAgent.id);
+          
+          // Wait 2.5 seconds before transitioning to the roulette
+          setTimeout(() => {
+            onSelectAgent(finalAgent.id);
+          }, 2500);
         }, 300);
       }
     }, intervalTime);
@@ -233,6 +237,17 @@ export const AgentSelect: React.FC<AgentSelectProps> = ({
             </div>
           ) : (
             <div className="flex flex-wrap justify-center gap-3 lg:gap-4 max-w-[1200px]">
+              {filteredAgents.map((agent) => (
+                <AgentCard
+                  key={agent.id}
+                  agent={agent}
+                  isSelected={agent.id === selectedAgentId}
+                  isSimulatedHover={agent.id === hoveredAgentId && isRandomizing}
+                  onSelect={handleSelect}
+                  onHover={setHoveredAgentId}
+                />
+              ))}
+
               {/* Random Agent Button */}
               <button
                 type="button"
@@ -248,16 +263,6 @@ export const AgentSelect: React.FC<AgentSelectProps> = ({
                   </span>
                 </div>
               </button>
-
-              {filteredAgents.map((agent) => (
-                <AgentCard
-                  key={agent.id}
-                  agent={agent}
-                  isSelected={agent.id === selectedAgentId}
-                  onSelect={handleSelect}
-                  onHover={setHoveredAgentId}
-                />
-              ))}
             </div>
           )}
 

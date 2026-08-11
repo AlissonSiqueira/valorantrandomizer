@@ -8,6 +8,7 @@ type AgentCardProps = {
   onSelect: (agentId: string) => void;
   onHover?: (agentId: string) => void;
   onLeave?: () => void;
+  isSimulatedHover?: boolean;
 };
 
 export const AgentCard: React.FC<AgentCardProps> = ({ 
@@ -15,8 +16,10 @@ export const AgentCard: React.FC<AgentCardProps> = ({
   isSelected, 
   onSelect,
   onHover,
-  onLeave 
+  onLeave,
+  isSimulatedHover 
 }) => {
+  const isHoveredState = isSelected || isSimulatedHover;
   return (
     <button
       type="button"
@@ -26,23 +29,25 @@ export const AgentCard: React.FC<AgentCardProps> = ({
       className={`group relative w-[72px] h-[72px] sm:w-[84px] sm:h-[84px] transition-all duration-200 rounded-lg cursor-pointer overflow-hidden ${
         isSelected
           ? 'border-2 border-[#ff4655] shadow-[0_0_15px_rgba(255,70,85,0.4)] scale-105 z-10'
+          : isSimulatedHover
+          ? 'border border-[#ff4655]/80 shadow-[0_0_10px_rgba(255,70,85,0.3)] scale-105 z-10'
           : 'border border-[#2a3e52] hover:border-[#ff4655]/60 hover:scale-105 z-0'
       }`}
       aria-pressed={isSelected}
       aria-label={`Select agent ${agent.name}, ${agent.role}`}
     >
-      <div className={`absolute inset-0 bg-[#152230] transition-opacity duration-300 ${isSelected ? 'opacity-0' : 'opacity-40 group-hover:opacity-10'}`} />
+      <div className={`absolute inset-0 bg-[#152230] transition-opacity duration-300 ${isHoveredState ? 'opacity-10' : 'opacity-40 group-hover:opacity-10'}`} />
       
       <AssetImage
         src={agent.portraitPath}
         alt={agent.name}
         type="agent"
         fallbackName={agent.name}
-        className={`w-full h-full object-cover transition-transform duration-300 ${isSelected ? 'scale-110' : 'group-hover:scale-110 grayscale-[0.3] group-hover:grayscale-0'}`}
+        className={`w-full h-full object-cover transition-transform duration-300 ${isHoveredState ? 'scale-110 grayscale-0' : 'group-hover:scale-110 grayscale-[0.3] group-hover:grayscale-0'}`}
       />
 
       {/* Name Overlay */}
-      <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-1 pt-4 opacity-0 group-hover:opacity-100 transition-opacity">
+      <div className={`absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-1 pt-4 transition-opacity ${isHoveredState ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`}>
         <span className="text-[10px] sm:text-xs font-bold text-white tracking-wider uppercase text-center block w-full drop-shadow-md">
           {agent.name}
         </span>
