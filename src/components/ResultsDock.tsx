@@ -83,7 +83,7 @@ export const ResultsDock: React.FC<ResultsDockProps> = ({
                     src={type === 'weapon' ? item.selectedIconPath : type === 'armor' ? item.iconPath : item.abilities[0]?.iconPath}
                     alt={type === 'ability' ? item.title : item.name}
                     type={type}
-                    className="max-h-full max-w-full object-contain drop-shadow-md"
+                    className={`max-w-full object-contain drop-shadow-md ${type === 'weapon' ? 'max-h-[70%] sm:max-h-[85%]' : 'max-h-full'}`}
                   />
                 )}
               </div>

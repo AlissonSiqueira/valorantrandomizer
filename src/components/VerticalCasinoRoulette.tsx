@@ -304,13 +304,13 @@ export const VerticalCasinoRoulette: React.FC<VerticalCasinoRouletteProps> = ({
                 }}
               >
                 {/* Left Side: Icon */}
-                <div className="flex items-center justify-center w-16 h-14">
+                <div className="flex items-center justify-center w-24 h-14 px-1">
                   <AssetImage
                     src={iconToDisplay}
                     alt={item.name}
                     type={type === 'weapon' ? 'weapon' : type === 'armor' ? 'armor' : 'ability'}
                     fallbackName={item.name}
-                    className={`max-h-14 max-w-full object-contain transition-all duration-300 ${
+                    className={`max-w-full object-contain transition-all duration-300 ${type === 'weapon' ? 'max-h-10' : 'max-h-12'} ${
                       isHighlighted
                         ? 'scale-110 filter drop-shadow-[0_0_15px_rgba(255,255,255,0.9)]'
                         : ''

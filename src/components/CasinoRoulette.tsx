@@ -291,7 +291,7 @@ export const CasinoRoulette: React.FC<CasinoRouletteProps> = ({
                     alt={item.name}
                     type={type === 'weapon' ? 'weapon' : type === 'armor' ? 'armor' : 'ability'}
                     fallbackName={item.name}
-                    className={`h-16 w-auto object-contain transition-all duration-300 ${
+                    className={`max-h-12 max-w-full object-contain transition-all duration-300 ${
                       showSelected ? 'scale-110 filter drop-shadow-[0_0_12px_rgba(255,180,0,0.8)]' : ''
                     }`}
                   />
