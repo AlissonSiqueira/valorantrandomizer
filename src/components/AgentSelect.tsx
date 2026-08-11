@@ -209,7 +209,7 @@ export const AgentSelect: React.FC<AgentSelectProps> = ({
 
       {/* BOTTOM ROSTER & FILTERS */}
       <div className="relative z-10 w-full p-2 sm:p-4 lg:p-8 pt-1 sm:pt-8 lg:pt-16 sm:my-auto">
-        <div className="w-full max-w-[1200px] mx-auto flex flex-col gap-4 lg:gap-6 items-center px-4">
+        <div className="w-full max-w-[1084px] mx-auto flex flex-col gap-4 lg:gap-6 items-center px-4">
           
           {/* Filters */}
           <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4 bg-[#152230]/80 backdrop-blur p-3 border border-[#2a3e52] rounded-xl w-full shadow-xl">
@@ -305,7 +305,7 @@ export const AgentSelect: React.FC<AgentSelectProps> = ({
               No agents found matching "{search}".
             </div>
           ) : (
-            <div className="flex flex-wrap justify-center gap-3 lg:gap-4 max-w-[1200px]">
+            <div className="flex flex-wrap justify-center gap-3 lg:gap-4 max-w-[1084px]">
               {filteredAgents.map((agent) => (
                 <AgentCard
                   key={agent.id}
