@@ -53,9 +53,9 @@ export const AgentSelect: React.FC<AgentSelectProps> = ({
           {displayAgent && (
             <motion.div
               key={displayAgent.id}
-              initial={{ opacity: 0, x: 50, scale: 0.95 }}
-              animate={{ opacity: 1, x: 0, scale: 1 }}
-              exit={{ opacity: 0, x: -50, scale: 0.95 }}
+              initial={{ opacity: 0, y: 50, scale: 0.95 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 50, scale: 0.95 }}
               transition={{ duration: 0.4, ease: "easeOut" }}
               className="h-[80%] lg:h-[95%] opacity-90 drop-shadow-[0_0_30px_rgba(255,255,255,0.1)]"
             >
@@ -201,7 +201,6 @@ export const AgentSelect: React.FC<AgentSelectProps> = ({
                   isSelected={agent.id === selectedAgentId}
                   onSelect={handleSelect}
                   onHover={setHoveredAgentId}
-                  onLeave={() => setHoveredAgentId(null)}
                 />
               ))}
             </div>

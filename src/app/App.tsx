@@ -8,7 +8,7 @@ import { ResultsDock } from '../components/ResultsDock';
 import { SettingsDrawer } from '../components/SettingsDrawer';
 import { EmptyState } from '../components/EmptyState';
 import { getAvailableWeapons } from '../lib/random';
-import { Dices, UserCheck, Settings, Sparkles } from 'lucide-react';
+
 
 export const App: React.FC = () => {
   const {
@@ -68,50 +68,7 @@ export const App: React.FC = () => {
           : 'No spin result generated.'}
       </div>
 
-      {/* Main Top Header Bar */}
-      <header className="w-full bg-[#152230]/95 border-b border-[#2a3e52] sticky top-0 z-40 backdrop-blur-md shadow-2xl">
-        <div className="max-w-[1650px] mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded bg-[#ff4655] flex items-center justify-center text-white shadow-val-glow">
-              <Dices className="w-6 h-6 animate-pulse" />
-            </div>
-            <div>
-              <h1 className="text-2xl sm:text-3xl font-black font-tactical uppercase tracking-wider text-white leading-none flex items-center gap-2">
-                VALORANT <span className="text-[#ff4655]">CASINO RANDOMIZER</span>
-                <span className="px-2.5 py-0.5 text-xs font-mono uppercase bg-[#ffb400]/20 text-[#ffb400] border border-[#ffb400] rounded hidden md:inline-flex items-center gap-1">
-                  <Sparkles className="w-3.5 h-3.5" /> STREAMER EDITION
-                </span>
-              </h1>
-              <p className="text-xs text-[#8b9bb4] font-mono tracking-widest hidden sm:block mt-0.5">
-                3 SEQUENTIAL VERTICAL ROULETTES (1. WEAPON → 2. ABILITY → 3. SHIELD)
-              </p>
-            </div>
-          </div>
-
-          <div className="flex items-center gap-3">
-            {selectedAgent && (
-              <button
-                type="button"
-                onClick={() => selectAgent('')}
-                className="flex items-center gap-2 px-4 py-2 bg-[#0f1923] border border-[#2a3e52] hover:border-[#ff4655] text-xs font-mono text-[#ece8e1] transition-colors rounded val-clip-corner"
-              >
-                <UserCheck className="w-4 h-4 text-[#ff4655]" />
-                Agent: <span className="font-bold text-[#ff4655] uppercase">{selectedAgent.name}</span>
-              </button>
-            )}
-
-            <button
-              type="button"
-              onClick={() => setIsSettingsOpen(true)}
-              className="flex items-center gap-2 px-4 py-2 bg-[#0f1923] border border-[#2a3e52] hover:border-[#ff4655] text-xs font-mono text-[#ece8e1] transition-colors rounded val-clip-corner"
-              title="Settings"
-            >
-              <Settings className="w-4 h-4 text-[#8b9bb4]" />
-              <span className="hidden sm:inline">Settings</span>
-            </button>
-          </div>
-        </div>
-      </header>
+      {/* Main Top Header Bar (Removed for now) */}
 
       {/* Main Content Area - ROULETTES AT TOP (HERO STAGE) */}
       <main className="flex-1 max-w-[1650px] w-full mx-auto p-4 sm:p-6 lg:p-8 space-y-6">
@@ -196,13 +153,7 @@ export const App: React.FC = () => {
         onClearAllData={clearAllData}
       />
 
-      {/* Footer */}
-      <footer className="w-full bg-[#0b131c] border-t border-[#2a3e52]/60 py-4 mt-auto text-center text-xs text-[#8b9bb4] font-mono">
-        <div className="max-w-[1650px] mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-2">
-          <span>VALORANT CASINO RANDOMIZER • Streamer Edition</span>
-          <span className="text-[#8b9bb4]">Local Storage Active • Version 1.0</span>
-        </div>
-      </footer>
+      {/* Footer (Removed for now) */}
     </div>
   );
 };
