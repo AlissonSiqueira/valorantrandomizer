@@ -48,9 +48,9 @@ export const AbilityResultCard: React.FC<AbilityResultCardProps> = ({
   const getModeMeta = (mode: AbilityPlan['mode']) => {
     switch (mode) {
       case 'double':
-        return { icon: Flame, color: 'text-[#ff4655]', bg: 'bg-[#ff4655]/10', label: 'COMBO DUPLO' };
+        return { icon: Flame, color: 'text-[#ff4655]', bg: 'bg-[#ff4655]/10', label: 'DOUBLE COMBO' };
       case 'triple':
-        return { icon: Flame, color: 'text-[#ff4655]', bg: 'bg-[#ff4655]/10', label: 'COMBO TRIPLO' };
+        return { icon: Flame, color: 'text-[#ff4655]', bg: 'bg-[#ff4655]/10', label: 'TRIPLE COMBO' };
       case 'all':
         return { icon: Sparkles, color: 'text-[#00ff88]', bg: 'bg-[#00ff88]/10', label: 'FULL UTILITY' };
       default:

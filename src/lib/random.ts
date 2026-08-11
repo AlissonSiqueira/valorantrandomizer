@@ -170,8 +170,8 @@ export function generateAbilityPlan(agent: Agent): AbilityPlan {
   if (mode === 'all') {
     return {
       mode: 'all',
-      title: 'Combinação Total',
-      description: `Todas as habilidades permitidas.`,
+      title: 'Full Utility',
+      description: `All abilities are allowed.`,
       abilities: shuffledSkills.slice(0, 4),
     };
   }
@@ -180,8 +180,8 @@ export function generateAbilityPlan(agent: Agent): AbilityPlan {
     const picked = shuffledSkills.slice(0, 3);
     return {
       mode: 'triple',
-      title: `Combinação Tripla`,
-      description: `Habilidades permitidas: ${picked.map(a => a.name).join(', ')}`,
+      title: `Triple Combo`,
+      description: `Allowed skills: ${picked.map(a => a.name).join(', ')}`,
       abilities: picked,
     };
   }
@@ -190,8 +190,8 @@ export function generateAbilityPlan(agent: Agent): AbilityPlan {
     const picked = shuffledSkills.slice(0, 2);
     return {
       mode: 'double',
-      title: `Combinação Dupla`,
-      description: `Habilidades permitidas: ${picked.map(a => a.name).join(' + ')}`,
+      title: `Double Combo`,
+      description: `Allowed skills: ${picked.map(a => a.name).join(' + ')}`,
       abilities: picked,
     };
   }
@@ -199,8 +199,8 @@ export function generateAbilityPlan(agent: Agent): AbilityPlan {
   const single = shuffledSkills[0];
   return {
     mode: 'single',
-    title: `Habilidade Individual`,
-    description: `Habilidade permitida: ${single.name}`,
+    title: `Single Skill`,
+    description: `Allowed skill: ${single.name}`,
     abilities: [single],
   };
 }
