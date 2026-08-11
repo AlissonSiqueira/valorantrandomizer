@@ -23,7 +23,7 @@ export const AgentCard: React.FC<AgentCardProps> = ({
       onClick={() => onSelect(agent.id)}
       onMouseEnter={() => onHover?.(agent.id)}
       onMouseLeave={() => onLeave?.()}
-      className={`group relative w-[72px] h-[72px] sm:w-[84px] sm:h-[84px] transition-all duration-200 val-clip-corner cursor-pointer overflow-hidden ${
+      className={`group relative w-[72px] h-[72px] sm:w-[84px] sm:h-[84px] transition-all duration-200 rounded-lg cursor-pointer overflow-hidden ${
         isSelected
           ? 'border-2 border-[#ff4655] shadow-[0_0_15px_rgba(255,70,85,0.4)] scale-105 z-10'
           : 'border border-[#2a3e52] hover:border-[#ff4655]/60 hover:scale-105 z-0'

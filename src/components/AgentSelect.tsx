@@ -118,7 +118,7 @@ export const AgentSelect: React.FC<AgentSelectProps> = ({
                     return (
                       <div 
                         key={ability.id} 
-                        className="flex items-center gap-3 bg-[#152230]/80 backdrop-blur border border-[#2a3e52] p-2 pr-4 val-clip-corner hover:border-[#ff4655]/50 transition-colors group cursor-help w-full max-w-[280px]"
+                        className="flex items-center gap-3 bg-[#152230]/80 backdrop-blur border border-[#2a3e52] p-2 pr-4 rounded-lg hover:border-[#ff4655]/50 transition-colors group cursor-help w-full max-w-[280px]"
                         title={ability.description}
                       >
                         <div className="w-10 h-10 shrink-0 bg-[#0f1923] flex items-center justify-center border border-[#2a3e52] group-hover:border-[#ff4655] transition-colors relative">
@@ -150,7 +150,7 @@ export const AgentSelect: React.FC<AgentSelectProps> = ({
         <div className="max-w-6xl mx-auto flex flex-col gap-6 items-center">
           
           {/* Filters */}
-          <div className="flex flex-col sm:flex-row items-center gap-4 bg-[#152230]/80 backdrop-blur p-2 border border-[#2a3e52] val-clip-corner w-full sm:w-auto shadow-xl">
+          <div className="flex flex-col sm:flex-row items-center gap-4 bg-[#152230]/80 backdrop-blur p-2 border border-[#2a3e52] rounded-lg w-full sm:w-auto shadow-xl">
             <div className="relative w-full sm:w-64">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#8b9bb4]" />
               <input
@@ -178,7 +178,7 @@ export const AgentSelect: React.FC<AgentSelectProps> = ({
                     key={tab.id}
                     type="button"
                     onClick={() => setRoleFilter(tab.id)}
-                    className={`flex items-center gap-2 px-4 py-2 text-xs font-semibold uppercase tracking-wider transition-all whitespace-nowrap val-clip-corner ${
+                    className={`flex items-center gap-2 px-4 py-2 text-xs font-semibold uppercase tracking-wider transition-all whitespace-nowrap rounded-md ${
                       isActive
                         ? 'bg-[#ff4655] text-white shadow-[0_0_10px_rgba(255,70,85,0.4)]'
                         : 'bg-[#0f1923] text-[#8b9bb4] hover:text-white'
@@ -224,7 +224,7 @@ export const AgentSelect: React.FC<AgentSelectProps> = ({
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              className="mt-4 px-8 py-3 bg-[#ff4655] text-white font-bold tracking-widest uppercase font-tactical text-xl val-clip-corner shadow-[0_0_20px_rgba(255,70,85,0.5)] border border-white/20"
+              className="mt-4 px-8 py-3 bg-[#ff4655] text-white font-bold tracking-widest uppercase font-tactical text-xl rounded-lg shadow-[0_0_20px_rgba(255,70,85,0.5)] border border-white/20"
             >
               LOCKED IN: {AGENTS.find((a) => a.id === selectedAgentId)?.name}
             </motion.div>
