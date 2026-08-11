@@ -60,17 +60,23 @@ export const ResultsDock: React.FC<ResultsDockProps> = ({
               animate={{ scale: 1, opacity: 1 }} 
               className="flex flex-col items-center w-full"
             >
-              <div className="h-10 sm:h-16 flex items-center justify-center gap-1 sm:gap-2 w-full mb-1 sm:mb-2">
-                {type === 'ability' && item.abilities && item.abilities.length > 1 ? (
+              <div className="h-10 sm:h-16 flex items-center justify-center gap-2 sm:gap-3 w-full mb-1 sm:mb-2">
+                {type === 'ability' && item.abilities && item.abilities.length > 0 ? (
                   item.abilities.map((ab: any, idx: number) => (
-                    <AssetImage
-                      key={ab.id || idx}
-                      src={ab.iconPath}
-                      alt={ab.name}
-                      type="ability"
-                      fallbackName={ab.name}
-                      className="max-w-[20px] max-h-[20px] sm:max-w-[40px] sm:max-h-[40px] object-contain drop-shadow-md"
-                    />
+                    <div key={ab.id || idx} className="relative flex items-center justify-center">
+                      <AssetImage
+                        src={ab.iconPath}
+                        alt={ab.name}
+                        type="ability"
+                        fallbackName={ab.name}
+                        className="max-w-[22px] max-h-[22px] sm:max-w-[40px] sm:max-h-[40px] object-contain drop-shadow-md"
+                      />
+                      {ab.assignedCharges && ab.assignedCharges > 1 && (
+                        <span className="absolute -top-1.5 -right-2 bg-[#ffb400] text-slate-950 font-black text-[8px] sm:text-[10px] px-1 rounded-full leading-tight shadow-md border border-slate-900">
+                          {ab.assignedCharges}x
+                        </span>
+                      )}
+                    </div>
                   ))
                 ) : (
                   <AssetImage
@@ -82,7 +88,11 @@ export const ResultsDock: React.FC<ResultsDockProps> = ({
                 )}
               </div>
               <span className="font-tactical font-black text-[10px] sm:text-sm uppercase tracking-wide text-white text-center w-full truncate px-0.5" style={{ color: accent }}>
-                {type === 'ability' ? item.title : item.name}
+                {type === 'ability'
+                  ? item.abilities && item.abilities.length === 1 && item.abilities[0]?.assignedCharges && item.abilities[0].assignedCharges > 1
+                    ? `${item.abilities[0].name} (${item.abilities[0].assignedCharges}x)`
+                    : item.title
+                  : item.name}
               </span>
             </motion.div>
           ) : isSpinning ? (

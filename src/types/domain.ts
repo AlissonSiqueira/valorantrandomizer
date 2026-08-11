@@ -41,6 +41,8 @@ export type Ability = {
   description?: string;
   enabled: boolean;
   cost?: number;
+  maxCharges?: number;
+  assignedCharges?: number;
 };
 
 export type AgentRole = 'duelist' | 'controller' | 'initiator' | 'sentinel';

@@ -106,7 +106,9 @@ export const AbilityResultCard: React.FC<AbilityResultCardProps> = ({
                   fallbackName={ab.name}
                   className="w-4 h-4 object-contain"
                 />
-                <span className="font-semibold text-[11px] truncate max-w-[100px]">{ab.name}</span>
+                <span className="font-semibold text-[11px] truncate max-w-[120px]">
+                  {ab.name}{ab.assignedCharges && ab.assignedCharges > 1 ? ` (${ab.assignedCharges}x)` : ''}
+                </span>
               </div>
             ))}
           </div>

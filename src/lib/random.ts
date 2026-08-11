@@ -1,5 +1,6 @@
 import {
   Agent,
+  Ability,
   AbilityPlan,
   ArmorOption,
   RandomizerSettings,
@@ -144,8 +145,14 @@ export function generateAbilityPlan(agent: Agent): AbilityPlan {
     };
   }
 
+  const withCharges = (ab: Ability): Ability => {
+    const max = ab.maxCharges ?? 1;
+    const assignedCharges = max > 1 ? Math.floor(Math.random() * max) + 1 : 1;
+    return { ...ab, assignedCharges };
+  };
+
   if (enabledAbilities.length === 1) {
-    const single = enabledAbilities[0];
+    const single = withCharges(enabledAbilities[0]);
     return {
       mode: 'single',
       title: `Allowed Skill: ${single.name}`,
@@ -168,39 +175,40 @@ export function generateAbilityPlan(agent: Agent): AbilityPlan {
   const shuffledSkills = shuffleArray(enabledAbilities);
 
   if (mode === 'all') {
+    const picked = shuffledSkills.slice(0, 4).map(withCharges);
     return {
       mode: 'all',
       title: 'Full Utility',
       description: `All abilities are allowed.`,
-      abilities: shuffledSkills.slice(0, 4),
+      abilities: picked,
     };
   }
 
   if (mode === 'triple') {
-    const picked = shuffledSkills.slice(0, 3);
+    const picked = shuffledSkills.slice(0, 3).map(withCharges);
     return {
       mode: 'triple',
       title: `Triple Combo`,
-      description: `Allowed skills: ${picked.map(a => a.name).join(', ')}`,
+      description: `Allowed skills: ${picked.map(a => `${a.name}${a.assignedCharges && a.assignedCharges > 1 ? ` (${a.assignedCharges}x)` : ''}`).join(', ')}`,
       abilities: picked,
     };
   }
 
   if (mode === 'double') {
-    const picked = shuffledSkills.slice(0, 2);
+    const picked = shuffledSkills.slice(0, 2).map(withCharges);
     return {
       mode: 'double',
       title: `Double Combo`,
-      description: `Allowed skills: ${picked.map(a => a.name).join(' + ')}`,
+      description: `Allowed skills: ${picked.map(a => `${a.name}${a.assignedCharges && a.assignedCharges > 1 ? ` (${a.assignedCharges}x)` : ''}`).join(' + ')}`,
       abilities: picked,
     };
   }
 
-  const single = shuffledSkills[0];
+  const single = withCharges(shuffledSkills[0]);
   return {
     mode: 'single',
     title: `Single Skill`,
-    description: `Allowed skill: ${single.name}`,
+    description: `Allowed skill: ${single.name}${single.assignedCharges && single.assignedCharges > 1 ? ` (${single.assignedCharges}x)` : ''}`,
     abilities: [single],
   };
 }
@@ -242,7 +250,11 @@ export function generateRoundResult(params: {
   }
 
   const abilityPlan = generateAbilityPlan(agent);
-  const totalCost = selectedWeapon.cost + selectedArmor.cost;
+  const abilityCostSum = abilityPlan.abilities.reduce(
+    (sum, ab) => sum + (ab.cost || 0) * (ab.assignedCharges || 1),
+    0
+  );
+  const totalCost = selectedWeapon.cost + selectedArmor.cost + abilityCostSum;
 
   return {
     id: `roll_${Date.now()}_${Math.random().toString(36).substring(2, 7)}`,
