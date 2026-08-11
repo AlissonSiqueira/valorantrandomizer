@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Weapon, ArmorOption, AbilityPlan } from '../types/domain';
+import { Weapon, ArmorOption, AbilityPlan, Agent } from '../types/domain';
 import { WEAPONS } from '../config/weapons';
 import { AssetImage } from './AssetImage';
 import { assetPath } from '@/utils/assetPath';
@@ -16,6 +16,7 @@ type RadialCasinoRouletteProps = {
   winningAbilityPlan?: AbilityPlan | null;
   availableWeapons?: Weapon[];
   intensity?: 'reduced' | 'normal' | 'high';
+  agent?: Agent | null;
 };
 
 type GenericRouletteItem = {
@@ -35,6 +36,7 @@ export const RadialCasinoRoulette: React.FC<RadialCasinoRouletteProps> = ({
   winningAbilityPlan,
   availableWeapons = WEAPONS,
   intensity = 'normal',
+  agent = null,
 }) => {
   const [items, setItems] = useState<GenericRouletteItem[]>([]);
   const [activeIndex, setActiveIndex] = useState<number>(-1);
@@ -99,6 +101,16 @@ export const RadialCasinoRoulette: React.FC<RadialCasinoRouletteProps> = ({
       }));
     }
     if (currentPoolStage === 'ability') {
+      if (agent && agent.abilities && agent.abilities.length > 0) {
+        return agent.abilities.map((ab) => ({
+          id: ab.id,
+          name: ab.name,
+          categoryOrMode: ab.slot.replace('_', ' ').toUpperCase(),
+          iconPath: ab.iconPath,
+          abilities: [ab],
+        }));
+      }
+
       return [
         { id: 'single', name: 'Single Skill', categoryOrMode: 'ABILITY', iconPath: assetPath('/assets/images/uses-1.webp') },
         { id: 'combo', name: 'Skill Combo', categoryOrMode: 'ABILITY', iconPath: assetPath('/assets/images/uses-2.webp') },

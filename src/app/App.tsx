@@ -152,6 +152,7 @@ export const App: React.FC = () => {
                   winningAbilityPlan={currentResult?.abilityPlan || null}
                   availableWeapons={availableWeaponsPool}
                   intensity={settings.animationIntensity}
+                  agent={selectedAgent}
                 />
 
                 {/* Results Dock - Nudged up by another 20px */}
