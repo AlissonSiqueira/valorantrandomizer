@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import { Weapon, ArmorOption, AbilityPlan } from '../types/domain';
 import { WEAPONS } from '../config/weapons';
 import { AssetImage } from './AssetImage';
+import { assetPath } from '@/utils/assetPath';
 import { motion, useAnimation, useMotionValue } from 'framer-motion';
 import { Trophy, Sparkles, Target, Shield, Zap } from 'lucide-react';
 import { shuffleArray } from '../lib/random';
@@ -84,7 +85,7 @@ export const VerticalCasinoRoulette: React.FC<VerticalCasinoRouletteProps> = ({
         id: winningAbilityPlan.mode,
         name: winningAbilityPlan.title,
         categoryOrMode: 'ALLOWED SKILLS',
-        iconPath: winningAbilityPlan.abilities[0]?.iconPath || '/assets/images/uses-1.webp',
+        iconPath: winningAbilityPlan.abilities[0]?.iconPath || assetPath('/assets/images/uses-1.webp'),
         description: winningAbilityPlan.description,
         abilities: winningAbilityPlan.abilities,
       };
@@ -106,21 +107,21 @@ export const VerticalCasinoRoulette: React.FC<VerticalCasinoRouletteProps> = ({
     }
     if (type === 'armor') {
       return [
-        { id: 'none', name: 'No Shield (Denied)', categoryOrMode: 'DENIED', cost: 0, iconPath: '/assets/images/warning.webp', description: 'No armor allowed' },
-        { id: 'light', name: 'Light Shield', categoryOrMode: 'LIGHT', cost: 400, iconPath: '/assets/images/light-armor.png', description: '25 HP shield protection' },
-        { id: 'regen', name: 'Regen Shield', categoryOrMode: 'REGEN', cost: 500, iconPath: '/assets/images/regen-shield.png', description: '50 HP recharging shield' },
-        { id: 'heavy', name: 'Heavy Shield', categoryOrMode: 'HEAVY', cost: 1000, iconPath: '/assets/images/heavy-armor.png', description: '50 HP full protection' },
-        { id: 'eco_save', name: 'Full Eco Save', categoryOrMode: 'DENIED', cost: 0, iconPath: '/assets/images/warning.webp', description: 'Save 100% credits' },
-        { id: 'tactical_light', name: 'Tactical Light Guard', categoryOrMode: 'LIGHT', cost: 400, iconPath: '/assets/images/light-armor.png', description: 'Light mobility shield' },
-        { id: 'combat_regen', name: 'Energy Surge Shield', categoryOrMode: 'REGEN', cost: 500, iconPath: '/assets/images/regen-shield.png', description: 'Self-repairing shield' },
-        { id: 'titan_heavy', name: 'Titan Heavy Plate', categoryOrMode: 'HEAVY', cost: 1000, iconPath: '/assets/images/heavy-armor.png', description: 'Max damage reduction' },
+        { id: 'none', name: 'No Shield (Denied)', categoryOrMode: 'DENIED', cost: 0, iconPath: assetPath('/assets/images/warning.webp'), description: 'No armor allowed' },
+        { id: 'light', name: 'Light Shield', categoryOrMode: 'LIGHT', cost: 400, iconPath: assetPath('/assets/images/light-armor.png'), description: '25 HP shield protection' },
+        { id: 'regen', name: 'Regen Shield', categoryOrMode: 'REGEN', cost: 500, iconPath: assetPath('/assets/images/regen-shield.png'), description: '50 HP recharging shield' },
+        { id: 'heavy', name: 'Heavy Shield', categoryOrMode: 'HEAVY', cost: 1000, iconPath: assetPath('/assets/images/heavy-armor.png'), description: '50 HP full protection' },
+        { id: 'eco_save', name: 'Full Eco Save', categoryOrMode: 'DENIED', cost: 0, iconPath: assetPath('/assets/images/warning.webp'), description: 'Save 100% credits' },
+        { id: 'tactical_light', name: 'Tactical Light Guard', categoryOrMode: 'LIGHT', cost: 400, iconPath: assetPath('/assets/images/light-armor.png'), description: 'Light mobility shield' },
+        { id: 'combat_regen', name: 'Energy Surge Shield', categoryOrMode: 'REGEN', cost: 500, iconPath: assetPath('/assets/images/regen-shield.png'), description: 'Self-repairing shield' },
+        { id: 'titan_heavy', name: 'Titan Heavy Plate', categoryOrMode: 'HEAVY', cost: 1000, iconPath: assetPath('/assets/images/heavy-armor.png'), description: 'Max damage reduction' },
       ];
     }
     return [
-      { id: 'single', name: 'Single Skill Focus', categoryOrMode: 'ALLOWED SKILLS', iconPath: '/assets/images/uses-1.webp', description: 'Allowed to cast 1 specific skill' },
-      { id: 'combo', name: 'Skill Combo Synergy', categoryOrMode: 'ALLOWED SKILLS', iconPath: '/assets/images/uses-2.webp', description: 'Allowed to combine 2 skills' },
-      { id: 'all', name: 'Full Utility: All Skills', categoryOrMode: 'ALLOWED SKILLS', iconPath: '/assets/images/uses-1.webp', description: 'All agent skills allowed this round' },
-      { id: 'ultimate', name: 'Ultimate Focus Surge', categoryOrMode: 'ALLOWED SKILLS', iconPath: '/assets/images/uses-2.webp', description: 'Focus on Ultimate ability' },
+      { id: 'single', name: 'Single Skill Focus', categoryOrMode: 'ALLOWED SKILLS', iconPath: assetPath('/assets/images/uses-1.webp'), description: 'Allowed to cast 1 specific skill' },
+      { id: 'combo', name: 'Skill Combo Synergy', categoryOrMode: 'ALLOWED SKILLS', iconPath: assetPath('/assets/images/uses-2.webp'), description: 'Allowed to combine 2 skills' },
+      { id: 'all', name: 'Full Utility: All Skills', categoryOrMode: 'ALLOWED SKILLS', iconPath: assetPath('/assets/images/uses-1.webp'), description: 'All agent skills allowed this round' },
+      { id: 'ultimate', name: 'Ultimate Focus Surge', categoryOrMode: 'ALLOWED SKILLS', iconPath: assetPath('/assets/images/uses-2.webp'), description: 'Focus on Ultimate ability' },
     ];
   };
 
@@ -341,7 +342,7 @@ export const VerticalCasinoRoulette: React.FC<VerticalCasinoRouletteProps> = ({
                       style={{ color: theme.accent }}
                     >
                       <AssetImage
-                        src="/assets/images/credits.webp"
+                        src={assetPath('/assets/images/credits.webp')}
                         alt="¤"
                         type="armor"
                         fallbackName="¤"
@@ -401,7 +402,7 @@ export const VerticalCasinoRoulette: React.FC<VerticalCasinoRouletteProps> = ({
           {winningItem.cost !== undefined && (
             <div className="flex items-center gap-1.5 font-bold text-sm" style={{ color: theme.accent }}>
               <AssetImage
-                src="/assets/images/credits.webp"
+                src={assetPath('/assets/images/credits.webp')}
                 alt="¤"
                 type="armor"
                 fallbackName="¤"

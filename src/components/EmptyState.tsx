@@ -1,6 +1,7 @@
 import React from 'react';
 import { RefreshCw, Settings } from 'lucide-react';
 import { AssetImage } from './AssetImage';
+import { assetPath } from '@/utils/assetPath';
 
 type EmptyStateProps = {
   title?: string;
@@ -19,7 +20,7 @@ export const EmptyState: React.FC<EmptyStateProps> = ({
     <div className="w-full val-panel val-clip-corner p-6 border-l-4 border-l-[#ff4655] text-center space-y-4 my-4">
       <div className="flex justify-center">
         <AssetImage
-          src="/assets/images/warning.webp"
+          src={assetPath('/assets/images/warning.webp')}
           alt="Warning"
           type="ability"
           fallbackName="WARN"

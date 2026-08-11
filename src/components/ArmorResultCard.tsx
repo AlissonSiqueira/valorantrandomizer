@@ -1,6 +1,7 @@
 import React from 'react';
 import { ArmorOption } from '../types/domain';
 import { AssetImage } from './AssetImage';
+import { assetPath } from '@/utils/assetPath';
 import { motion } from 'framer-motion';
 import { Shield } from 'lucide-react';
 
@@ -85,7 +86,7 @@ export const ArmorResultCard: React.FC<ArmorResultCardProps> = ({
         <span className="text-[#8b9bb4]">COST</span>
         <span className="flex items-center gap-1 text-[#ffb400] font-bold text-sm">
           <AssetImage
-            src="/assets/images/credits.webp"
+            src={assetPath('/assets/images/credits.webp')}
             alt="¤"
             type="armor"
             fallbackName="¤"

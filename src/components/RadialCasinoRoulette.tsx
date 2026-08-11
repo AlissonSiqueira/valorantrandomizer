@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Weapon, ArmorOption, AbilityPlan } from '../types/domain';
 import { WEAPONS } from '../config/weapons';
 import { AssetImage } from './AssetImage';
+import { assetPath } from '@/utils/assetPath';
 import { motion, useAnimation, useMotionValue } from 'framer-motion';
 import { shuffleArray } from '../lib/random';
 import { Target, Zap, Shield } from 'lucide-react';
@@ -66,7 +67,7 @@ export const RadialCasinoRoulette: React.FC<RadialCasinoRouletteProps> = ({
         id: winningAbilityPlan.mode,
         name: winningAbilityPlan.title,
         categoryOrMode: 'ABILITY',
-        iconPath: winningAbilityPlan.abilities[0]?.iconPath || '/assets/images/uses-1.webp',
+        iconPath: winningAbilityPlan.abilities[0]?.iconPath || assetPath('/assets/images/uses-1.webp'),
         abilities: winningAbilityPlan.abilities,
       };
     }
@@ -99,18 +100,18 @@ export const RadialCasinoRoulette: React.FC<RadialCasinoRouletteProps> = ({
     }
     if (currentPoolStage === 'ability') {
       return [
-        { id: 'single', name: 'Single Skill', categoryOrMode: 'ABILITY', iconPath: '/assets/images/uses-1.webp' },
-        { id: 'combo', name: 'Skill Combo', categoryOrMode: 'ABILITY', iconPath: '/assets/images/uses-2.webp' },
-        { id: 'all', name: 'Full Utility', categoryOrMode: 'ABILITY', iconPath: '/assets/images/uses-1.webp' },
-        { id: 'ultimate', name: 'Ultimate Focus', categoryOrMode: 'ABILITY', iconPath: '/assets/images/uses-2.webp' },
+        { id: 'single', name: 'Single Skill', categoryOrMode: 'ABILITY', iconPath: assetPath('/assets/images/uses-1.webp') },
+        { id: 'combo', name: 'Skill Combo', categoryOrMode: 'ABILITY', iconPath: assetPath('/assets/images/uses-2.webp') },
+        { id: 'all', name: 'Full Utility', categoryOrMode: 'ABILITY', iconPath: assetPath('/assets/images/uses-1.webp') },
+        { id: 'ultimate', name: 'Ultimate Focus', categoryOrMode: 'ABILITY', iconPath: assetPath('/assets/images/uses-2.webp') },
       ];
     }
     if (currentPoolStage === 'armor') {
       return [
-        { id: 'none', name: 'No Shield', categoryOrMode: 'DENIED', cost: 0, iconPath: '/assets/images/warning.webp' },
-        { id: 'light', name: 'Light Shield', categoryOrMode: 'LIGHT', cost: 400, iconPath: '/assets/images/light-armor.png' },
-        { id: 'regen', name: 'Regen Shield', categoryOrMode: 'REGEN', cost: 500, iconPath: '/assets/images/regen-shield.png' },
-        { id: 'heavy', name: 'Heavy Shield', categoryOrMode: 'HEAVY', cost: 1000, iconPath: '/assets/images/heavy-armor.png' },
+        { id: 'none', name: 'No Shield', categoryOrMode: 'DENIED', cost: 0, iconPath: assetPath('/assets/images/warning.webp') },
+        { id: 'light', name: 'Light Shield', categoryOrMode: 'LIGHT', cost: 400, iconPath: assetPath('/assets/images/light-armor.png') },
+        { id: 'regen', name: 'Regen Shield', categoryOrMode: 'REGEN', cost: 500, iconPath: assetPath('/assets/images/regen-shield.png') },
+        { id: 'heavy', name: 'Heavy Shield', categoryOrMode: 'HEAVY', cost: 1000, iconPath: assetPath('/assets/images/heavy-armor.png') },
       ];
     }
     return [];
@@ -304,7 +305,7 @@ export const RadialCasinoRoulette: React.FC<RadialCasinoRouletteProps> = ({
                     {item.cost !== undefined && (
                       <div className="flex items-center gap-1 mt-1 text-[10px] font-mono font-bold text-slate-300">
                         <AssetImage
-                          src="/assets/images/credits.webp"
+                          src={assetPath('/assets/images/credits.webp')}
                           alt="¤"
                           type="armor"
                           fallbackName="¤"
