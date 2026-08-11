@@ -1,9 +1,11 @@
 import React, { useState, useMemo } from 'react';
-import { AgentRole } from '../types/domain';
+import { AgentRole, Agent } from '../types/domain';
 import { AGENTS } from '../config/agents';
 import { AgentCard } from './AgentCard';
 import { AssetImage } from './AssetImage';
 import { Search, Users } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { assetPath } from '@/utils/assetPath';
 
 type AgentSelectProps = {
   selectedAgentId: string | null;
@@ -16,6 +18,7 @@ export const AgentSelect: React.FC<AgentSelectProps> = ({
 }) => {
   const [search, setSearch] = useState('');
   const [roleFilter, setRoleFilter] = useState<AgentRole | 'all'>('all');
+  const [hoveredAgentId, setHoveredAgentId] = useState<string | null>(null);
 
   const filteredAgents = useMemo(() => {
     return AGENTS.filter((agent) => {
@@ -25,106 +28,197 @@ export const AgentSelect: React.FC<AgentSelectProps> = ({
     }).sort((a, b) => a.name.localeCompare(b.name));
   }, [search, roleFilter]);
 
+  const displayAgent = useMemo(() => {
+    const id = hoveredAgentId || selectedAgentId || filteredAgents[0]?.id;
+    return AGENTS.find(a => a.id === id);
+  }, [hoveredAgentId, selectedAgentId, filteredAgents]);
+
   const handleSelect = (agentId: string) => {
     onSelectAgent(agentId);
   };
 
+  const roleColors: Record<Agent['role'], string> = {
+    duelist: 'text-[#ff4655]',
+    controller: 'text-[#00e5ff]',
+    initiator: 'text-[#ffb400]',
+    sentinel: 'text-[#00ff88]',
+  };
+
   return (
-    <div className="w-full max-w-[1600px] mx-auto p-4 sm:p-6 lg:p-8 space-y-6">
-      {/* Top Banner */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 p-6 val-panel val-clip-corner border-l-4 border-l-[#ff4655] shadow-xl">
-        <div>
-          <h1 className="text-2xl sm:text-4xl font-black tracking-wider font-tactical uppercase text-white flex items-center gap-3">
-            <Users className="w-8 h-8 text-[#ff4655]" />
-            Agent Selection (Alphabetical Roster)
-          </h1>
-          <p className="text-sm text-[#8b9bb4] mt-1">
-            Choose your active Valorant agent to launch the 3-stage casino roulette match randomizer.
-          </p>
-        </div>
+    <div className="relative w-full min-h-[calc(100vh-80px)] overflow-hidden bg-[#0f1923] flex flex-col justify-between">
+      
+      {/* BACKGROUND LARGE RENDER */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden flex items-end justify-center lg:justify-end lg:pr-20">
+        <AnimatePresence mode="wait">
+          {displayAgent && (
+            <motion.div
+              key={displayAgent.id}
+              initial={{ opacity: 0, x: 50, scale: 0.95 }}
+              animate={{ opacity: 1, x: 0, scale: 1 }}
+              exit={{ opacity: 0, x: -50, scale: 0.95 }}
+              transition={{ duration: 0.4, ease: "easeOut" }}
+              className="h-[80%] lg:h-[95%] opacity-90 drop-shadow-[0_0_30px_rgba(255,255,255,0.1)]"
+            >
+              <img 
+                src={displayAgent.fullPortraitPath} 
+                alt={displayAgent.name}
+                className="h-full w-auto object-contain object-bottom"
+                onError={(e) => {
+                  (e.target as HTMLImageElement).src = displayAgent.portraitPath; // fallback
+                }}
+              />
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
 
-        {selectedAgentId && (
-          <div className="flex items-center gap-3 bg-[#0f1923] p-3 px-5 border border-[#ff4655]/50 rounded val-clip-corner">
-            <span className="text-xs font-mono text-[#8b9bb4]">ACTIVE AGENT:</span>
-            <span className="text-base font-bold text-[#ff4655] uppercase tracking-wider font-tactical">
-              {AGENTS.find((a) => a.id === selectedAgentId)?.name}
-            </span>
+      {/* TOP/LEFT AGENT INFO OVERLAY */}
+      <div className="relative z-10 p-6 lg:p-12 max-w-2xl pointer-events-none mt-10">
+        <AnimatePresence mode="wait">
+          {displayAgent && (
+            <motion.div
+              key={`info-${displayAgent.id}`}
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 20 }}
+              transition={{ duration: 0.3 }}
+            >
+              <div className="flex items-center gap-3 mb-2">
+                <AssetImage
+                  src={assetPath(`/assets/images/role-${displayAgent.role}.webp`)}
+                  alt={displayAgent.role}
+                  type="ability"
+                  className="w-6 h-6"
+                />
+                <span className={`text-sm font-mono font-bold uppercase tracking-[0.2em] ${roleColors[displayAgent.role]}`}>
+                  {displayAgent.role}
+                </span>
+              </div>
+              <h1 className="text-6xl md:text-8xl font-black uppercase font-tactical text-transparent bg-clip-text bg-gradient-to-br from-white to-[#8b9bb4] tracking-wider mb-8 drop-shadow-lg">
+                {displayAgent.name}
+              </h1>
+
+              {/* Abilities preview */}
+              <div className="flex flex-col gap-4 pointer-events-auto">
+                <p className="text-[#8b9bb4] text-xs font-mono uppercase tracking-widest border-b border-[#2a3e52] pb-1 w-max">
+                  Abilities
+                </p>
+                <div className="flex flex-wrap gap-3">
+                  {displayAgent.abilities.map((ability) => (
+                    <div 
+                      key={ability.id} 
+                      className="flex items-center gap-3 bg-[#152230]/80 backdrop-blur border border-[#2a3e52] p-2 pr-4 val-clip-corner hover:border-[#ff4655]/50 transition-colors group cursor-help"
+                      title={ability.description}
+                    >
+                      <div className="w-10 h-10 bg-[#0f1923] flex items-center justify-center border border-[#2a3e52] group-hover:border-[#ff4655] transition-colors">
+                        <AssetImage
+                          src={ability.iconPath}
+                          alt={ability.name}
+                          type="ability"
+                          className="w-6 h-6 object-contain"
+                        />
+                      </div>
+                      <div className="flex flex-col">
+                        <span className="text-white font-bold text-sm tracking-wide">{ability.name}</span>
+                        <span className="text-[#8b9bb4] text-[10px] font-mono uppercase tracking-wider">{ability.slot.replace('_', ' ')}</span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+
+      {/* BOTTOM ROSTER & FILTERS */}
+      <div className="relative z-10 w-full p-4 lg:p-8 bg-gradient-to-t from-[#0f1923] via-[#0f1923]/90 to-transparent pt-32">
+        <div className="max-w-6xl mx-auto flex flex-col gap-6 items-center">
+          
+          {/* Filters */}
+          <div className="flex flex-col sm:flex-row items-center gap-4 bg-[#152230]/80 backdrop-blur p-2 border border-[#2a3e52] val-clip-corner w-full sm:w-auto shadow-xl">
+            <div className="relative w-full sm:w-64">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#8b9bb4]" />
+              <input
+                type="text"
+                placeholder="Search agent (A-Z)..."
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                className="w-full pl-9 pr-4 py-2 bg-[#0f1923] border border-[#2a3e52] focus:border-[#ff4655] text-sm text-white placeholder-[#8b9bb4] outline-none transition-colors"
+              />
+            </div>
+            
+            <div className="flex items-center gap-1 overflow-x-auto w-full sm:w-auto pb-1 sm:pb-0 scrollbar-hide">
+              {(
+                [
+                  { id: 'all', label: 'All', roleIcon: null },
+                  { id: 'duelist', label: 'Duelist', roleIcon: '/assets/images/role-duelist.webp' },
+                  { id: 'initiator', label: 'Initiator', roleIcon: '/assets/images/role-initiator.webp' },
+                  { id: 'controller', label: 'Controller', roleIcon: '/assets/images/role-controller.webp' },
+                  { id: 'sentinel', label: 'Sentinel', roleIcon: '/assets/images/role-sentinel.webp' },
+                ] as const
+              ).map((tab) => {
+                const isActive = roleFilter === tab.id;
+                return (
+                  <button
+                    key={tab.id}
+                    type="button"
+                    onClick={() => setRoleFilter(tab.id)}
+                    className={`flex items-center gap-2 px-4 py-2 text-xs font-semibold uppercase tracking-wider transition-all whitespace-nowrap val-clip-corner ${
+                      isActive
+                        ? 'bg-[#ff4655] text-white shadow-[0_0_10px_rgba(255,70,85,0.4)]'
+                        : 'bg-[#0f1923] text-[#8b9bb4] hover:text-white'
+                    }`}
+                  >
+                    {tab.roleIcon ? (
+                      <AssetImage
+                        src={assetPath(tab.roleIcon)}
+                        alt={tab.label}
+                        type="ability"
+                        className="w-4 h-4 object-contain opacity-70"
+                      />
+                    ) : (
+                      <Users className="w-4 h-4 opacity-70" />
+                    )}
+                    {tab.label}
+                  </button>
+                );
+              })}
+            </div>
           </div>
-        )}
-      </div>
 
-      {/* Filter Bar */}
-      <div className="flex flex-col sm:flex-row items-center justify-between gap-4 bg-[#152230] p-4 border border-[#2a3e52] val-clip-corner">
-        {/* Search */}
-        <div className="relative w-full sm:w-80">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#8b9bb4]" />
-          <input
-            type="text"
-            placeholder="Search agent (A-Z)..."
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            className="w-full pl-9 pr-4 py-2 bg-[#0f1923] border border-[#2a3e52] focus:border-[#ff4655] text-sm text-white placeholder-[#8b9bb4] outline-none transition-colors"
-          />
-        </div>
+          {/* Roster Grid */}
+          {filteredAgents.length === 0 ? (
+            <div className="p-8 text-center text-[#8b9bb4] font-mono">
+              No agents found matching "{search}".
+            </div>
+          ) : (
+            <div className="flex flex-wrap justify-center gap-3 lg:gap-4 max-w-[1200px]">
+              {filteredAgents.map((agent) => (
+                <AgentCard
+                  key={agent.id}
+                  agent={agent}
+                  isSelected={agent.id === selectedAgentId}
+                  onSelect={handleSelect}
+                  onHover={setHoveredAgentId}
+                  onLeave={() => setHoveredAgentId(null)}
+                />
+              ))}
+            </div>
+          )}
 
-        {/* Role Tabs */}
-        <div className="flex items-center gap-2 overflow-x-auto w-full sm:w-auto pb-1 sm:pb-0">
-          {(
-            [
-              { id: 'all', label: 'All Roles', roleIcon: null },
-              { id: 'duelist', label: 'Duelist', roleIcon: '/assets/images/role-duelist.webp' },
-              { id: 'initiator', label: 'Initiator', roleIcon: '/assets/images/role-initiator.webp' },
-              { id: 'controller', label: 'Controller', roleIcon: '/assets/images/role-controller.webp' },
-              { id: 'sentinel', label: 'Sentinel', roleIcon: '/assets/images/role-sentinel.webp' },
-            ] as const
-          ).map((tab) => {
-            const isActive = roleFilter === tab.id;
-            return (
-              <button
-                key={tab.id}
-                type="button"
-                onClick={() => setRoleFilter(tab.id)}
-                className={`flex items-center gap-2 px-4 py-2 text-xs font-semibold uppercase tracking-wider transition-all whitespace-nowrap val-clip-corner ${
-                  isActive
-                    ? 'bg-[#ff4655] text-white shadow-[0_0_15px_rgba(255,70,85,0.5)]'
-                    : 'bg-[#0f1923] text-[#8b9bb4] border border-[#2a3e52] hover:border-[#ff4655]/50 hover:text-white'
-                }`}
-              >
-                {tab.roleIcon ? (
-                  <AssetImage
-                    src={tab.roleIcon}
-                    alt={tab.label}
-                    type="ability"
-                    fallbackName={tab.label}
-                    className="w-4 h-4 object-contain"
-                  />
-                ) : (
-                  <Users className="w-4 h-4" />
-                )}
-                {tab.label}
-              </button>
-            );
-          })}
+          {selectedAgentId && (
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="mt-4 px-8 py-3 bg-[#ff4655] text-white font-bold tracking-widest uppercase font-tactical text-xl val-clip-corner shadow-[0_0_20px_rgba(255,70,85,0.5)] border border-white/20"
+            >
+              LOCKED IN: {AGENTS.find((a) => a.id === selectedAgentId)?.name}
+            </motion.div>
+          )}
+
         </div>
       </div>
-
-      {/* Grid of Agents */}
-      {filteredAgents.length === 0 ? (
-        <div className="p-12 text-center bg-[#152230] border border-[#2a3e52] text-[#8b9bb4] val-clip-corner">
-          No agents found matching "{search}".
-        </div>
-      ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
-          {filteredAgents.map((agent) => (
-            <AgentCard
-              key={agent.id}
-              agent={agent}
-              isSelected={agent.id === selectedAgentId}
-              onSelect={handleSelect}
-            />
-          ))}
-        </div>
-      )}
     </div>
   );
 };

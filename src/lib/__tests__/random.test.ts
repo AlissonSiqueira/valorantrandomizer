@@ -69,10 +69,11 @@ describe('Randomization Engine Pure Utilities', () => {
   it('generateAbilityPlan handles agent with single ability', () => {
     const singleAbilityAgent: Agent = {
       id: 'custom',
-      name: 'Custom Agent',
+      name: 'Jett',
       role: 'duelist',
-      portraitPath: '',
-      iconPath: '',
+      portraitPath: '/assets/images/jett.webp',
+      fullPortraitPath: '/assets/images/full_jett.png',
+      iconPath: '/assets/images/jett.webp',
       enabled: true,
       abilities: [
         {

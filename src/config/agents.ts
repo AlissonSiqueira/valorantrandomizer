@@ -7,6 +7,7 @@ export const AGENTS: Agent[] = [
     name: 'Astra',
     role: 'controller',
     portraitPath: assetPath('/assets/images/astra.webp'),
+    fullPortraitPath: assetPath(`/assets/images/full_astra.png`),
     iconPath: assetPath('/assets/images/astra.webp'),
     enabled: true,
     abilities: [
@@ -21,6 +22,7 @@ export const AGENTS: Agent[] = [
     name: 'Breach',
     role: 'initiator',
     portraitPath: assetPath('/assets/images/breach.webp'),
+    fullPortraitPath: assetPath(`/assets/images/full_breach.png`),
     iconPath: assetPath('/assets/images/breach.webp'),
     enabled: true,
     abilities: [
@@ -35,6 +37,7 @@ export const AGENTS: Agent[] = [
     name: 'Brimstone',
     role: 'controller',
     portraitPath: assetPath('/assets/images/brimstone.webp'),
+    fullPortraitPath: assetPath(`/assets/images/full_brimstone.png`),
     iconPath: assetPath('/assets/images/brimstone.webp'),
     enabled: true,
     abilities: [
@@ -49,6 +52,7 @@ export const AGENTS: Agent[] = [
     name: 'Chamber',
     role: 'sentinel',
     portraitPath: assetPath('/assets/images/chamber.webp'),
+    fullPortraitPath: assetPath(`/assets/images/full_chamber.png`),
     iconPath: assetPath('/assets/images/chamber.webp'),
     enabled: true,
     abilities: [
@@ -63,6 +67,7 @@ export const AGENTS: Agent[] = [
     name: 'Clove',
     role: 'controller',
     portraitPath: assetPath('/assets/images/clove.webp'),
+    fullPortraitPath: assetPath(`/assets/images/full_clove.png`),
     iconPath: assetPath('/assets/images/clove.webp'),
     enabled: true,
     abilities: [
@@ -77,6 +82,7 @@ export const AGENTS: Agent[] = [
     name: 'Cypher',
     role: 'sentinel',
     portraitPath: assetPath('/assets/images/cypher.webp'),
+    fullPortraitPath: assetPath(`/assets/images/full_cypher.png`),
     iconPath: assetPath('/assets/images/cypher.webp'),
     enabled: true,
     abilities: [
@@ -91,6 +97,7 @@ export const AGENTS: Agent[] = [
     name: 'Deadlock',
     role: 'sentinel',
     portraitPath: assetPath('/assets/images/deadlock.webp'),
+    fullPortraitPath: assetPath(`/assets/images/full_deadlock.png`),
     iconPath: assetPath('/assets/images/deadlock.webp'),
     enabled: true,
     abilities: [
@@ -105,6 +112,7 @@ export const AGENTS: Agent[] = [
     name: 'Fade',
     role: 'initiator',
     portraitPath: assetPath('/assets/images/fade.webp'),
+    fullPortraitPath: assetPath(`/assets/images/full_fade.png`),
     iconPath: assetPath('/assets/images/fade.webp'),
     enabled: true,
     abilities: [
@@ -119,6 +127,7 @@ export const AGENTS: Agent[] = [
     name: 'Gekko',
     role: 'initiator',
     portraitPath: assetPath('/assets/images/gekko.webp'),
+    fullPortraitPath: assetPath(`/assets/images/full_gekko.png`),
     iconPath: assetPath('/assets/images/gekko.webp'),
     enabled: true,
     abilities: [
@@ -133,6 +142,7 @@ export const AGENTS: Agent[] = [
     name: 'Harbor',
     role: 'controller',
     portraitPath: assetPath('/assets/images/harbor.webp'),
+    fullPortraitPath: assetPath(`/assets/images/full_harbor.png`),
     iconPath: assetPath('/assets/images/harbor.webp'),
     enabled: true,
     abilities: [
@@ -147,6 +157,7 @@ export const AGENTS: Agent[] = [
     name: 'Iso',
     role: 'duelist',
     portraitPath: assetPath('/assets/images/iso.webp'),
+    fullPortraitPath: assetPath(`/assets/images/full_iso.png`),
     iconPath: assetPath('/assets/images/iso.webp'),
     enabled: true,
     abilities: [
@@ -161,6 +172,7 @@ export const AGENTS: Agent[] = [
     name: 'Jett',
     role: 'duelist',
     portraitPath: assetPath('/assets/images/jett.webp'),
+    fullPortraitPath: assetPath(`/assets/images/full_jett.png`),
     iconPath: assetPath('/assets/images/jett.webp'),
     enabled: true,
     abilities: [
@@ -175,6 +187,7 @@ export const AGENTS: Agent[] = [
     name: 'KAY/O',
     role: 'initiator',
     portraitPath: assetPath('/assets/images/kayo.webp'),
+    fullPortraitPath: assetPath(`/assets/images/full_kayo.png`),
     iconPath: assetPath('/assets/images/kayo.webp'),
     enabled: true,
     abilities: [
@@ -189,6 +202,7 @@ export const AGENTS: Agent[] = [
     name: 'Killjoy',
     role: 'sentinel',
     portraitPath: assetPath('/assets/images/killjoy.webp'),
+    fullPortraitPath: assetPath(`/assets/images/full_killjoy.png`),
     iconPath: assetPath('/assets/images/killjoy.webp'),
     enabled: true,
     abilities: [
@@ -203,6 +217,7 @@ export const AGENTS: Agent[] = [
     name: 'Miks',
     role: 'controller',
     portraitPath: assetPath('/assets/images/miks.webp'),
+    fullPortraitPath: assetPath(`/assets/images/full_miks.png`),
     iconPath: assetPath('/assets/images/miks.webp'),
     enabled: true,
     abilities: [
@@ -217,6 +232,7 @@ export const AGENTS: Agent[] = [
     name: 'Neon',
     role: 'duelist',
     portraitPath: assetPath('/assets/images/neon.webp'),
+    fullPortraitPath: assetPath(`/assets/images/full_neon.png`),
     iconPath: assetPath('/assets/images/neon.webp'),
     enabled: true,
     abilities: [
@@ -231,6 +247,7 @@ export const AGENTS: Agent[] = [
     name: 'Omen',
     role: 'controller',
     portraitPath: assetPath('/assets/images/omen.webp'),
+    fullPortraitPath: assetPath(`/assets/images/full_omen.png`),
     iconPath: assetPath('/assets/images/omen.webp'),
     enabled: true,
     abilities: [
@@ -245,6 +262,7 @@ export const AGENTS: Agent[] = [
     name: 'Phoenix',
     role: 'duelist',
     portraitPath: assetPath('/assets/images/phoenix.webp'),
+    fullPortraitPath: assetPath(`/assets/images/full_phoenix.png`),
     iconPath: assetPath('/assets/images/phoenix.webp'),
     enabled: true,
     abilities: [
@@ -259,6 +277,7 @@ export const AGENTS: Agent[] = [
     name: 'Raze',
     role: 'duelist',
     portraitPath: assetPath('/assets/images/raze.webp'),
+    fullPortraitPath: assetPath(`/assets/images/full_raze.png`),
     iconPath: assetPath('/assets/images/raze.webp'),
     enabled: true,
     abilities: [
@@ -273,6 +292,7 @@ export const AGENTS: Agent[] = [
     name: 'Reyna',
     role: 'duelist',
     portraitPath: assetPath('/assets/images/reyna.webp'),
+    fullPortraitPath: assetPath(`/assets/images/full_reyna.png`),
     iconPath: assetPath('/assets/images/reyna.webp'),
     enabled: true,
     abilities: [
@@ -287,6 +307,7 @@ export const AGENTS: Agent[] = [
     name: 'Sage',
     role: 'sentinel',
     portraitPath: assetPath('/assets/images/sage.webp'),
+    fullPortraitPath: assetPath(`/assets/images/full_sage.png`),
     iconPath: assetPath('/assets/images/sage.webp'),
     enabled: true,
     abilities: [
@@ -301,6 +322,7 @@ export const AGENTS: Agent[] = [
     name: 'Skye',
     role: 'initiator',
     portraitPath: assetPath('/assets/images/skye.webp'),
+    fullPortraitPath: assetPath(`/assets/images/full_skye.png`),
     iconPath: assetPath('/assets/images/skye.webp'),
     enabled: true,
     abilities: [
@@ -315,6 +337,7 @@ export const AGENTS: Agent[] = [
     name: 'Sova',
     role: 'initiator',
     portraitPath: assetPath('/assets/images/sova.webp'),
+    fullPortraitPath: assetPath(`/assets/images/full_sova.png`),
     iconPath: assetPath('/assets/images/sova.webp'),
     enabled: true,
     abilities: [
@@ -329,6 +352,7 @@ export const AGENTS: Agent[] = [
     name: 'Tejo',
     role: 'initiator',
     portraitPath: assetPath('/assets/images/tejo.webp'),
+    fullPortraitPath: assetPath(`/assets/images/full_tejo.png`),
     iconPath: assetPath('/assets/images/tejo.webp'),
     enabled: true,
     abilities: [
@@ -343,6 +367,7 @@ export const AGENTS: Agent[] = [
     name: 'Veto',
     role: 'sentinel',
     portraitPath: assetPath('/assets/images/veto.webp'),
+    fullPortraitPath: assetPath(`/assets/images/full_veto.png`),
     iconPath: assetPath('/assets/images/veto.webp'),
     enabled: true,
     abilities: [
@@ -357,6 +382,7 @@ export const AGENTS: Agent[] = [
     name: 'Viper',
     role: 'controller',
     portraitPath: assetPath('/assets/images/viper.webp'),
+    fullPortraitPath: assetPath(`/assets/images/full_viper.png`),
     iconPath: assetPath('/assets/images/viper.webp'),
     enabled: true,
     abilities: [
@@ -371,6 +397,7 @@ export const AGENTS: Agent[] = [
     name: 'Vyse',
     role: 'sentinel',
     portraitPath: assetPath('/assets/images/vyse.webp'),
+    fullPortraitPath: assetPath(`/assets/images/full_vyse.png`),
     iconPath: assetPath('/assets/images/vyse.webp'),
     enabled: true,
     abilities: [
@@ -385,6 +412,7 @@ export const AGENTS: Agent[] = [
     name: 'Waylay',
     role: 'duelist',
     portraitPath: assetPath('/assets/images/waylay.webp'),
+    fullPortraitPath: assetPath(`/assets/images/full_waylay.png`),
     iconPath: assetPath('/assets/images/waylay.webp'),
     enabled: true,
     abilities: [
@@ -399,6 +427,7 @@ export const AGENTS: Agent[] = [
     name: 'Yoru',
     role: 'duelist',
     portraitPath: assetPath('/assets/images/yoru.webp'),
+    fullPortraitPath: assetPath(`/assets/images/full_yoru.png`),
     iconPath: assetPath('/assets/images/yoru.webp'),
     enabled: true,
     abilities: [

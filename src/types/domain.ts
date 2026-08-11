@@ -50,6 +50,7 @@ export type Agent = {
   name: string;
   role: AgentRole;
   portraitPath: string;
+  fullPortraitPath: string;
   iconPath: string;
   enabled: boolean;
   abilities: Ability[];
