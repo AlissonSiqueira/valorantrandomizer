@@ -1,3 +1,5 @@
+/// <reference types="vite/client" />
+
 /**
  * Resolves a public asset path using the Vite base URL.
  * This ensures assets work correctly when deployed under a subpath (e.g., /val/).
