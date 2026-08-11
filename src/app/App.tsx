@@ -106,8 +106,8 @@ export const App: React.FC = () => {
         </div>
       </header>
 
-      {/* Main Content Area - ROULETTES AT TOP (HERO STAGE) */}
-      <main className="flex-1 max-w-[1650px] w-full mx-auto p-4 sm:p-6 lg:p-8 space-y-6">
+      {/* Main Content Area */}
+      <main className={`flex-1 max-w-[1650px] w-full mx-auto flex flex-col ${!selectedAgent ? '' : 'p-4 sm:p-6 lg:p-8 space-y-6'}`}>
         {!selectedAgent ? (
           /* Step 1: Agent Select Screen */
           <AgentSelect

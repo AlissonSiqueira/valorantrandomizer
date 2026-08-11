@@ -74,7 +74,7 @@ export const AgentSelect: React.FC<AgentSelectProps> = ({
   };
 
   return (
-    <div className="relative w-full min-h-[calc(100vh-80px)] overflow-hidden bg-[#0f1923] flex flex-col justify-between">
+    <div className="relative w-full h-full flex-1 overflow-hidden bg-[#0f1923] flex flex-col justify-between">
       
       {/* BACKGROUND LARGE RENDER */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden flex items-end justify-center lg:justify-end lg:pr-20">
@@ -102,7 +102,7 @@ export const AgentSelect: React.FC<AgentSelectProps> = ({
       </div>
 
       {/* TOP/LEFT AGENT INFO OVERLAY */}
-      <div className="relative z-10 p-6 lg:p-12 max-w-2xl pointer-events-none mt-10">
+      <div className="relative z-10 p-4 lg:p-12 max-w-2xl pointer-events-none lg:mt-4">
         <AnimatePresence mode="wait">
           {displayAgent && (
             <motion.div
@@ -123,12 +123,12 @@ export const AgentSelect: React.FC<AgentSelectProps> = ({
                   {displayAgent.role}
                 </span>
               </div>
-              <h1 className="text-6xl md:text-8xl font-black uppercase font-tactical text-transparent bg-clip-text bg-gradient-to-br from-white to-[#8b9bb4] tracking-wider mb-8 drop-shadow-lg">
+              <h1 className="text-5xl md:text-8xl font-black uppercase font-tactical text-transparent bg-clip-text bg-gradient-to-br from-white to-[#8b9bb4] tracking-wider mb-4 lg:mb-8 drop-shadow-lg">
                 {displayAgent.name}
               </h1>
 
               {/* Abilities preview */}
-              <div className="flex flex-col gap-4 pointer-events-auto">
+              <div className="flex flex-col gap-2 lg:gap-4 pointer-events-auto">
                 <p className="text-[#8b9bb4] text-xs font-mono uppercase tracking-widest border-b border-[#2a3e52] pb-1 w-max">
                   Abilities
                 </p>
@@ -147,20 +147,20 @@ export const AgentSelect: React.FC<AgentSelectProps> = ({
                     return (
                       <div 
                         key={ability.id} 
-                        className="flex items-center gap-3 bg-[#152230]/80 backdrop-blur border border-[#2a3e52] p-2 pr-4 rounded-lg hover:border-[#ff4655]/50 transition-colors group cursor-help w-full max-w-[280px]"
+                        className="flex items-center gap-2 lg:gap-3 bg-[#152230]/80 backdrop-blur border border-[#2a3e52] p-1.5 lg:p-2 lg:pr-4 rounded-lg hover:border-[#ff4655]/50 transition-colors group cursor-help w-full max-w-[220px] lg:max-w-[280px]"
                         title={ability.description}
                       >
-                        <div className="w-10 h-10 shrink-0 bg-[#0f1923] flex items-center justify-center border border-[#2a3e52] group-hover:border-[#ff4655] transition-colors relative">
+                        <div className="w-8 h-8 lg:w-10 lg:h-10 shrink-0 bg-[#0f1923] flex items-center justify-center border border-[#2a3e52] group-hover:border-[#ff4655] transition-colors relative">
                           <AssetImage
                             src={ability.iconPath}
                             alt={ability.name}
                             type="ability"
-                            className="w-6 h-6 object-contain"
+                            className="w-5 h-5 lg:w-6 lg:h-6 object-contain"
                           />
                         </div>
                         <div className="flex flex-col">
-                          <span className="text-white font-bold text-sm tracking-wide">{ability.name}</span>
-                          <span className="text-[#8b9bb4] text-[10px] font-mono uppercase tracking-wider font-bold">
+                          <span className="text-white font-bold text-xs lg:text-sm tracking-wide leading-tight">{ability.name}</span>
+                          <span className="text-[#8b9bb4] text-[9px] lg:text-[10px] font-mono uppercase tracking-wider font-bold">
                             KEY: {getAbilityKey(ability.slot)}
                           </span>
                         </div>
@@ -175,8 +175,8 @@ export const AgentSelect: React.FC<AgentSelectProps> = ({
       </div>
 
       {/* BOTTOM ROSTER & FILTERS */}
-      <div className="relative z-10 w-full p-4 lg:p-8 bg-gradient-to-t from-[#0f1923] via-[#0f1923]/90 to-transparent pt-32">
-        <div className="max-w-6xl mx-auto flex flex-col gap-6 items-center">
+      <div className="relative z-10 w-full p-2 lg:p-8 bg-gradient-to-t from-[#0f1923] via-[#0f1923]/90 to-transparent pt-8 lg:pt-16 mt-auto">
+        <div className="max-w-6xl mx-auto flex flex-col gap-4 lg:gap-6 items-center">
           
           {/* Filters */}
           <div className="flex flex-col sm:flex-row items-center gap-4 bg-[#152230]/80 backdrop-blur p-2 border border-[#2a3e52] rounded-lg w-full sm:w-auto shadow-xl">
@@ -253,10 +253,10 @@ export const AgentSelect: React.FC<AgentSelectProps> = ({
                 type="button"
                 onClick={handleRandomize}
                 disabled={isRandomizing}
-                className={`group relative w-[72px] h-[72px] sm:w-[84px] sm:h-[84px] transition-all duration-200 rounded-lg cursor-pointer overflow-hidden border border-[#2a3e52] hover:border-[#ff4655]/60 hover:scale-105 flex items-center justify-center bg-[#152230] ${isRandomizing ? 'animate-pulse shadow-[0_0_15px_rgba(255,70,85,0.4)] border-[#ff4655]' : ''}`}
+                className={`group relative w-[56px] h-[56px] sm:w-[72px] sm:h-[72px] lg:w-[84px] lg:h-[84px] transition-all duration-200 rounded-lg cursor-pointer overflow-hidden border border-[#2a3e52] hover:border-[#ff4655]/60 hover:scale-105 flex items-center justify-center bg-[#152230] ${isRandomizing ? 'animate-pulse shadow-[0_0_15px_rgba(255,70,85,0.4)] border-[#ff4655]' : ''}`}
                 title="Random Agent"
               >
-                <span className="text-4xl font-tactical text-[#8b9bb4] group-hover:text-white transition-colors">?</span>
+                <span className="text-3xl lg:text-4xl font-tactical text-[#8b9bb4] group-hover:text-white transition-colors">?</span>
                 <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-1 pt-4 opacity-0 group-hover:opacity-100 transition-opacity">
                   <span className="text-[10px] sm:text-xs font-bold text-white tracking-wider uppercase text-center block w-full drop-shadow-md">
                     RANDOM
