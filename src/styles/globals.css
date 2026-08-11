@@ -1,0 +1,83 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    background-color: #0f1923;
+    background-image: 
+      radial-gradient(circle at 50% 0%, rgba(255, 70, 85, 0.08) 0%, transparent 60%),
+      linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+    background-size: 100% 100%, 32px 32px, 32px 32px;
+    color: #ece8e1;
+    overflow-x: hidden;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #0f1923;
+}
+::-webkit-scrollbar-thumb {
+  background: #2a3e52;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #ff4655;
+}
+
+/* Tactical clipped angle utilities */
+.val-clip-corner {
+  clip-path: polygon(
+    0 0,
+    calc(100% - 12px) 0,
+    100% 12px,
+    100% 100%,
+    12px 100%,
+    0 calc(100% - 12px)
+  );
+}
+
+.val-clip-btn {
+  clip-path: polygon(
+    0 0,
+    calc(100% - 14px) 0,
+    100% 14px,
+    100% 100%,
+    14px 100%,
+    0 calc(100% - 14px)
+  );
+}
+
+.val-panel {
+  background: rgba(24, 37, 51, 0.85);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(42, 62, 82, 0.8);
+}
+
+.val-panel-active {
+  background: rgba(30, 48, 66, 0.95);
+  border-color: #ff4655;
+  box-shadow: 0 0 20px rgba(255, 70, 85, 0.25);
+}
+
+@keyframes pulseGlow {
+  0% {
+    box-shadow: 0 0 10px rgba(255, 70, 85, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 25px rgba(255, 70, 85, 0.7);
+  }
+  100% {
+    box-shadow: 0 0 10px rgba(255, 70, 85, 0.3);
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulseGlow 2s infinite ease-in-out;
+}
