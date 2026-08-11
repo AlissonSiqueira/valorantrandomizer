@@ -40,12 +40,18 @@ export const App: React.FC = () => {
 
   const handleSpin = () => {
     spinRound();
-    // Scroll the roulette spinner into view with smooth animation
+    // Scroll the roulette spinner into view taking sticky header into account
     setTimeout(() => {
-      rouletteRef.current?.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start',
-      });
+      if (rouletteRef.current) {
+        const headerOffset = 90; // height of header (70px) + extra margin (20px)
+        const elementPosition = rouletteRef.current.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.scrollY - headerOffset;
+        
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth',
+        });
+      }
     }, 100);
   };
 
@@ -199,7 +205,21 @@ export const App: React.FC = () => {
         onClearAllData={clearAllData}
       />
 
-      {/* Footer (Removed for now) */}
+      {/* Footer */}
+      <footer className="w-full py-4 mt-auto border-t border-[#2a3e52]/40 bg-[#0b121a]/80 text-center text-[11px] sm:text-xs font-mono text-[#8b9bb4] z-10 px-4">
+        <p>
+          Created by{' '}
+          <a
+            href="https://www.tiktok.com/@SlicerzzTV"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-[#ff4655] hover:text-[#ff6b77] hover:underline transition-colors font-bold"
+          >
+            @SlicerzzTV
+          </a>{' '}
+          on TikTok • ValoRoll is a fan project and not affiliated with Riot Games.
+        </p>
+      </footer>
     </div>
   );
 };
