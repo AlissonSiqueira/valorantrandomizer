@@ -102,13 +102,61 @@ export const RadialCasinoRoulette: React.FC<RadialCasinoRouletteProps> = ({
     }
     if (currentPoolStage === 'ability') {
       if (agent && agent.abilities && agent.abilities.length > 0) {
-        return agent.abilities.map((ab) => ({
-          id: ab.id,
-          name: ab.name,
-          categoryOrMode: ab.slot.replace('_', ' ').toUpperCase(),
-          iconPath: ab.iconPath,
-          abilities: [ab],
-        }));
+        const abs = agent.abilities;
+        const poolItems: GenericRouletteItem[] = [];
+
+        // 1. Single skills (1 item)
+        abs.forEach((ab) => {
+          poolItems.push({
+            id: `single_${ab.id}`,
+            name: ab.name,
+            categoryOrMode: ab.slot.replace('_', ' ').toUpperCase(),
+            iconPath: ab.iconPath,
+            abilities: [ab],
+          });
+        });
+
+        // 2. Double combos (2 items)
+        if (abs.length >= 2) {
+          for (let i = 0; i < abs.length; i++) {
+            for (let j = i + 1; j < abs.length; j++) {
+              poolItems.push({
+                id: `double_${abs[i].id}_${abs[j].id}`,
+                name: `${abs[i].name} + ${abs[j].name}`,
+                categoryOrMode: 'DOUBLE COMBO',
+                iconPath: abs[i].iconPath,
+                abilities: [abs[i], abs[j]],
+              });
+            }
+          }
+        }
+
+        // 3. Triple combos (3 items)
+        if (abs.length >= 3) {
+          for (let i = 0; i < abs.length; i++) {
+            const triple = abs.filter((_, idx) => idx !== i);
+            poolItems.push({
+              id: `triple_${triple.map((a) => a.id).join('_')}`,
+              name: 'Triple Combo',
+              categoryOrMode: 'TRIPLE COMBO',
+              iconPath: triple[0].iconPath,
+              abilities: triple,
+            });
+          }
+        }
+
+        // 4. Quadruple / Full utility (4 items)
+        if (abs.length >= 4) {
+          poolItems.push({
+            id: `quad_${abs.map((a) => a.id).join('_')}`,
+            name: 'Full Utility',
+            categoryOrMode: 'FULL UTILITY',
+            iconPath: abs[0].iconPath,
+            abilities: abs,
+          });
+        }
+
+        return poolItems;
       }
 
       return [
@@ -293,7 +341,11 @@ export const RadialCasinoRoulette: React.FC<RadialCasinoRouletteProps> = ({
                           alt={ab.name}
                           type="ability"
                           fallbackName={ab.name}
-                          className={`max-w-[56px] max-h-[56px] sm:max-w-[64px] sm:max-h-[64px] object-contain transition-all ${isActive ? 'drop-shadow-md' : 'grayscale-[40%]'}`}
+                          className={`${
+                            item.abilities!.length === 2
+                              ? 'max-w-[64px] max-h-[64px] sm:max-w-[76px] sm:max-h-[76px]'
+                              : 'max-w-[48px] max-h-[48px] sm:max-w-[56px] sm:max-h-[56px]'
+                          } object-contain transition-all ${isActive ? 'drop-shadow-md scale-105' : 'grayscale-[40%]'}`}
                         />
                       ))
                     ) : (
