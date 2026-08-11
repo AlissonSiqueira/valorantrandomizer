@@ -33,9 +33,7 @@ const loaded = loadStoredState();
 
 // Helper to determine default credit preset based on round number
 export function getDefaultCreditsForRound(roundNum: number): number {
-  if (roundNum === 1) return 800;   // Pistol Round
-  if (roundNum === 2) return 1500;  // Eco Round
-  return 3900;                      // Full Buy (Round 3+)
+  return 9000;
 }
 
 const initialState: AppState = {
@@ -58,7 +56,7 @@ export const useRandomizerStore = create<RandomizerStore>((set, get) => ({
     set({
       selectedAgentId: agentId,
       currentRound: 1,
-      availableCredits: 800, // Round 1 Pistol default
+      availableCredits: 9000,
       currentResult: null,
       previousResult: null,
       spinStage: 'idle',
@@ -170,7 +168,7 @@ export const useRandomizerStore = create<RandomizerStore>((set, get) => ({
     set((state) => {
       const newState = {
         currentRound: 1,
-        availableCredits: 800, // Pistol Round 1 default
+        availableCredits: 9000,
         currentResult: null,
         previousResult: null,
         spinStage: 'idle' as SpinStage,
@@ -195,7 +193,7 @@ export const useRandomizerStore = create<RandomizerStore>((set, get) => ({
     set({
       selectedAgentId: null,
       currentRound: 1,
-      availableCredits: 800,
+      availableCredits: 9000,
       currentResult: null,
       previousResult: null,
       spinStage: 'idle',

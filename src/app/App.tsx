@@ -3,16 +3,16 @@ import { useRandomizerStore } from '../store/useRandomizerStore';
 import { AGENTS } from '../config/agents';
 import { AgentSelect } from '../components/AgentSelect';
 import { RoundControls } from '../components/RoundControls';
-import { VerticalCasinoRoulette } from '../components/VerticalCasinoRoulette';
+import { RadialCasinoRoulette } from '../components/RadialCasinoRoulette';
+import { ResultsDock } from '../components/ResultsDock';
 import { SettingsDrawer } from '../components/SettingsDrawer';
 import { EmptyState } from '../components/EmptyState';
 import { getAvailableWeapons } from '../lib/random';
-import { Dices, UserCheck, Settings, Sparkles, Target, Zap, Shield } from 'lucide-react';
+import { Dices, UserCheck, Settings, Sparkles } from 'lucide-react';
 
 export const App: React.FC = () => {
   const {
     selectedAgentId,
-    currentRound,
     availableCredits,
     currentResult,
     previousResult,
@@ -24,8 +24,6 @@ export const App: React.FC = () => {
     selectAgent,
     setAvailableCredits,
     spinRound,
-    nextRound,
-    reSpinRound,
     resetMatch,
     updateSettings,
     clearAllData,
@@ -59,15 +57,7 @@ export const App: React.FC = () => {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [selectedAgent, isSpinning, isSettingsOpen, spinRound]);
 
-  // Determine exactly when each column has completed its spin (No spoilers!)
-  const weaponHasSpun =
-    spinStage === 'ability' || spinStage === 'armor' || spinStage === 'complete';
 
-  const abilityHasSpun =
-    spinStage === 'armor' || spinStage === 'complete';
-
-  const armorHasSpun =
-    spinStage === 'complete';
 
   return (
     <div className="min-h-screen bg-[#0f1923] text-[#ece8e1] flex flex-col font-sans selection:bg-[#ff4655] selection:text-white">
@@ -157,94 +147,38 @@ export const App: React.FC = () => {
             )}
 
             {/* TOP / HERO STAGE: 3 INDEPENDENT SIDE-BY-SIDE VERTICAL CASINO ROULETTES (33% / 33% / 33%) */}
-            <div className="space-y-3">
-              {/* Stage Progress Bar */}
-              <div className="flex items-center justify-between px-2 text-xs font-mono">
-                <div className="flex items-center gap-3">
-                  <span className="text-[#8b9bb4] uppercase tracking-wider font-bold">SEQUENTIAL SPIN ORDER:</span>
-                  <div className="flex items-center gap-2">
-                    <span
-                      className={`px-3 py-1 font-bold rounded uppercase border flex items-center gap-1.5 transition-all ${
-                        spinStage === 'weapon'
-                          ? 'bg-[#ff4655] text-white border-[#ff4655] shadow-val-glow scale-105'
-                          : 'bg-[#152230] text-[#8b9bb4] border-[#2a3e52]'
-                      }`}
-                    >
-                      <Target className="w-3.5 h-3.5" /> 1. WEAPON
-                    </span>
-                    <span className="text-[#8b9bb4]">→</span>
-                    <span
-                      className={`px-3 py-1 font-bold rounded uppercase border flex items-center gap-1.5 transition-all ${
-                        spinStage === 'ability'
-                          ? 'bg-[#ffb400] text-black border-[#ffb400] shadow-[0_0_15px_#ffb400] scale-105'
-                          : 'bg-[#152230] text-[#8b9bb4] border-[#2a3e52]'
-                      }`}
-                    >
-                      <Zap className="w-3.5 h-3.5" /> 2. ABILITY
-                    </span>
-                    <span className="text-[#8b9bb4]">→</span>
-                    <span
-                      className={`px-3 py-1 font-bold rounded uppercase border flex items-center gap-1.5 transition-all ${
-                        spinStage === 'armor'
-                          ? 'bg-[#00e5ff] text-black border-[#00e5ff] shadow-[0_0_15px_#00e5ff] scale-105'
-                          : 'bg-[#152230] text-[#8b9bb4] border-[#2a3e52]'
-                      }`}
-                    >
-                      <Shield className="w-3.5 h-3.5" /> 3. SHIELD
-                    </span>
-                  </div>
-                </div>
+            {/* TOP / HERO STAGE: RADIAL CASINO ROULETTE & RESULTS */}
+            <div className="space-y-4">
+              <div className="w-full bg-[#0a1017] rounded-2xl border border-[#2a3e52] shadow-2xl relative overflow-hidden flex flex-col items-center pb-6 gap-6">
 
-                <span className="text-[#8b9bb4] hidden sm:block">
-                  Press <kbd className="px-2 py-0.5 bg-[#152230] border border-[#2a3e52] text-white font-bold">Space</kbd> to spin
-                </span>
-              </div>
-
-              {/* 3 SIDE-BY-SIDE VERTICAL CASINO ROULETTES (33% EACH) */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                {/* 33% Column 1: WEAPON VERTICAL ROULETTE */}
-                <VerticalCasinoRoulette
-                  type="weapon"
+                {/* The Radial Roulette Spinner */}
+                <RadialCasinoRoulette
+                  currentStage={spinStage}
                   winningWeapon={currentResult?.weapon || null}
-                  isSpinning={isSpinning && spinStage === 'weapon'}
-                  hasSpun={weaponHasSpun}
+                  winningArmor={currentResult?.armor || null}
+                  winningAbilityPlan={currentResult?.abilityPlan || null}
                   availableWeapons={availableWeaponsPool}
                   intensity={settings.animationIntensity}
                 />
 
-                {/* 33% Column 2: ABILITY STRATEGY VERTICAL ROULETTE */}
-                <VerticalCasinoRoulette
-                  type="ability"
-                  winningAbilityPlan={currentResult?.abilityPlan || null}
-                  isSpinning={isSpinning && spinStage === 'ability'}
-                  hasSpun={abilityHasSpun}
-                  intensity={settings.animationIntensity}
-                />
-
-                {/* 33% Column 3: SHIELD VERTICAL ROULETTE */}
-                <VerticalCasinoRoulette
-                  type="armor"
-                  winningArmor={currentResult?.armor || null}
-                  isSpinning={isSpinning && spinStage === 'armor'}
-                  hasSpun={armorHasSpun}
-                  intensity={settings.animationIntensity}
-                />
+                {/* Results Dock - Nudged up by another 20px */}
+                <div className="w-full max-w-5xl z-30 -mt-24 sm:-mt-32 relative">
+                  <ResultsDock
+                    currentStage={spinStage}
+                    weapon={currentResult?.weapon || null}
+                    abilityPlan={currentResult?.abilityPlan || null}
+                    armor={currentResult?.armor || null}
+                  />
+                </div>
               </div>
             </div>
 
             {/* BOTTOM AREA: ROUND CONTROLS & CREDITS BUDGET (DIRECTLY UNDER ROULETTES) */}
             <div className="pt-2">
               <RoundControls
-                agent={selectedAgent}
-                currentRound={currentRound}
                 availableCredits={availableCredits}
                 isSpinning={isSpinning}
                 onSpin={spinRound}
-                onNextRound={nextRound}
-                onReSpin={reSpinRound}
-                onResetMatch={resetMatch}
-                onChangeAgent={() => selectAgent('')}
-                onOpenSettings={() => setIsSettingsOpen(true)}
                 onCreditsChange={setAvailableCredits}
               />
             </div>
