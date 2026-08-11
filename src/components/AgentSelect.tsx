@@ -77,7 +77,7 @@ export const AgentSelect: React.FC<AgentSelectProps> = ({
     <div className="relative w-full h-full flex-1 overflow-hidden bg-[#0f1923] flex flex-col justify-between">
       
       {/* BACKGROUND LARGE RENDER */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden flex items-center justify-end pr-4 lg:items-end lg:justify-end lg:pr-20 pb-40 lg:pb-0">
+      <div className="hidden sm:flex absolute inset-0 pointer-events-none overflow-hidden items-center justify-end pr-4 lg:items-end lg:justify-end lg:pr-20 pb-40 lg:pb-0">
         <AnimatePresence mode="wait">
           {displayAgent && (
             <motion.div
@@ -102,7 +102,7 @@ export const AgentSelect: React.FC<AgentSelectProps> = ({
       </div>
 
       {/* TOP/LEFT AGENT INFO OVERLAY */}
-      <div className="relative z-10 p-4 lg:p-12 max-w-2xl pointer-events-none lg:mt-4">
+      <div className="hidden sm:block relative z-10 p-4 lg:p-12 max-w-2xl pointer-events-none lg:mt-4">
         <AnimatePresence mode="wait">
           {displayAgent && (
             <motion.div
@@ -175,12 +175,12 @@ export const AgentSelect: React.FC<AgentSelectProps> = ({
       </div>
 
       {/* BOTTOM ROSTER & FILTERS */}
-      <div className="relative z-10 w-full p-2 lg:p-8 bg-gradient-to-t from-[#0f1923] via-[#0f1923]/90 to-transparent pt-8 lg:pt-16 mt-auto">
+      <div className="relative z-10 w-full p-2 sm:p-4 lg:p-8 pt-4 sm:pt-8 lg:pt-16 my-auto">
         <div className="w-full max-w-[1200px] mx-auto flex flex-col gap-4 lg:gap-6 items-center px-4">
           
           {/* Filters */}
           <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4 bg-[#152230]/80 backdrop-blur p-3 border border-[#2a3e52] rounded-xl w-full shadow-xl">
-            <div className="relative w-full md:max-w-xs lg:max-w-sm">
+            <div className="hidden sm:block relative w-full md:max-w-xs lg:max-w-sm">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#8b9bb4]" />
               <input
                 type="text"

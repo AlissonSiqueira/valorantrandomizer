@@ -252,7 +252,7 @@ export const RadialCasinoRoulette: React.FC<RadialCasinoRouletteProps> = ({
   const isSpinning = currentStage === 'weapon' || currentStage === 'ability' || currentStage === 'armor';
 
   return (
-    <div className="relative w-full h-[460px] sm:h-[635px] flex justify-center overflow-hidden bg-transparent perspective-[1000px] select-none">
+    <div className="relative w-full h-[400px] sm:h-[635px] flex justify-center overflow-hidden bg-transparent perspective-[1000px] select-none">
       
       {/* Background soft glow */}
       {isSpinning && (
