@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useRandomizerStore } from '../store/useRandomizerStore';
 import { AGENTS } from '../config/agents';
 import { AgentSelect } from '../components/AgentSelect';
@@ -36,8 +36,18 @@ export const App: React.FC = () => {
     previousResult,
     availableCredits
   );
+  const rouletteRef = useRef<HTMLDivElement>(null);
 
-
+  const handleSpin = () => {
+    spinRound();
+    // Scroll the roulette spinner into view with smooth animation
+    setTimeout(() => {
+      rouletteRef.current?.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start',
+      });
+    }, 100);
+  };
 
   // Keyboard shortcut listener: Spacebar to spin
   useEffect(() => {
@@ -48,7 +58,7 @@ export const App: React.FC = () => {
 
       if (e.code === 'Space' && selectedAgent && !isSpinning && !isSettingsOpen) {
         e.preventDefault();
-        spinRound();
+        handleSpin();
       }
     };
 
@@ -141,7 +151,7 @@ export const App: React.FC = () => {
 
             {/* TOP / HERO STAGE: 3 INDEPENDENT SIDE-BY-SIDE VERTICAL CASINO ROULETTES (33% / 33% / 33%) */}
             {/* TOP / HERO STAGE: RADIAL CASINO ROULETTE & RESULTS */}
-            <div className="space-y-4">
+            <div ref={rouletteRef} className="space-y-4">
               <div className="w-full bg-[#0a1017] rounded-2xl border border-[#2a3e52] shadow-2xl relative overflow-hidden flex flex-col items-center pb-6 gap-6">
 
                 {/* The Radial Roulette Spinner */}
@@ -172,7 +182,7 @@ export const App: React.FC = () => {
               <RoundControls
                 availableCredits={availableCredits}
                 isSpinning={isSpinning}
-                onSpin={spinRound}
+                onSpin={handleSpin}
                 onCreditsChange={setAvailableCredits}
               />
             </div>
