@@ -81,7 +81,7 @@ export const AgentSelect: React.FC<AgentSelectProps> = ({
         <AnimatePresence mode="wait">
           {displayAgent && (
             <motion.div
-              key={displayAgent.id}
+              key={isRandomizing ? 'randomizing' : displayAgent.id}
               initial={{ opacity: 0, y: 50, scale: 0.95 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 50, scale: 0.95 }}
@@ -106,7 +106,7 @@ export const AgentSelect: React.FC<AgentSelectProps> = ({
         <AnimatePresence mode="wait">
           {displayAgent && (
             <motion.div
-              key={`info-${displayAgent.id}`}
+              key={isRandomizing ? 'info-randomizing' : `info-${displayAgent.id}`}
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 20 }}
