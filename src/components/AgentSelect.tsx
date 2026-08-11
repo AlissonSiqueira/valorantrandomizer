@@ -73,6 +73,39 @@ export const AgentSelect: React.FC<AgentSelectProps> = ({
     sentinel: 'text-[#00ff88]',
   };
 
+  const roleTabStyles: Record<AgentRole | 'all', { bg: string; border: string; text: string; shadow: string }> = {
+    all: {
+      bg: 'bg-[#ff4655]',
+      border: 'border-[#ff4655]',
+      text: 'text-white',
+      shadow: 'shadow-[0_0_12px_rgba(255,70,85,0.5)]',
+    },
+    duelist: {
+      bg: 'bg-[#ff4655]',
+      border: 'border-[#ff4655]',
+      text: 'text-white',
+      shadow: 'shadow-[0_0_12px_rgba(255,70,85,0.5)]',
+    },
+    initiator: {
+      bg: 'bg-[#ffb400]',
+      border: 'border-[#ffb400]',
+      text: 'text-slate-950 font-black',
+      shadow: 'shadow-[0_0_12px_rgba(255,180,0,0.5)]',
+    },
+    controller: {
+      bg: 'bg-[#00e5ff]',
+      border: 'border-[#00e5ff]',
+      text: 'text-slate-950 font-black',
+      shadow: 'shadow-[0_0_12px_rgba(0,229,255,0.5)]',
+    },
+    sentinel: {
+      bg: 'bg-[#00ff88]',
+      border: 'border-[#00ff88]',
+      text: 'text-slate-950 font-black',
+      shadow: 'shadow-[0_0_12px_rgba(0,255,136,0.5)]',
+    },
+  };
+
   return (
     <div className="relative w-full h-full flex-1 overflow-hidden bg-[#0f1923] flex flex-col justify-between">
       
@@ -175,7 +208,7 @@ export const AgentSelect: React.FC<AgentSelectProps> = ({
       </div>
 
       {/* BOTTOM ROSTER & FILTERS */}
-      <div className="relative z-10 w-full p-2 sm:p-4 lg:p-8 pt-4 sm:pt-8 lg:pt-16 my-auto">
+      <div className="relative z-10 w-full p-2 sm:p-4 lg:p-8 pt-1 sm:pt-8 lg:pt-16 sm:my-auto">
         <div className="w-full max-w-[1200px] mx-auto flex flex-col gap-4 lg:gap-6 items-center px-4">
           
           {/* Filters */}
@@ -202,15 +235,20 @@ export const AgentSelect: React.FC<AgentSelectProps> = ({
                 ] as const
               ).map((tab) => {
                 const isActive = roleFilter === tab.id;
+                const style = roleTabStyles[tab.id];
+
                 return (
                   <button
                     key={tab.id}
                     type="button"
-                    onClick={() => setRoleFilter(tab.id)}
-                    className={`flex items-center gap-2 px-4 py-2 text-xs font-semibold uppercase tracking-wider transition-all whitespace-nowrap rounded-md ${
+                    onClick={() => {
+                      setRoleFilter(tab.id);
+                      setHoveredAgentId(null);
+                    }}
+                    className={`flex items-center gap-2 px-4 py-2 text-xs font-bold uppercase tracking-wider transition-all whitespace-nowrap rounded-md border ${
                       isActive
-                        ? 'bg-[#ff4655] text-white shadow-[0_0_10px_rgba(255,70,85,0.4)]'
-                        : 'bg-[#0f1923] text-[#8b9bb4] hover:text-white'
+                        ? `${style.bg} ${style.border} ${style.text} ${style.shadow}`
+                        : 'bg-[#0f1923] text-[#8b9bb4] hover:text-white border-[#2a3e52]'
                     }`}
                   >
                     {tab.roleIcon ? (
@@ -218,10 +256,10 @@ export const AgentSelect: React.FC<AgentSelectProps> = ({
                         src={assetPath(tab.roleIcon)}
                         alt={tab.label}
                         type="ability"
-                        className="w-4 h-4 object-contain opacity-70"
+                        className={`w-4 h-4 object-contain ${isActive && (tab.id === 'initiator' || tab.id === 'controller' || tab.id === 'sentinel') ? 'opacity-100 invert' : 'opacity-80'}`}
                       />
                     ) : (
-                      <Users className="w-4 h-4 opacity-70" />
+                      <Users className={`w-4 h-4 ${isActive ? 'opacity-100' : 'opacity-80'}`} />
                     )}
                     {tab.label}
                   </button>
