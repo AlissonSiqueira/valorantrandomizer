@@ -26,7 +26,7 @@ export const ARMOR_OPTIONS: ArmorOption[] = [
     id: 'regenerative',
     name: 'Regen Shield',
     description: 'Adds 50 HP shield that recharges out of combat.',
-    cost: 500,
+    cost: 650,
     iconPath: assetPath('/assets/images/regen-shield.png'),
     selectedIconPath: assetPath('/assets/images/regen-shield.png'),
     enabled: true,
