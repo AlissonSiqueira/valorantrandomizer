@@ -125,9 +125,6 @@ export const AgentSelect: React.FC<AgentSelectProps> = ({
                 src={displayAgent.fullPortraitPath} 
                 alt={displayAgent.name}
                 className="h-full w-auto object-contain object-right lg:object-bottom"
-                onError={(e) => {
-                  (e.target as HTMLImageElement).src = displayAgent.portraitPath; // fallback
-                }}
               />
             </motion.div>
           )}
