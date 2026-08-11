@@ -1,6 +1,7 @@
 import React from 'react';
 import { AbilityPlan } from '../types/domain';
 import { AssetImage } from './AssetImage';
+import { assetPath } from '@/utils/assetPath';
 import { motion } from 'framer-motion';
 import { Zap, Flame, Sparkles, Award } from 'lucide-react';
 
@@ -116,7 +117,7 @@ export const AbilityResultCard: React.FC<AbilityResultCardProps> = ({
       <div className="flex items-center justify-between pt-2 border-t border-[#2a3e52]/60 text-[11px] font-mono text-[#8b9bb4]">
         <span className="flex items-center gap-1">
           <AssetImage
-            src={abilityPlan.abilities.length === 2 ? '/assets/images/uses-2.webp' : '/assets/images/uses-1.webp'}
+            src={abilityPlan.abilities.length === 2 ? assetPath('/assets/images/uses-2.webp') : assetPath('/assets/images/uses-1.webp')}
             alt="Charges"
             type="ability"
             fallbackName="USE"

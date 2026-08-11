@@ -1,5 +1,6 @@
 import React from 'react';
 import { AssetImage } from './AssetImage';
+import { assetPath } from '@/utils/assetPath';
 import { Dices } from 'lucide-react';
 import { motion } from 'framer-motion';
 
@@ -58,7 +59,7 @@ export const RoundControls: React.FC<RoundControlsProps> = ({
             className="w-24 bg-transparent text-center font-mono font-bold text-2xl text-[#ffb400] outline-none"
           />
           <AssetImage
-            src="/assets/images/credits.webp"
+            src={assetPath('/assets/images/credits.webp')}
             alt="¤"
             type="armor"
             fallbackName="¤"

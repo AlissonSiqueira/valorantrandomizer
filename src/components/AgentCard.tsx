@@ -1,6 +1,7 @@
 import React from 'react';
 import { Agent } from '../types/domain';
 import { AssetImage } from './AssetImage';
+import { assetPath } from '@/utils/assetPath';
 
 type AgentCardProps = {
   agent: Agent;
@@ -12,7 +13,7 @@ export const AgentCard: React.FC<AgentCardProps> = ({ agent, isSelected, onSelec
   const getRoleIcon = (role: Agent['role']) => {
     return (
       <AssetImage
-        src={`/assets/images/role-${role}.webp`}
+        src={assetPath(`/assets/images/role-${role}.webp`)}
         alt={role}
         type="ability"
         fallbackName={role}

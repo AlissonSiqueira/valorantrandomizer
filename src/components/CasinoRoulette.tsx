@@ -3,6 +3,7 @@ import { Weapon, ArmorOption, AbilityPlan } from '../types/domain';
 import { WEAPONS } from '../config/weapons';
 import { ARMOR_OPTIONS } from '../config/armor';
 import { AssetImage } from './AssetImage';
+import { assetPath } from '@/utils/assetPath';
 import { motion, useAnimation } from 'framer-motion';
 import { Trophy, Sparkles, Target, Shield, Zap } from 'lucide-react';
 
@@ -82,7 +83,7 @@ export const CasinoRoulette: React.FC<CasinoRouletteProps> = ({
         id: winningAbilityPlan.mode,
         name: winningAbilityPlan.title,
         categoryOrMode: winningAbilityPlan.mode.toUpperCase(),
-        iconPath: winningAbilityPlan.abilities[0]?.iconPath || '/assets/images/uses-1.webp',
+        iconPath: winningAbilityPlan.abilities[0]?.iconPath || assetPath('/assets/images/uses-1.webp'),
         description: winningAbilityPlan.description,
         abilities: winningAbilityPlan.abilities,
       };
@@ -116,10 +117,10 @@ export const CasinoRoulette: React.FC<CasinoRouletteProps> = ({
     }
     // Ability Strategy Pool
     return [
-      { id: 'single', name: 'Single Ability Focus', categoryOrMode: 'SINGLE', iconPath: '/assets/images/uses-1.webp', description: 'Maximize single ability value' },
-      { id: 'combo', name: 'Ability Combo Synergy', categoryOrMode: 'COMBO', iconPath: '/assets/images/uses-2.webp', description: 'Combine 2 abilities in sequence' },
-      { id: 'restriction', name: 'Challenge Restriction', categoryOrMode: 'RESTRICTION', iconPath: '/assets/images/warning.webp', description: 'Do NOT cast a specific ability' },
-      { id: 'ultimate', name: 'Ultimate Focus Surge', categoryOrMode: 'ULTIMATE', iconPath: '/assets/images/uses-1.webp', description: 'Play around Ultimate ability' },
+      { id: 'single', name: 'Single Ability Focus', categoryOrMode: 'SINGLE', iconPath: assetPath('/assets/images/uses-1.webp'), description: 'Maximize single ability value' },
+      { id: 'combo', name: 'Ability Combo Synergy', categoryOrMode: 'COMBO', iconPath: assetPath('/assets/images/uses-2.webp'), description: 'Combine 2 abilities in sequence' },
+      { id: 'restriction', name: 'Challenge Restriction', categoryOrMode: 'RESTRICTION', iconPath: assetPath('/assets/images/warning.webp'), description: 'Do NOT cast a specific ability' },
+      { id: 'ultimate', name: 'Ultimate Focus Surge', categoryOrMode: 'ULTIMATE', iconPath: assetPath('/assets/images/uses-1.webp'), description: 'Play around Ultimate ability' },
     ];
   };
 
@@ -309,7 +310,7 @@ export const CasinoRoulette: React.FC<CasinoRouletteProps> = ({
                   {item.cost !== undefined ? (
                     <>
                       <AssetImage
-                        src="/assets/images/credits.webp"
+                        src={assetPath('/assets/images/credits.webp')}
                         alt="¤"
                         type="armor"
                         fallbackName="¤"
@@ -348,7 +349,7 @@ export const CasinoRoulette: React.FC<CasinoRouletteProps> = ({
           {winningItem.cost !== undefined && (
             <div className="flex items-center gap-1.5 font-bold text-sm" style={{ color: theme.accent }}>
               <AssetImage
-                src="/assets/images/credits.webp"
+                src={assetPath('/assets/images/credits.webp')}
                 alt="¤"
                 type="armor"
                 fallbackName="¤"
