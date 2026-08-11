@@ -119,7 +119,7 @@ export const AgentSelect: React.FC<AgentSelectProps> = ({
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 30, scale: 0.95 }}
               transition={{ duration: 0.4, ease: "easeOut" }}
-              className="h-[55%] sm:h-[70%] lg:h-[95%] opacity-40 sm:opacity-75 lg:opacity-90 drop-shadow-[0_0_30px_rgba(255,255,255,0.15)] flex items-center justify-end"
+              className="h-[55%] sm:h-[70%] lg:h-[115%] opacity-40 sm:opacity-75 lg:opacity-90 drop-shadow-[0_0_30px_rgba(255,255,255,0.15)] flex items-center justify-end"
             >
               <img 
                 src={displayAgent.fullPortraitPath} 
@@ -208,8 +208,8 @@ export const AgentSelect: React.FC<AgentSelectProps> = ({
       </div>
 
       {/* BOTTOM ROSTER & FILTERS */}
-      <div className="relative z-10 w-full p-2 sm:p-4 lg:p-8 pt-1 sm:pt-8 lg:pt-16 sm:my-auto">
-        <div className="w-full max-w-[1084px] mx-auto flex flex-col gap-4 lg:gap-6 items-center px-4">
+      <div className="relative z-10 w-full p-2 sm:p-4 lg:p-8 pt-1 sm:pt-8 lg:pt-16 mt-auto mb-2 lg:mb-4">
+        <div className="w-full max-w-[1216px] mx-auto flex flex-col gap-4 lg:gap-6 items-center px-4">
           
           {/* Filters */}
           <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4 bg-[#152230]/80 backdrop-blur p-3 border border-[#2a3e52] rounded-xl w-full shadow-xl">
@@ -305,7 +305,7 @@ export const AgentSelect: React.FC<AgentSelectProps> = ({
               No agents found matching "{search}".
             </div>
           ) : (
-            <div className="flex flex-wrap justify-center gap-3 lg:gap-4 max-w-[1084px]">
+            <div className="flex flex-wrap justify-center gap-3 lg:gap-4 max-w-[1216px]">
               {filteredAgents.map((agent) => (
                 <AgentCard
                   key={agent.id}
