@@ -3,7 +3,12 @@ import { AppState, RandomizerSettings } from '../types/domain';
 import { AGENTS } from '../config/agents';
 import { DEFAULT_SETTINGS } from '../config/randomizer';
 import { generateRoundResult } from '../lib/random';
-import { loadStoredState, saveStateToStorage, clearStoredState } from '../lib/storage';
+import {
+  loadStoredState,
+  saveStateToStorage,
+  scheduleSaveStateToStorage,
+  clearStoredState,
+} from '../lib/storage';
 
 type StoreActions = {
   selectAgent: (agentId: string) => void;
@@ -27,6 +32,17 @@ type RandomizerStore = AppState &
   };
 
 const loaded = loadStoredState();
+let spinTimers: ReturnType<typeof setTimeout>[] = [];
+
+function clearSpinTimers() {
+  spinTimers.forEach(clearTimeout);
+  spinTimers = [];
+}
+
+function scheduleSpinStage(fn: () => void, ms: number) {
+  const id = setTimeout(fn, ms);
+  spinTimers.push(id);
+}
 
 const initialState: AppState = {
   selectedAgentId: loaded?.selectedAgentId ?? null,
@@ -58,7 +74,7 @@ export const useRandomizerStore = create<RandomizerStore>((set, get) => ({
   setAvailableCredits: (credits: number) => {
     const validCredits = Math.max(0, Math.min(16000, Number.isNaN(credits) ? 0 : credits));
     set({ availableCredits: validCredits });
-    saveStateToStorage(get());
+    scheduleSaveStateToStorage(get());
   },
 
   setSpinStage: (stage: SpinStage) => {
@@ -84,6 +100,8 @@ export const useRandomizerStore = create<RandomizerStore>((set, get) => ({
         availableCredits,
       });
 
+      clearSpinTimers();
+
       set({
         isSpinning: true,
         spinStage: 'weapon',
@@ -99,28 +117,25 @@ export const useRandomizerStore = create<RandomizerStore>((set, get) => ({
           ? 6500
           : 4500;
 
-      // Stage 1: Weapon (4.5s) -> Stage 2: Ability
-      setTimeout(() => {
+      scheduleSpinStage(() => {
         set({ spinStage: 'ability' });
-
-        // Stage 2: Ability (4.5s) -> Stage 3: Armor
-        setTimeout(() => {
-          set({ spinStage: 'armor' });
-
-          // Stage 3: Armor (4.5s) -> Complete
-          setTimeout(() => {
-            set((state) => {
-              const newState = {
-                isSpinning: false,
-                spinStage: 'complete' as SpinStage,
-                error: null,
-              };
-              saveStateToStorage({ ...state, ...newState });
-              return newState;
-            });
-          }, stageDuration);
-        }, stageDuration);
       }, stageDuration);
+
+      scheduleSpinStage(() => {
+        set({ spinStage: 'armor' });
+      }, stageDuration * 2);
+
+      scheduleSpinStage(() => {
+        set((state) => {
+          const newState = {
+            isSpinning: false,
+            spinStage: 'complete' as SpinStage,
+            error: null,
+          };
+          saveStateToStorage({ ...state, ...newState });
+          return newState;
+        });
+      }, stageDuration * 3);
     } catch (err: any) {
       set({
         isSpinning: false,

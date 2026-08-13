@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useCallback, useEffect, useMemo, useRef } from 'react';
 import { useRandomizerStore } from '../store/useRandomizerStore';
 import { AGENTS } from '../config/agents';
 import { AgentSelect } from '../components/AgentSelect';
@@ -10,52 +10,49 @@ import { EmptyState } from '../components/EmptyState';
 import { getAvailableWeapons } from '../lib/random';
 import { Dices, UserCheck, Settings } from 'lucide-react';
 
+const AGENTS_BY_ID = new Map(AGENTS.map((agent) => [agent.id, agent]));
+
 export const App: React.FC = () => {
-  const {
-    selectedAgentId,
-    availableCredits,
-    currentResult,
-    previousResult,
-    settings,
-    isSpinning,
-    spinStage,
-    isSettingsOpen,
-    error,
-    selectAgent,
-    setAvailableCredits,
-    spinRound,
-    updateSettings,
-    clearAllData,
-    setIsSettingsOpen,
-  } = useRandomizerStore();
+  const selectedAgentId = useRandomizerStore((s) => s.selectedAgentId);
+  const availableCredits = useRandomizerStore((s) => s.availableCredits);
+  const currentResult = useRandomizerStore((s) => s.currentResult);
+  const previousResult = useRandomizerStore((s) => s.previousResult);
+  const settings = useRandomizerStore((s) => s.settings);
+  const isSpinning = useRandomizerStore((s) => s.isSpinning);
+  const spinStage = useRandomizerStore((s) => s.spinStage);
+  const isSettingsOpen = useRandomizerStore((s) => s.isSettingsOpen);
+  const error = useRandomizerStore((s) => s.error);
+  const selectAgent = useRandomizerStore((s) => s.selectAgent);
+  const setAvailableCredits = useRandomizerStore((s) => s.setAvailableCredits);
+  const spinRound = useRandomizerStore((s) => s.spinRound);
+  const updateSettings = useRandomizerStore((s) => s.updateSettings);
+  const clearAllData = useRandomizerStore((s) => s.clearAllData);
+  const setIsSettingsOpen = useRandomizerStore((s) => s.setIsSettingsOpen);
 
-  const selectedAgent = AGENTS.find((a) => a.id === selectedAgentId) || null;
+  const selectedAgent = selectedAgentId ? AGENTS_BY_ID.get(selectedAgentId) ?? null : null;
 
-  const availableWeaponsPool = getAvailableWeapons(
-    settings,
-    previousResult,
-    availableCredits
+  const availableWeaponsPool = useMemo(
+    () => getAvailableWeapons(settings, previousResult, availableCredits),
+    [settings, previousResult, availableCredits]
   );
   const rouletteRef = useRef<HTMLDivElement>(null);
 
-  const handleSpin = () => {
+  const handleSpin = useCallback(() => {
     spinRound();
-    // Scroll the roulette spinner into view taking sticky header into account
-    setTimeout(() => {
+    window.setTimeout(() => {
       if (rouletteRef.current) {
-        const headerOffset = 90; // height of header (70px) + extra margin (20px)
+        const headerOffset = 90;
         const elementPosition = rouletteRef.current.getBoundingClientRect().top;
         const offsetPosition = elementPosition + window.scrollY - headerOffset;
-        
+
         window.scrollTo({
           top: offsetPosition,
           behavior: 'smooth',
         });
       }
     }, 100);
-  };
+  }, [spinRound]);
 
-  // Keyboard shortcut listener: Spacebar to spin
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (['INPUT', 'TEXTAREA', 'SELECT'].includes((e.target as HTMLElement)?.tagName)) {
@@ -70,7 +67,7 @@ export const App: React.FC = () => {
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [selectedAgent, isSpinning, isSettingsOpen, spinRound]);
+  }, [selectedAgent, isSpinning, isSettingsOpen, handleSpin]);
 
 
 

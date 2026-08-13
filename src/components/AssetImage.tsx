@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { memo, useState, useEffect } from 'react';
 import { Shield, Target, Zap, User } from 'lucide-react';
 
 type AssetImageProps = {
@@ -9,7 +9,7 @@ type AssetImageProps = {
   fallbackName?: string;
 };
 
-export const AssetImage: React.FC<AssetImageProps> = ({
+const AssetImageInner: React.FC<AssetImageProps> = ({
   src,
   alt,
   className = '',
@@ -52,7 +52,12 @@ export const AssetImage: React.FC<AssetImageProps> = ({
       src={src}
       alt={alt}
       className={className}
+      loading="lazy"
+      decoding="async"
+      draggable={false}
       onError={() => setHasError(true)}
     />
   );
 };
+
+export const AssetImage = memo(AssetImageInner);

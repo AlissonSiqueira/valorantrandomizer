@@ -85,7 +85,7 @@ export function getAvailableWeapons(
     }
   }
 
-  return shuffleArray(pool);
+  return pool;
 }
 
 /**
@@ -118,7 +118,7 @@ export function getAvailableArmorOptions(
     }
   }
 
-  return shuffleArray(pool);
+  return pool;
 }
 
 /**

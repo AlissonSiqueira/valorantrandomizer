@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { Agent } from '../types/domain';
 import { AssetImage } from './AssetImage';
 
@@ -11,7 +11,7 @@ type AgentCardProps = {
   isSimulatedHover?: boolean;
 };
 
-export const AgentCard: React.FC<AgentCardProps> = ({ 
+export const AgentCard: React.FC<AgentCardProps> = memo(({ 
   agent, 
   isSelected, 
   onSelect,
@@ -54,4 +54,4 @@ export const AgentCard: React.FC<AgentCardProps> = ({
       </div>
     </button>
   );
-};
+});

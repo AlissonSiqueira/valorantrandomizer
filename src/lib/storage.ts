@@ -43,7 +43,10 @@ export function loadStoredState(): Partial<AppState> | null {
   }
 }
 
-export function saveStateToStorage(state: AppState): void {
+let persistTimer: ReturnType<typeof setTimeout> | null = null;
+let pendingState: AppState | null = null;
+
+function writeState(state: AppState): void {
   try {
     const dataToSave: PersistedState = {
       _version: STORAGE_VERSION,
@@ -58,6 +61,29 @@ export function saveStateToStorage(state: AppState): void {
   } catch (err) {
     console.error(`[ValoRoll] Failed to write to localStorage:`, err);
   }
+}
+
+/** Immediate persist (agent change, spin complete, settings). */
+export function saveStateToStorage(state: AppState): void {
+  if (persistTimer) {
+    clearTimeout(persistTimer);
+    persistTimer = null;
+  }
+  pendingState = null;
+  writeState(state);
+}
+
+/** Coalesce rapid writes (credit slider) into one localStorage hit. */
+export function scheduleSaveStateToStorage(state: AppState, delayMs = 200): void {
+  pendingState = state;
+  if (persistTimer) clearTimeout(persistTimer);
+  persistTimer = setTimeout(() => {
+    persistTimer = null;
+    if (pendingState) {
+      writeState(pendingState);
+      pendingState = null;
+    }
+  }, delayMs);
 }
 
 export function clearStoredState(): void {

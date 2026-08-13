@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { memo, useEffect, useState } from 'react';
 import { Weapon, ArmorOption, AbilityPlan, Agent } from '../types/domain';
 import { WEAPONS } from '../config/weapons';
 import { AssetImage } from './AssetImage';
@@ -29,7 +29,7 @@ type GenericRouletteItem = {
   abilities?: any[];
 };
 
-export const RadialCasinoRoulette: React.FC<RadialCasinoRouletteProps> = ({
+export const RadialCasinoRoulette: React.FC<RadialCasinoRouletteProps> = memo(({
   currentStage,
   winningWeapon,
   winningArmor,
@@ -185,16 +185,23 @@ export const RadialCasinoRoulette: React.FC<RadialCasinoRouletteProps> = ({
     const generated: GenericRouletteItem[] = [];
     let lastId = '';
 
+    const pickRandom = (excludeId: string): GenericRouletteItem => {
+      if (pool.length === 1) return pool[0];
+      let pick = pool[Math.floor(Math.random() * pool.length)];
+      if (pick.id === excludeId) {
+        pick = pool[(pool.indexOf(pick) + 1) % pool.length];
+      }
+      return pick;
+    };
+
     for (let i = 0; i < winnerIndex + 15; i++) {
       if (i === winnerIndex) {
         generated.push(fallbackItem);
         lastId = fallbackItem.id;
       } else {
-        const validPicks = pool.filter((p) => p.id !== lastId);
-        const pickPool = validPicks.length > 0 ? validPicks : pool;
-        const shuffledPickPool = shuffleArray(pickPool);
-        generated.push(shuffledPickPool[0]);
-        lastId = shuffledPickPool[0].id;
+        const pick = pickRandom(lastId);
+        generated.push(pick);
+        lastId = pick.id;
       }
     }
 
@@ -234,7 +241,7 @@ export const RadialCasinoRoulette: React.FC<RadialCasinoRouletteProps> = ({
     const unsubscribe = rotateMotion.on('change', (latestRotate) => {
       const idx = Math.round(-latestRotate / cardAngle);
       if (idx >= 0 && idx < items.length) {
-        setActiveIndex(idx);
+        setActiveIndex((prev) => (prev === idx ? prev : idx));
       }
     });
     return () => unsubscribe();
@@ -460,4 +467,4 @@ export const RadialCasinoRoulette: React.FC<RadialCasinoRouletteProps> = ({
       <div className="absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-[#0a1017] to-transparent pointer-events-none z-20" />
     </div>
   );
-};
+});
