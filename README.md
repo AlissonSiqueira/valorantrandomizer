@@ -1,150 +1,171 @@
-# Valorant Round Randomizer (MVP)
+# ValoRoll — Valorant Loadout Randomizer
 
-A polished, dark-tactical browser companion web application for Valorant players. Designed to run client-side on a secondary monitor during live matches, it randomizes **Weapons**, **Armor**, and **Agent Ability Playstyles** round-by-round within player budget constraints.
+<div align="center">
 
----
+**A dark-tactical browser companion for Valorant players and streamers.**  
+Randomizes **Weapons**, **Shields/Armor**, and **Agent Ability Combinations** round-by-round within economy constraints with casino-style radial roulettes.
 
-## Features
+[![React](https://img.shields.io/badge/React-18.3-61dafb?style=flat-square&logo=react)](https://reactjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.7-3178c6?style=flat-square&logo=typescript)](https://www.typescriptlang.org/)
+[![Vite](https://img.shields.io/badge/Vite-6.1-646cff?style=flat-square&logo=vite)](https://vitejs.dev/)
+[![TailwindCSS](https://img.shields.io/badge/TailwindCSS-3.4-38bdf8?style=flat-square&logo=tailwindcss)](https://tailwindcss.com/)
+[![Framer Motion](https://img.shields.io/badge/Framer_Motion-11.18-ff0055?style=flat-square&logo=framer)](https://www.framer.com/motion/)
 
-- **Agent Selection**: Complete roster of Valorant agents categorized by role (Controller, Duelist, Initiator, Sentinel) with role tabs and instant search.
-- **Round Randomizer**: Spin button with roulette animation revealing weapon, armor tier, and custom ability strategy instructions.
-- **Budget Credit Constraints**: Interactive "Available Credits" input ensuring randomized loadouts fit round eco/buy budgets (e.g. 800¤ Pistol, 2000¤ Eco, 3900¤ Full Buy).
-- **Ability Plan Generator**: Generates 4 strategy playstyle modes:
-  - **Single Focus**: Maximize value from one specific ability.
-  - **Ability Combo**: Synergize two abilities together.
-  - **Restriction**: Challenge mode forbidding casting a specific ability.
-  - **Ultimate Focus**: Build economy or play aggressively to unlock and unleash Ultimate.
-- **Repeat Avoidance Rules**: Toggles to prevent immediate consecutive weapon or armor repeats across rounds.
-- **Match History**: Persistent round history log with detailed view of previous buys & strategy instructions.
-- **Tactical Dark UI**: Built with a Valorant-inspired aesthetic (`#0f1923` dark background, `#ff4655` crimson accents, sharp clipped paneling, glowing states, and full keyboard accessibility).
-- **Self-Contained Persistence**: Uses `localStorage` with version migration key (`STORAGE_VERSION = 1`).
-- **Asset Resiliency**: Automatic styled SVG/CSS fallback placeholders if local image assets are absent or broken.
+</div>
 
 ---
 
-## Quick Start & Development
+## ✨ Features
 
-### 1. Install Dependencies
+### 🎯 Authentic Agent Selection Roster
+- **Full Roster Support**: All 25 Valorant agents (Controllers, Duelists, Initiators, Sentinels) with accurate abilities, charges, and portraits.
+- **Large Splash Art Renders**: Fluid full-body character art that updates dynamically on hover/select.
+- **Role Filtering & Color-Coded Themes**: Instant category filtering with custom role styling (Duelist: Crimson, Initiator: Amber, Controller: Cyan, Sentinel: Emerald).
+- **Instant Search**: Real-time filtering by agent name.
+- **Random Agent Selector**: One-click quick roll with suspenseful shuffling animation to randomize your agent.
 
+### 🎰 Radial Casino Roulette Spinner
+- **3-Stage Synchronized Reveal**: Smooth physics-based multi-slot spinning animation transitioning from **Weapon** ➜ **Ability Plan** ➜ **Armor/Shield** ➜ **Complete Results**.
+- **Results Dock**: High-contrast tactical dock highlighting the winning loadout with direct keybinds, ability icons, and weapon tiers.
+- **Keyboard Shortcut**: Press `[Spacebar]` anywhere on the randomizer screen to trigger an instant spin.
+- **Auto-Scroll Focus**: Smooth automatic viewport centering when spinning on all screen resolutions.
+
+### 💥 Dynamic Ability Combination Engine
+- **Multi-Skill Combinations**: Randomizes between **Single Skill**, **Double Combo** (vertical stack layout), **Triple Combo** (pyramid layout), and **Full Utility (All 4 skills)**.
+- **Randomized Skill Charges**: Assigns randomized charge counts up to the agent's maximum capability (e.g. `2x` flashes, `3x` smokes, `8x` Headhunter shots) with badge overlays.
+- **Keybind & Price Mapping**: Accurate in-game default keybinds (`[C]`, `[Q]`, `[E]`, `[X]`) and ability credit costs.
+
+### 💰 Economy & Budget Control
+- **Available Credits Selector**: Input your available round funds (e.g., 800¤ Pistol, 2000¤ Eco, 3900¤ Full Buy) to ensure generated loadouts never exceed your budget.
+- **Intelligent Fallback**: Guarantees free loadouts (Classic + No Shield) if credits are depleted.
+
+### 🔄 Anti-Repeat Intelligence
+- Prevents immediate consecutive weapon or armor duplicates across rounds, ensuring variety in every roll.
+
+### ⚡ Performance & Polish
+- **Stateless & Frictionless**: Quick rolls without round-tracking friction.
+- **Debounced Local Storage**: Persists state without unnecessary disk/render overhead.
+- **Memoized Components**: Optimized React render cycles for zero lag during high-intensity animations.
+- **Asset Resiliency**: Automatic fallback system supporting subpath deployments (`/val/`).
+
+---
+
+## 🛠️ Tech Stack
+
+- **Framework**: [React 18](https://react.dev/) + [TypeScript](https://www.typescriptlang.org/)
+- **Build Tool**: [Vite 6](https://vitejs.dev/)
+- **Styling**: [Tailwind CSS](https://tailwindcss.com/) with custom Valorant tactical palette
+- **Animations**: [Framer Motion](https://www.framer.com/motion/)
+- **State Management**: [Zustand 5](https://zustand-demo.pmnd.rs/)
+- **Icons**: [Lucide React](https://lucide.dev/)
+- **Testing**: [Vitest](https://vitest.dev/)
+
+---
+
+## 🚀 Quick Start & Development
+
+### 1. Prerequisites
+- **Node.js** (v18.0.0 or higher recommended)
+- **npm** (or `pnpm` / `yarn`)
+
+### 2. Installation
 ```bash
+# Clone the repository
+git clone https://github.com/AlissonSiqueira/valorantrandomizer.git
+
+# Navigate into the directory
+cd valorantrandomizer
+
+# Install dependencies
 npm install
 ```
 
-### 2. Run Development Server
-
+### 3. Run Development Server
 ```bash
 npm run dev
 ```
-
 Open [http://localhost:5173](http://localhost:5173) in your browser.
 
-### 3. Run Unit Tests
-
+### 4. Run Tests & Validation
 ```bash
+# Run unit test suite
 npm run test
-```
 
-### 4. Run Typecheck & Build
-
-```bash
+# Run TypeScript type check
 npm run typecheck
+
+# Build optimized production bundle
 npm run build
 ```
 
 ---
 
-## Project Structure
+## 📁 Project Structure
 
 ```txt
-valorant-round-randomizer/
-  public/
-    assets/
-      agents/        # Agent portraits and role icons
-      weapons/       # Weapon icons
-      abilities/     # Agent ability icons
-      armor/         # Shield option icons
-  src/
-    app/
-      App.tsx        # Main application dashboard layout
-    components/
-      AgentCard.tsx          # Agent selection grid item
-      AgentSelect.tsx        # Agent roster view with filters
-      WeaponResultCard.tsx   # Weapon spin reveal card
-      ArmorResultCard.tsx    # Armor option reveal card
-      AbilityResultCard.tsx   # Ability plan strategy card
-      RoundControls.tsx      # Spin button, Credits input & round controls
-      HistoryPanel.tsx       # Round log sidebar
-      SettingsDrawer.tsx     # Randomizer rule settings drawer
-      EmptyState.tsx         # Edge-case alert card
-      AssetImage.tsx         # Resilient image component with fallback
-    config/
-      agents.ts      # Agent roster dataset & ability configurations
-      weapons.ts     # Weapon catalog & cost structures
-      armor.ts       # Armor options & shield stats
-      randomizer.ts  # Default weights, storage keys & settings
-    lib/
-      random.ts      # Pure randomization engine utilities
-      storage.ts     # Safe localStorage versioning & error recovery
-      validation.ts  # State schema validation guards
-      __tests__/
-        random.test.ts # Vitest unit tests for randomization engine
-    store/
-      useRandomizerStore.ts # Zustand global store
-    styles/
-      globals.css    # Valorant design system & utility classes
-    types/
-      domain.ts      # TypeScript interfaces and domain types
-    main.tsx
-  index.html
-  package.json
-  vite.config.ts
-  tsconfig.json
-  tailwind.config.ts
-  README.md
+valorantrandomizer/
+├── public/
+│   └── assets/
+│       └── images/         # High-resolution agent, weapon, ability, & shield assets
+├── src/
+│   ├── app/
+│   │   └── App.tsx         # Main application layout, routing & header
+│   ├── components/
+│   │   ├── AgentCard.tsx             # Agent card with role badges & animations
+│   │   ├── AgentSelect.tsx           # Full-screen agent selection roster & search
+│   │   ├── RadialCasinoRoulette.tsx  # Radial spinning wheel animation engine
+│   │   ├── ResultsDock.tsx           # Multi-slot result display dock
+│   │   ├── RoundControls.tsx         # Spin trigger, economy & credit controls
+│   │   ├── SettingsDrawer.tsx        # Preference drawer (weapons, intensity, etc.)
+│   │   ├── AssetImage.tsx            # Resilient asset loader with SVG fallback
+│   │   └── EmptyState.tsx            # Budget & error warning fallback cards
+│   ├── config/
+│   │   ├── agents.ts       # 25 agents dataset, roles, abilities & max charges
+│   │   ├── weapons.ts      # Weapons catalog, categories, costs & icon paths
+│   │   ├── armor.ts        # Shield tiers (Light, Heavy, Regen, None)
+│   │   └── randomizer.ts   # Default settings, weights & configuration
+│   ├── lib/
+│   │   ├── random.ts       # Pure randomization engine & Fisher-Yates shuffle
+│   │   ├── storage.ts      # Safe localStorage persistence with debouncing
+│   │   └── __tests__/
+│   │       └── random.test.ts # Vitest unit test suite
+│   ├── store/
+│   │   └── useRandomizerStore.ts # Global Zustand state store
+│   ├── styles/
+│   │   └── globals.css     # Valorant dark tactical styling & animations
+│   ├── types/
+│   │   └── domain.ts       # TypeScript domain models & schemas
+│   ├── utils/
+│   │   └── assetPath.ts    # Base path resolution utility
+│   └── main.tsx            # Application entry point
+├── package.json
+├── tailwind.config.js
+├── tsconfig.json
+├── vite.config.ts
+└── README.md
 ```
 
 ---
 
-## How Content & Assets Work
+## ⚙️ Configuration & Customization
 
-All game content is defined in pure TypeScript configuration files in `src/config/`:
+Game data is structured in modular TypeScript configuration files under `src/config/`:
 
-- **Agents**: Edit `src/config/agents.ts` to adjust agent roster, roles, or abilities.
-- **Weapons**: Edit `src/config/weapons.ts` to adjust weapon names, categories, costs, or weights.
-- **Armor**: Edit `src/config/armor.ts` to configure shield tiers and descriptions.
-
-### Adding Real Valorant Visual Assets
-
-Place images in `public/assets/` following these paths:
-
-- Agent Portrait: `/assets/agents/jett.png`
-- Weapon Icon: `/assets/weapons/vandal.png`
-- Armor Icon: `/assets/armor/heavy.png`
-- Ability Icon: `/assets/abilities/jett-dash.png`
-
-If an asset file does not exist, `AssetImage` automatically displays a styled tactical placeholder badge with category icon and item initials.
+- **Agents & Abilities**: [`src/config/agents.ts`](src/config/agents.ts) — Edit agent attributes, role classifications, ability descriptions, icons, and `maxCharges`.
+- **Weapons**: [`src/config/weapons.ts`](src/config/weapons.ts) — Update weapon costs, categories, and icon mappings.
+- **Shields & Armor**: [`src/config/armor.ts`](src/config/armor.ts) — Configure shield options, HP absorption, and costs.
+- **Randomizer Weights**: [`src/config/randomizer.ts`](src/config/randomizer.ts) — Adjust combination probability distribution.
 
 ---
 
-## Randomization Algorithm
+## 👤 Author & Credits
 
-1. **Weapon Selection**: Filters enabled weapons in configured categories where `weapon.cost <= availableCredits`. Filters out previous round weapon if repeat avoidance is active (unless no alternative exists). Picks weighted item from pool.
-2. **Armor Selection**: Calculates remaining credit budget (`availableCredits - weapon.cost`). Filters armor options fitting budget and repeat avoidance rules.
-3. **Ability Plan**: Filters enabled abilities for selected agent. Selects strategy mode (`single`, `combo`, `restriction`, `ultimate_focus`) based on configurable weights in `src/config/randomizer.ts`.
-
----
-
-## MVP Limitations & Non-Goals
-
-- No real-time game hook / Valorant API connection (manual input for match flow).
-- No backend database or user accounts required.
-- Fully local client-side state.
+- Created by **[@SlicerzzTV](https://www.tiktok.com/@SlicerzzTV)** on TikTok.
+- Maintained by [Alisson Siqueira](https://github.com/AlissonSiqueira).
 
 ---
 
-## Future Enhancements
+## 📄 License & Disclaimer
 
-- Hotkey / Stream Deck overlay triggers.
-- Custom challenge modifier presets (e.g. Pistol Only, Shotgun Rush).
-- sound effects on spin.
-- Export / Import match history stats.
+This project is a fan-made creation and is not endorsed by, directly affiliated with, maintained, authorized, or sponsored by **Riot Games, Inc.**  
+VALORANT and all related assets, characters, and trademarks are property of **Riot Games, Inc.**
