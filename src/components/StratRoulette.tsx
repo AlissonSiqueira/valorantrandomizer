@@ -1,6 +1,6 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion, useAnimation, useMotionValue } from 'framer-motion';
-import { Trophy, Sparkles, Swords } from 'lucide-react';
+import { Swords } from 'lucide-react';
 import { STRATS, Strat } from '../config/strats';
 
 type StratRouletteProps = {
@@ -12,7 +12,6 @@ type StratRouletteProps = {
 };
 
 const ACCENT = '#39ff14';
-const GLOW = 'rgba(57, 255, 20, 0.6)';
 
 export const StratRoulette: React.FC<StratRouletteProps> = ({
   isSpinning,
@@ -22,46 +21,38 @@ export const StratRoulette: React.FC<StratRouletteProps> = ({
   intensity = 'normal',
 }) => {
   const [items, setItems] = useState<Strat[]>([]);
-  const [isLanded, setIsLanded] = useState(false);
   const [activeIndex, setActiveIndex] = useState<number>(-1);
+  const [hasLanded, setHasLanded] = useState<boolean>(false);
   const controls = useAnimation();
-  const containerRef = useRef<HTMLDivElement>(null);
-  const yMotion = useMotionValue(0);
+  const rotateMotion = useMotionValue(0);
 
-  const cardHeight = 96;
-  const cardGap = 10;
-  const itemTotalHeight = cardHeight + cardGap;
-  const winnerIndex = 42;
+  // Geometry configurations for the radial wheel (Matches RadialCasinoRoulette)
+  const radius = 1200; // pixels
+  const cardAngle = 13; // degrees per card
+  const winnerIndex = 48;
+  const targetRotation = -(winnerIndex * cardAngle);
 
-  const targetY = -(winnerIndex * itemTotalHeight + cardHeight / 2);
-
-  // Highlight the active card as it scrolls by
+  // Update items array
   useEffect(() => {
-    const unsubscribe = yMotion.on('change', (latestY) => {
-      const idx = Math.round((-latestY - cardHeight / 2) / itemTotalHeight);
-      if (idx >= 0 && idx < items.length) {
-        setActiveIndex(idx);
-      }
-    });
-    return () => unsubscribe();
-  }, [items, itemTotalHeight, yMotion]);
-
-  // Build strip and trigger animation
-  useEffect(() => {
-    if (!winningStrat && !isSpinning) return;
-
     const pool = [...STRATS];
+    const fallbackItem = winningStrat || pool[0];
     const generated: Strat[] = [];
-    const fallback = winningStrat || pool[0];
     let lastId = '';
 
-    for (let i = 0; i < winnerIndex + 12; i++) {
+    const pickRandom = (excludeId: string): Strat => {
+      let pick = pool[Math.floor(Math.random() * pool.length)];
+      if (pick.id === excludeId && pool.length > 1) {
+        pick = pool[(pool.indexOf(pick) + 1) % pool.length];
+      }
+      return pick;
+    };
+
+    for (let i = 0; i < winnerIndex + 15; i++) {
       if (i === winnerIndex) {
-        generated.push(fallback);
-        lastId = fallback.id;
+        generated.push(fallbackItem);
+        lastId = fallbackItem.id;
       } else {
-        const valid = pool.filter((s) => s.id !== lastId);
-        const pick = valid[Math.floor(Math.random() * valid.length)];
+        const pick = pickRandom(lastId);
         generated.push(pick);
         lastId = pick.id;
       }
@@ -69,187 +60,168 @@ export const StratRoulette: React.FC<StratRouletteProps> = ({
 
     setItems(generated);
 
-    if (isSpinning) {
-      setIsLanded(false);
-      const duration = intensity === 'reduced' ? 1.0 : intensity === 'high' ? 6.0 : 4.5;
-
-      controls.set({ y: 0 });
-      yMotion.set(0);
+    // Trigger spin
+    const duration = intensity === 'reduced' ? 1.0 : intensity === 'high' ? 6.0 : 4.5;
+    
+    if (!isSpinning && !hasSpun) {
+      controls.set({ rotate: 0 });
+      rotateMotion.set(0);
+      setHasLanded(false);
+    } else if (isSpinning) {
+      controls.set({ rotate: 0 });
+      rotateMotion.set(0);
+      setHasLanded(false);
 
       controls
         .start({
-          y: targetY,
+          rotate: targetRotation,
           transition: {
-            duration,
-            ease: [0.08, 0.92, 0.15, 1],
+            duration: duration,
+            ease: [0.08, 0.92, 0.15, 1], // Custom deep friction decelerator
           },
-        })
-        .then(() => {
-          setIsLanded(true);
-          setActiveIndex(winnerIndex);
+        }).then(() => {
+          setHasLanded(true);
           if (onSpinComplete) onSpinComplete();
         });
-    } else if (hasSpun && winningStrat) {
-      controls.set({ y: targetY });
-      yMotion.set(targetY);
-      setIsLanded(true);
-      setActiveIndex(winnerIndex);
-    } else {
-      controls.set({ y: 0 });
-      yMotion.set(0);
-      setIsLanded(false);
-      setActiveIndex(-1);
+    } else if (hasSpun) {
+      controls.set({ rotate: targetRotation });
+      rotateMotion.set(targetRotation);
+      setHasLanded(true);
     }
-  }, [winningStrat, isSpinning, hasSpun]);
 
-  const showWinnerFooter = isLanded && hasSpun && winningStrat;
+  }, [isSpinning, hasSpun, winningStrat]);
 
-  if (!winningStrat && !isSpinning) {
-    return (
-      <div
-        className="w-full bg-[#0a1017] border-2 val-clip-corner p-6 flex flex-col items-center justify-center min-h-[320px] text-center"
-        style={{ borderColor: ACCENT }}
-      >
-        <Swords className="w-12 h-12 mb-3 animate-pulse" style={{ color: ACCENT }} />
-        <h3 className="text-xl font-black font-tactical uppercase tracking-wider text-white">
-          STRAT ROULETTE READY
-        </h3>
-        <p className="text-xs text-[#8b9bb4] mt-2 max-w-sm">
-          Click <span className="font-bold" style={{ color: ACCENT }}>SPIN STRAT</span> to roll a random round strategy!
-        </p>
-      </div>
-    );
-  }
+  // Track active index for visual popping during spin
+  useEffect(() => {
+    const unsubscribe = rotateMotion.on('change', (latestRotate) => {
+      const idx = Math.round(-latestRotate / cardAngle);
+      if (idx >= 0 && idx < items.length) {
+        setActiveIndex((prev) => (prev === idx ? prev : idx));
+      }
+    });
+    return () => unsubscribe();
+  }, [items, cardAngle, rotateMotion]);
 
   return (
-    <div
-      className="w-full bg-[#0a1017] border-2 val-clip-corner p-4 relative overflow-hidden shadow-2xl space-y-3 flex flex-col"
-      style={{
-        borderColor: ACCENT,
-        boxShadow: isSpinning ? `0 0 30px ${GLOW}` : undefined,
-      }}
-    >
-      {/* Header */}
-      <div className="flex items-center justify-between px-1 text-xs font-mono pb-2 border-b border-[#1e2d3d]">
-        <span className="flex items-center gap-2 font-bold uppercase tracking-wider text-sm text-white">
-          <Swords className="w-4 h-4" style={{ color: ACCENT }} />
-          <Sparkles className="w-3.5 h-3.5" style={{ color: ACCENT }} />
-          STRAT ROULETTE
-        </span>
+    <div className="relative w-full h-[400px] sm:h-[635px] flex justify-center overflow-hidden bg-transparent perspective-[1000px] select-none">
+      
+      {/* Background soft glow */}
+      {(isSpinning || hasSpun) && (
+        <div 
+          className="absolute inset-0 pointer-events-none opacity-20 transition-colors duration-500" 
+          style={{ background: `radial-gradient(circle at top center, ${ACCENT}, transparent 60%)` }}
+        />
+      )}
 
-        <span
-          className="px-3 py-1 font-bold uppercase tracking-wider text-[11px] border"
-          style={{
-            color: ACCENT,
-            borderColor: ACCENT,
-            backgroundColor: 'rgba(57, 255, 20, 0.1)',
-          }}
-        >
-          {isSpinning ? 'SPINNING...' : showWinnerFooter ? 'REVEALED' : 'WAITING'}
-        </span>
-      </div>
-
-      {/* Vertical Slot Machine Reel */}
-      <div
-        ref={containerRef}
-        className="relative w-full h-[520px] bg-[#060a0f] border border-[#1e2d3d] overflow-hidden flex justify-center items-center shadow-inner rounded"
-      >
-        {/* Side pointer brackets */}
-        <div className="absolute top-1/2 left-1 -translate-y-1/2 z-30 pointer-events-none">
-          <div
-            className="w-0 h-0 border-t-[10px] border-t-transparent border-b-[10px] border-b-transparent border-l-[14px]"
-            style={{ borderLeftColor: ACCENT, filter: `drop-shadow(0 0 10px ${ACCENT})` }}
-          />
-        </div>
-        <div className="absolute top-1/2 right-1 -translate-y-1/2 z-30 pointer-events-none">
-          <div
-            className="w-0 h-0 border-t-[10px] border-t-transparent border-b-[10px] border-b-transparent border-r-[14px]"
-            style={{ borderRightColor: ACCENT, filter: `drop-shadow(0 0 10px ${ACCENT})` }}
-          />
-        </div>
-
-        {/* Top & Bottom fade */}
-        <div className="absolute top-0 left-0 right-0 h-16 bg-gradient-to-b from-[#060a0f] to-transparent z-20 pointer-events-none opacity-90" />
-        <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-[#060a0f] to-transparent z-20 pointer-events-none opacity-90" />
-
-        {/* Animated Strip */}
+      {/* Main Wheel Container */}
+      <div className="absolute top-14 left-1/2 -translate-x-1/2 w-full h-full flex justify-center pointer-events-none">
+        
+        {/* The rotating anchor */}
         <motion.div
           animate={controls}
-          style={{ y: yMotion }}
-          className="flex flex-col items-center gap-[10px] absolute top-1/2 w-full px-4"
+          style={{ 
+            rotate: rotateMotion,
+            transformOrigin: `50% ${radius}px`,
+            position: 'absolute',
+            top: 0,
+            left: '50%',
+            translateX: '-50%'
+          }}
+          className="w-0 h-0"
         >
-          {items.map((strat, idx) => {
-            const isWinner = idx === winnerIndex;
-            const isCurrentlyActive = idx === activeIndex;
-            const showSelected = isWinner && isLanded && hasSpun;
-            const isHighlighted = showSelected || (isCurrentlyActive && (isSpinning || hasSpun));
+          {items.map((item, i) => {
+            const angle = i * cardAngle;
+            const isActive = i === activeIndex;
+
+            const distance = Math.abs(i - activeIndex);
+            if (distance > 15) return null;
 
             return (
               <div
-                key={`${strat.id}_${idx}`}
-                className={`flex-shrink-0 w-full h-[96px] flex flex-col justify-center px-5 val-clip-corner border relative transition-all duration-300 ${
-                  isHighlighted
-                    ? 'bg-[#0f1f0a] border-2 z-20 scale-[1.02] opacity-100 shadow-2xl'
-                    : 'bg-[#0d151f] border-[#182535] opacity-30 scale-95 filter blur-[3px] grayscale-[60%]'
-                }`}
+                key={`${item.id}_${i}`}
+                className="absolute"
                 style={{
-                  borderColor: isHighlighted ? ACCENT : undefined,
-                  boxShadow: isHighlighted ? `0 0 28px ${GLOW}` : undefined,
+                  transformOrigin: `50% ${radius}px`,
+                  transform: `translateX(-50%) rotate(${angle}deg)`,
+                  top: 0,
+                  left: '50%',
                 }}
               >
-                {/* Tag */}
-                <span
-                  className="text-[9px] font-mono uppercase tracking-widest font-bold mb-1"
-                  style={{ color: isHighlighted ? ACCENT : '#8b9bb4' }}
+                {/* The Card */}
+                <motion.div 
+                  animate={isActive && hasLanded ? {
+                    boxShadow: [
+                      `0 0 25px ${ACCENT}60`,
+                      `0 0 60px ${ACCENT}FF`,
+                      `0 0 35px ${ACCENT}80`
+                    ],
+                    scale: [1.1, 1.14, 1.1]
+                  } : isActive ? {
+                    scale: 1.1,
+                    boxShadow: '0 0 0px transparent'
+                  } : { 
+                    scale: 0.8, 
+                    boxShadow: '0 0 0px transparent' 
+                  }}
+                  transition={isActive && hasLanded ? { duration: 0.6 } : { duration: 0.3 }}
+                  className={`
+                    w-64 h-84 sm:w-76 sm:h-[400px]
+                    flex flex-col items-center justify-between p-5 sm:p-7
+                    transition-colors duration-300 rounded-2xl
+                    ${isActive 
+                      ? 'bg-[#1a2938] border-2 border-opacity-100 z-20 opacity-100' 
+                      : 'bg-[#0f1923]/40 border-opacity-20 z-10 opacity-30 blur-[4px] grayscale-[70%]'
+                    }
+                  `}
+                  style={{
+                    borderColor: isActive ? ACCENT : '#2a3e52',
+                  }}
                 >
-                  STRAT
-                </span>
+                  <span className="text-xs sm:text-base font-mono font-bold text-slate-400 uppercase w-full text-center truncate">
+                    STRATEGY
+                  </span>
+                  
+                  <div className="flex-1 flex flex-col items-center justify-center w-full my-3 gap-6">
+                    <Swords 
+                      className={`w-16 h-16 sm:w-24 sm:h-24 transition-all ${isActive ? 'drop-shadow-[0_0_20px_rgba(57,255,20,0.6)] scale-110' : 'grayscale-[40%]'}`}
+                      style={{ color: isActive ? ACCENT : '#8b9bb4' }}
+                    />
+                    
+                    <span 
+                      className="text-2xl sm:text-3xl font-black font-tactical uppercase tracking-wider text-center w-full px-2"
+                      style={{ 
+                        color: isActive ? '#fff' : '#ece8e1',
+                        textShadow: isActive ? `0 0 10px ${ACCENT}80` : 'none',
+                        lineHeight: '1.1'
+                      }}
+                    >
+                      {item.title}
+                    </span>
+                  </div>
 
-                {/* Title (shown during spin) */}
-                <h4
-                  className={`font-black font-tactical uppercase tracking-wider leading-tight ${
-                    isHighlighted ? 'text-white text-base' : 'text-[#ece8e1] text-sm'
-                  }`}
-                  style={{ color: isHighlighted ? ACCENT : undefined }}
-                >
-                  {strat.title}
-                </h4>
-
-                {/* Description revealed only when winner is landed */}
-                {showSelected && (
-                  <p className="text-xs text-[#c8d6e5] mt-1.5 leading-snug line-clamp-2">
-                    {strat.description}
-                  </p>
-                )}
+                  <div className="flex flex-col items-center w-full">
+                    {/* Placeholder to keep alignment matching RadialCasinoRoulette */}
+                    <div className="h-6"></div>
+                  </div>
+                </motion.div>
               </div>
             );
           })}
         </motion.div>
       </div>
 
-      {/* Winner Footer */}
-      {showWinnerFooter && (
-        <motion.div
-          initial={{ opacity: 0, y: 8 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="p-4 bg-[#071408] border-2 flex flex-col gap-2 text-xs font-mono text-white rounded val-clip-corner"
-          style={{ borderColor: ACCENT }}
-        >
-          <div className="flex items-center gap-2">
-            <Trophy className="w-4 h-4 flex-shrink-0" style={{ color: ACCENT }} />
-            <span className="text-[#8b9bb4]">STRAT REVEALED:</span>
-            <span
-              className="font-black text-sm tracking-wider uppercase font-tactical"
-              style={{ color: ACCENT }}
-            >
-              {winningStrat!.title}
-            </span>
-          </div>
-          <p className="text-[#c8d6e5] leading-relaxed text-[13px] border-t border-[#1a2e1a] pt-2">
-            {winningStrat!.description}
-          </p>
-        </motion.div>
+      {/* Center Marker Pointer */}
+      {(isSpinning || hasSpun) && (
+        <div className="absolute top-[44px] left-1/2 -translate-x-1/2 z-40 flex flex-col items-center pointer-events-none drop-shadow-xl">
+          <div 
+            className="w-0 h-0 border-l-[12px] border-l-transparent border-r-[12px] border-r-transparent border-t-[18px]"
+            style={{ borderTopColor: ACCENT, filter: `drop-shadow(0 0 8px ${ACCENT})` }}
+          />
+        </div>
       )}
+
+      {/* Bottom fade mask to softly blend with the container */}
+      <div className="absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-[#0a1017] to-transparent pointer-events-none z-20" />
     </div>
   );
 };

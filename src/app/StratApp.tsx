@@ -15,6 +15,8 @@ export const StratApp: React.FC<StratAppProps> = ({ onBack }) => {
   const [hasSpun, setHasSpun] = useState(false);
   const [winningStrat, setWinningStrat] = useState<Strat | null>(null);
 
+  const [hasLanded, setHasLanded] = useState(false);
+
   const handleSpin = useCallback(() => {
     if (isSpinning) return;
 
@@ -27,10 +29,12 @@ export const StratApp: React.FC<StratAppProps> = ({ onBack }) => {
     setWinningStrat(pick);
     setIsSpinning(true);
     setHasSpun(true);
+    setHasLanded(false);
   }, [isSpinning, winningStrat]);
 
   const handleSpinComplete = useCallback(() => {
     setIsSpinning(false);
+    setHasLanded(true);
   }, []);
 
   // Space bar shortcut
@@ -94,28 +98,54 @@ export const StratApp: React.FC<StratAppProps> = ({ onBack }) => {
       </header>
 
       {/* Main Content */}
-      <main className="flex-1 max-w-3xl w-full mx-auto flex flex-col p-4 sm:p-6 lg:p-8 space-y-6">
-        {/* Page title block */}
-        <div className="text-center pt-2">
-          <h2 className="text-4xl sm:text-5xl font-black font-tactical uppercase tracking-widest text-white">
-            STRAT <span style={{ color: ACCENT }}>ROULETTE</span>
-          </h2>
-          <p className="text-sm text-[#8b9bb4] mt-2 font-mono">
-            Spin to get a random round strategy — one strat per round, no excuses.
-          </p>
+      <main className="flex-1 max-w-[1650px] w-full mx-auto flex flex-col p-4 sm:p-6 lg:p-8 space-y-6">
+        
+        {/* Roulette & Results Stage */}
+        <div className="space-y-4">
+          <div className="w-full bg-[#0a1017] rounded-2xl border border-[#2a3e52] shadow-2xl relative overflow-hidden flex flex-col items-center pb-6 gap-6">
+            
+            <StratRoulette
+              isSpinning={isSpinning}
+              hasSpun={hasSpun}
+              winningStrat={winningStrat}
+              onSpinComplete={handleSpinComplete}
+              intensity="normal"
+            />
+            
+            {/* Dock for Results (mirrors the ResultsDock spacing) */}
+            <div className="w-full max-w-5xl z-30 -mt-36 sm:-mt-28 relative px-4 sm:px-6">
+              {hasLanded && winningStrat ? (
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="w-full bg-[#152230]/95 backdrop-blur-xl border-t border-[#39ff14] shadow-[0_-10px_40px_rgba(57,255,20,0.15)] rounded-2xl p-6"
+                >
+                  <div className="flex flex-col items-center text-center gap-3">
+                    <span className="text-[11px] font-mono text-[#39ff14] font-extrabold uppercase tracking-widest bg-[#39ff14]/10 px-3 py-1 rounded-full border border-[#39ff14]/30">
+                      STRAT REVEALED
+                    </span>
+                    <h3 className="text-3xl sm:text-4xl font-black font-tactical uppercase tracking-wider text-white">
+                      {winningStrat.title}
+                    </h3>
+                    <p className="text-[#8b9bb4] text-sm sm:text-base max-w-2xl mt-2 leading-relaxed">
+                      {winningStrat.description}
+                    </p>
+                  </div>
+                </motion.div>
+              ) : (
+                <div className="w-full h-32 flex items-center justify-center opacity-50">
+                  <p className="text-sm font-mono uppercase tracking-widest text-[#8b9bb4]">
+                    {isSpinning ? 'SPINNING...' : 'WAITING FOR SPIN...'}
+                  </p>
+                </div>
+              )}
+            </div>
+
+          </div>
         </div>
 
-        {/* Roulette */}
-        <StratRoulette
-          isSpinning={isSpinning}
-          hasSpun={hasSpun}
-          winningStrat={winningStrat}
-          onSpinComplete={handleSpinComplete}
-          intensity="normal"
-        />
-
         {/* Spin Button */}
-        <div className="flex flex-col items-center gap-4">
+        <div className="flex flex-col items-center gap-4 mt-4">
           <motion.button
             type="button"
             onClick={handleSpin}
