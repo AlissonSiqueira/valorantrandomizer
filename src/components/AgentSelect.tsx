@@ -3,18 +3,20 @@ import { AgentRole, Agent } from '../types/domain';
 import { AGENTS } from '../config/agents';
 import { AgentCard } from './AgentCard';
 import { AssetImage } from './AssetImage';
-import { Search, Users } from 'lucide-react';
+import { Search, Users, Swords } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { assetPath } from '@/utils/assetPath';
 
 type AgentSelectProps = {
   selectedAgentId: string | null;
   onSelectAgent: (agentId: string) => void;
+  onGoToStrats: () => void;
 };
 
 export const AgentSelect: React.FC<AgentSelectProps> = ({
   selectedAgentId,
   onSelectAgent,
+  onGoToStrats,
 }) => {
   const [search, setSearch] = useState('');
   const [roleFilter, setRoleFilter] = useState<AgentRole | 'all'>('all');
@@ -222,6 +224,20 @@ export const AgentSelect: React.FC<AgentSelectProps> = ({
             </div>
             
             <div className="flex items-center gap-1 overflow-x-auto w-full md:w-auto pb-1 md:pb-0 scrollbar-hide justify-start md:justify-end">
+              {/* STRAT Beta Button */}
+              <motion.button
+                type="button"
+                onClick={onGoToStrats}
+                whileHover={{ scale: 1.04 }}
+                whileTap={{ scale: 0.96 }}
+                className="flex items-center gap-2 px-4 py-2 text-xs font-bold uppercase tracking-wider transition-all whitespace-nowrap rounded-md border border-[#39ff14]/60 bg-[#39ff14]/10 text-[#39ff14] hover:bg-[#39ff14]/20 hover:border-[#39ff14] shadow-[0_0_12px_rgba(57,255,20,0.15)] mr-2"
+              >
+                <Swords className="w-4 h-4" />
+                STRAT
+                <span className="text-[9px] px-1.5 py-0.5 rounded-full border border-[#39ff14]/60 bg-[#39ff14]/10 font-mono tracking-widest leading-none">
+                  BETA
+                </span>
+              </motion.button>
               {(
                 [
                   { id: 'all', label: 'All', roleIcon: null },

@@ -1,0 +1,98 @@
+- After a player dies, all players have to give bottom frag a complement
+- Everytime a player gets a kill, they have to repeat a phrase the top frag chooses
+- The player who dies first has to back seat all players for that round. You cannot perform an action not stated by the first dead.
+- For the entire round, all players must use knife and until only
+- If a player misses their first shot, they must use knife for the rest of the round
+- All players must spray before killing an enemy
+- The spike carrier is default top frag and is the only person who can move. If the spike is dropped, next frag may retrieve. All players must wait in spawn until spike is planted.
+- All players must sing happy birthday to planter in full while planting
+- All players must use comms in full throughout entire round
+- Bottom frag chooses a song which every player must sing throughout the entire round
+- If an ally is killed, every player must use knife until an enemy is killed, then they may switch back to weapon
+- For an entire round, everyone chooses one person and only they may get kills. All other players must support them. If the killer dies, the next frag is promoted
+- All players must leave spike in spawn until first kill
+- One player is chosen to go the entire map while their teammates follow them around and protect them. If the person being protected dies, all other players may only use knife for the remainder of the round
+- All players must jump when shooting
+- All players must only use A and D keys to move
+- For the entire round, all call outs must be made in text chat, no pings are allowed
+- All players, after every kill must type thank you in full. No copy and paste allowed
+- After every kill you have to t-bag
+- If a teammate dies, all living teammates must t bag them before you're allowed to use your gun again
+- After every kill, all teammates must spray before killing again. Must wait on cooldown before firing again
+- If somebody sprays, ally or enemy, every body must pull out their knife for 5 seconds before returning to gun
+- For an entire round you can only use pistol and utility. If your pistol runs out of ammo, you may only use knife.
+- When defending, all players must take fall damage
+- When a player gets a kill they must make animal noises
+- Bottom frag chooses one type of gun everyone must use for the round
+- After the first ally dies, they will say red light or green light. On red light all players must stop everything they're doing and not resume until player says green light
+- All players must only use the terms "hotter" or "colder" for call outs
+- First ally to die becomes "Simon". This player makes decisions for the entire team in a "Simon says" manner
+- Players must remain crouched the entire round
+- Players must walk backwards the entire round
+
+- Try to get the enemies to knife fight in the center of the map!
+- Put on sunglasses for this round or squint!
+- Choose a target and be the first to kill them
+- The first person to die must become an epic shout caster!
+- Your mouse has become sticky and you can only single fire now!
+- The president is in the 3rd position. Protect them at all cost!
+- You have no money and cannot buy this round!
+- Every 15 seconds you have to stand completely still for 5 seconds!
+- You no longer can use correct callouts!
+- Create your own wacky strat that you want to do!
+- Bait the enemy with a pile of guns
+- Get and stay as far away from your teammates as possible!
+- Whomever is at the top of the scoreboard is "it" avoid them at all costs!
+- Try to kill someone while in mid air!
+- Close your eyes and let one of your teammates guide you to the bombsite!
+- You must hop every 5 seconds!
+- You must purchase a gun (that has alt fire) and use its alt fire only!
+- Buy a Bulldog this round!
+- Buy a Phantom or a Ghost this round!
+- Rush all the way down mid!
+- Shoot at every sound you hear!
+- To the best of your ability, stay off the ground!
+- Try to sneak to the enemy’s spawn!
+- Every time you kill an enemy, you must voice a mighty shout!
+- You can only use a pistol this round!
+- You must crouch and avoid line of sight this round!
+- Try to get the enemies to knife and betray their trust by shooting them!
+- Purchase a gun for your favorite player/agent!
+- RUSH B! DON’T STOP!
+- Everytime you shoot spray until you run out of bullets
+- Play the entire round while whispering to your team
+- Purchase an Odin or Aries and wait for the enemy to peak you
+- Keep one eye closed for the whole round
+- Win the round without using any abilities
+- Ask a teammate to request a gun and then never buy it
+- Your sensitivity is cut in half and your crosshair must be changed to max settings
+- Go alone and sneakily plant the bomb
+- Try to get the enemies to take you hostage
+- Once you takeover a site, you must plant at a different site
+
+- If possible, players must use the same weapon (or weapon type, if budget does not allow) that they held in the previous round
+- Players must swap keybinds for Primary Fire and Jump
+- All players using male characters must make callouts in a deep voice. All players using female characters must make callouts in falsetto
+- Players may only use guns sporting a Gun Buddy. If a player has no equipped Buddies, they must use the Classic
+- Only one player at a time may have their primary weapon drawn
+- This round is a pistol round
+- No two players may be at the same callout area at the same time
+- All callouts must now include the name of a real-life city, country, or point of interest
+- Players must use all abilities before the spike is planted. Any abilities remaining after the plant must be used in the enemy spawn
+- All players must buy an LMG and run straight to point from spawn
+- Players must hold down the W key at all times until the spike has been planted
+- Players must always have a knife out while moving. Players are not allowed to crouch
+- Players may only use abilities when their clip is empty
+- No player may spend more than the poorest player
+- Players must remain crouched at all times
+- All players with their ultimate ability available must use it before the spike is planted. If no player has their ultimate ability available, roll another strat
+- Players that fire their primary weapons before the spike is planted may not fire them afterward. Players that use abilities before the spike is planted may not use them afterwards
+- Choose a point at random. All players must defend this point (and may not leave it) until the spike is planted
+- All players must buy a Shorty. Players are allowed to harass and damage enemies with any weapon, but all kills must be completed with the Shorty. Players who score a kill by other means must return to tag spawn before firing their weapon again
+- Each player must choose an agent from the enemy team, and cannot harm any other enemy until their target has been eliminated. Players also cannot kill any enemy still being targeted by a living teammate
+- Only players who have been eliminated may use comms, preferably in a ghostly manner
+- All players must double their in-game mouse sensivitity
+- On defense, Players must remain in spawn until the spike is planted
+- All players must full-buy their abilities. The team must completely use all possible abilities before the spike is planted
+- Choose one player at random. All callouts must be made by this player. Other players may make use of the whisper system to keep them informed
+- After each kill, players must retrieve the downed enemy's weapon and use it for the next kill

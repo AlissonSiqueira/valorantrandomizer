@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useRef } from 'react';
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useRandomizerStore } from '../store/useRandomizerStore';
 import { AGENTS } from '../config/agents';
 import { AgentSelect } from '../components/AgentSelect';
@@ -7,12 +7,16 @@ import { RadialCasinoRoulette } from '../components/RadialCasinoRoulette';
 import { ResultsDock } from '../components/ResultsDock';
 import { SettingsDrawer } from '../components/SettingsDrawer';
 import { EmptyState } from '../components/EmptyState';
+import { StratApp } from './StratApp';
 import { getAvailableWeapons } from '../lib/random';
 import { Dices, UserCheck, Settings } from 'lucide-react';
+
+type AppView = 'home' | 'strats';
 
 const AGENTS_BY_ID = new Map(AGENTS.map((agent) => [agent.id, agent]));
 
 export const App: React.FC = () => {
+  const [currentView, setCurrentView] = useState<AppView>('home');
   const selectedAgentId = useRandomizerStore((s) => s.selectedAgentId);
   const availableCredits = useRandomizerStore((s) => s.availableCredits);
   const currentResult = useRandomizerStore((s) => s.currentResult);
@@ -72,6 +76,14 @@ export const App: React.FC = () => {
 
 
   return (
+    <>
+      {/* STRAT view — completely replaces the normal UI */}
+      {currentView === 'strats' && (
+        <StratApp onBack={() => setCurrentView('home')} />
+      )}
+
+      {/* Main Randomizer view */}
+      {currentView === 'home' && (
     <div className="min-h-screen bg-[#0f1923] text-[#ece8e1] flex flex-col font-sans selection:bg-[#ff4655] selection:text-white">
       {/* Screen Reader Live Region */}
       <div className="sr-only" aria-live="polite" aria-atomic="true">
@@ -126,6 +138,7 @@ export const App: React.FC = () => {
           <AgentSelect
             selectedAgentId={selectedAgentId}
             onSelectAgent={selectAgent}
+            onGoToStrats={() => setCurrentView('strats')}
           />
         ) : (
           /* Step 2: Main Streamer Casino Stage */
@@ -218,5 +231,7 @@ export const App: React.FC = () => {
         </p>
       </footer>
     </div>
+      )}
+    </>
   );
 };
