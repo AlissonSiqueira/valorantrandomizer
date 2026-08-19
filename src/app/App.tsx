@@ -9,7 +9,7 @@ import { SettingsDrawer } from '../components/SettingsDrawer';
 import { EmptyState } from '../components/EmptyState';
 import { StratApp } from './StratApp';
 import { getAvailableWeapons } from '../lib/random';
-import { Dices, UserCheck, Settings } from 'lucide-react';
+import { Dices, Settings, ArrowLeft } from 'lucide-react';
 
 type AppView = 'home' | 'strats';
 
@@ -95,28 +95,33 @@ export const App: React.FC = () => {
       {/* Main Top Header Bar */}
       <header className="w-full bg-[#152230]/95 border-b border-[#2a3e52] sticky top-0 z-40 backdrop-blur-md shadow-2xl">
         <div className="max-w-[1650px] mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded bg-[#ff4655] flex items-center justify-center text-white shadow-val-glow">
-              <Dices className="w-6 h-6 animate-pulse" />
-            </div>
-            <div>
-              <h1 className="text-2xl sm:text-3xl font-black font-tactical uppercase tracking-wider text-white leading-none">
-                Valo<span className="text-[#ff4655]">Roll</span>
-              </h1>
-            </div>
-          </div>
-
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-4">
+            {/* Back Button (shown only when agent is selected) */}
             {selectedAgent && (
               <button
                 type="button"
                 onClick={() => selectAgent('')}
-                className="flex items-center gap-2 px-4 py-2 bg-[#0f1923] border border-[#2a3e52] hover:border-[#ff4655] text-xs font-mono text-[#ece8e1] transition-colors rounded-lg"
+                className="flex items-center gap-2 px-3 py-2 bg-[#0f1923] border border-[#2a3e52] hover:border-[#ff4655] text-xs font-mono text-[#ece8e1] transition-colors rounded-lg"
               >
-                <UserCheck className="w-4 h-4 text-[#ff4655]" />
-                Change Agent
+                <ArrowLeft className="w-4 h-4 text-[#ff4655]" />
+                <span className="hidden sm:inline">BACK</span>
               </button>
             )}
+            
+            {/* Logo Area */}
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded bg-[#ff4655] flex items-center justify-center text-white shadow-val-glow">
+                <Dices className="w-6 h-6 animate-pulse" />
+              </div>
+              <div>
+                <h1 className="text-2xl sm:text-3xl font-black font-tactical uppercase tracking-wider text-white leading-none">
+                  Valo<span className="text-[#ff4655]">Roll</span>
+                </h1>
+              </div>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-3">
 
             <button
               type="button"

@@ -118,7 +118,7 @@ export const StratApp: React.FC<StratAppProps> = ({ onBack }) => {
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className="w-full bg-[#152230]/95 backdrop-blur-xl shadow-[0_-10px_40px_rgba(57,255,20,0.15)] rounded-2xl p-6"
+                  className="w-full bg-[#152230]/95 backdrop-blur-xl border border-[#2a3e52] shadow-2xl rounded-2xl p-6"
                 >
                   <div className="flex flex-col items-center text-center gap-3">
                     <h3 className="text-3xl sm:text-4xl font-black font-tactical uppercase tracking-wider text-white">
