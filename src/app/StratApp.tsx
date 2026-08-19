@@ -118,12 +118,9 @@ export const StratApp: React.FC<StratAppProps> = ({ onBack }) => {
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className="w-full bg-[#152230]/95 backdrop-blur-xl border-t border-[#39ff14] shadow-[0_-10px_40px_rgba(57,255,20,0.15)] rounded-2xl p-6"
+                  className="w-full bg-[#152230]/95 backdrop-blur-xl shadow-[0_-10px_40px_rgba(57,255,20,0.15)] rounded-2xl p-6"
                 >
                   <div className="flex flex-col items-center text-center gap-3">
-                    <span className="text-[11px] font-mono text-[#39ff14] font-extrabold uppercase tracking-widest bg-[#39ff14]/10 px-3 py-1 rounded-full border border-[#39ff14]/30">
-                      STRAT REVEALED
-                    </span>
                     <h3 className="text-3xl sm:text-4xl font-black font-tactical uppercase tracking-wider text-white">
                       {winningStrat.title}
                     </h3>
